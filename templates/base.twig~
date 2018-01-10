@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>{{ title|default('Contents of /') }}</title>
+      {% block head %}
+      <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon.ico" />
+      <link rel="icon" href="/favicon.png" type="image/png" />
+      <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+      <link rel="stylesheet" type="text/css" href="css/base.css" />
+      <link rel="stylesheet" href="css/pageheader.css" />
+      <script src="js/pageheader.js"></script>
+      {% endblock %}
+    </head>
+    <body>
+      <header id="pageheader">
+	<div class="header-banner">
+	  <a href="/" class="logo"></a>
+	  
+	  <h1>It has purpose.</h1>
+	  
+	</div>
+	<div class="clear"></div>
+	<nav id="nav">
+	  <ul>
+	    <li><a href="/public">public/</a></li>
+	    <li><a href="/date.php?ts=now">$date</a></li>
+	    <li><a href="/your_ip_is.php">$your_ip_is</a></li>
+	    <ul>
+	</nav>
+      </header>
+
+      <div id="header">
+        {% block header %}
+        <h1>{{ headline }}</h1>
+        Hello, {{ name }}
+        {% endblock %}
+      </div>
+
+      <div id="content">
+	{% block content %}{% endblock %}
+      </div>
+      
+      <div id="footer">
+        {% block footer %}
+        <a href="http://www.int2byte.de/">int2byte.de</a>
+        {% endblock %}
+      </div>
+      
+    </body>
+</html>

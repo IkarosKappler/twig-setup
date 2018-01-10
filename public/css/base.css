@@ -1,0 +1,44 @@
+
+
+body {
+    font-family: Monospace;
+    margin-top: 50px;
+    margin-left: 200px;
+}
+
+
+div#footer {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    margin: 10px 10px 10px 10px;
+    text-align: right;
+}
+
+/*
+a:link {
+    color: #0000ff;
+}
+
+a:hover {
+    color: #0000ff;
+}
+
+a:visited {
+    color: #0000ff;
+}
+
+a:focus {
+    color: #0000ff;
+}
+
+a:active {
+    color: #0000ff;
+}
+*/
+
+
+pre {
+    background-color: #e8e8e8;
+    /* width:            512px; */
+}

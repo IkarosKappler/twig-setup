@@ -1,0 +1,14 @@
+{% extends "base.twig" %}
+
+{% block head %}
+      {{ parent() }}
+      <link rel="stylesheet" href="css/error.css" />
+{% endblock %}
+
+{% block header %}
+   Error {{ code }}
+{% endblock header %}
+
+{% block content %}
+  {{ message|default('There was an error.') }}
+{% endblock %}

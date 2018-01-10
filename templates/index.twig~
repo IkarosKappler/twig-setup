@@ -1,0 +1,69 @@
+{% extends "base.twig" %}
+
+{% block head %}
+  {{ parent() }}
+      <script src="js/girih_frontpage/js/ikrs/IKRS.js"></script>
+      <script src="js/girih_frontpage/js/ikrs/IKRS.Object.js"></script>
+
+      <script src="js/girih_frontpage/js/ikrs/IKRS.Pair.js"></script>
+
+
+      <script src="js/girih_frontpage/js/ikrs/IKRS.TileAlign.js"></script>
+      <script src="js/girih_frontpage/js/ikrs/IKRS.Point2.js"></script>
+      <script src="js/girih_frontpage/js/ikrs/IKRS.Line2.js"></script>
+      <script src="js/girih_frontpage/js/ikrs/IKRS.Polygon.js"></script>
+      <script src="js/girih_frontpage/js/ikrs/IKRS.Circle.js"></script>
+      <script src="js/girih_frontpage/js/ikrs/IKRS.BoundingBox2.js"></script>
+      <script src="js/girih_frontpage/js/ikrs/IKRS.Tile.js"></script>
+      <script src="js/girih_frontpage/js/ikrs/IKRS.Tile.Decagon.js"></script>
+      <script src="js/girih_frontpage/js/ikrs/IKRS.Tile.Pentagon.js"></script>
+      <script src="js/girih_frontpage/js/ikrs/IKRS.Tile.IrregularHexagon.js"></script>
+      <script src="js/girih_frontpage/js/ikrs/IKRS.Tile.Rhombus.js"></script>
+      <script src="js/girih_frontpage/js/ikrs/IKRS.Tile.BowTie.js"></script>
+      <script src="js/girih_frontpage/js/ikrs/IKRS.Tile.PenroseRhombus.js"></script>
+      <script src="js/girih_frontpage/js/ikrs/IKRS.Girih.js"></script>
+      <script src="js/girih_frontpage/js/ikrs/IKRS.GirihCanvasHandler.js"></script>
+
+      <script src="js/girih_frontpage/js/thirdparty/FileSaver.js"></script>
+      <script src="js/girih_frontpage/js/StringFileExporter.js"></script>
+
+      <script src="js/canvasResize.js"></script>
+      <script src="js/girih_frontpage/js/main.js"></script>
+
+      <link rel="stylesheet" href="css/index.css" />
+{% endblock %}
+
+{% block header %}
+   <!-- <img src="img/favicon_large_C.png" alt="A large site icon" width="256" height="256" border="0" /> -->
+
+   <div id="i2banim-container">
+      <img id="icon_blank_final" src="img/icon_blank_cropped.png" width="136" height="200" style="visibility: hidden; position: absolute;" />
+      <div id="i2banim-pixel-container"></div>
+   </div>
+
+   <div id="i2ba_pixel_template" width="16" height="16" class="no-display"></div>
+{% endblock header %}
+
+{% block content %}
+
+
+<canvas 
+  id="girih_canvas" 
+  style="background-color: #ffffff;"
+  width="800" 
+  height="600" 
+  class="tooltip" 
+  title="Hover over existing tiles to see possible adjacent tiles.
+
+Press [a] or [d] to navigate through the tile set.
+
+Press [Enter] or click to place new tiles onto the canvas.
+
+Press [o] to toggle the outlines on/off.
+
+Press [t] to toggle the textures on/off.
+
+Press [e] to save an image file."></canvas>
+
+
+{% endblock %}
