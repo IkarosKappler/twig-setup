@@ -1,19 +1,14 @@
+<IfModule mod_rewrite.c>
 
-   
-    
- 
+   RewriteEngine On
 
-RewriteEngine On
+   # This line excludes the 'test' directory from the routing routine.
+   RewriteRule ^(test) - [L]
 
-# Added 2016-10-06 by Ika
-# This line excludes the 'test' directory from the routing routine.
-RewriteRule ^(test) - [L]
+   # Handle Front Controller ... pass requests to the main script index.php
+   RewriteBase /
+   RewriteCond %{REQUEST_FILENAME} !-d
+   RewriteCond %{REQUEST_FILENAME} !-f
+   RewriteRule ^ index.php [L]
 
-# Handle Front Controller...
-RewriteBase /
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^ index.php [L]
-
-
-
+</IfModule>

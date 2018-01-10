@@ -10,12 +10,14 @@ $(window).scroll(function(){
 */
 
 window.onscroll = function() {
-    console.log('scrolled ...');
+    //console.log('scrolled ...');
     var header = document.getElementById('pageheader');
     var nav    = document.getElementById('nav');
+    //var avatar = document.getElementById('avatar');
+    //var nav    = document.getElementById('nav_ul');
     
     function addClass(element,name) {
-	console.log('adding class ...');
+	//console.log('adding class ...');
 	var arr;
 	arr = element.className.split(" ");
 	if( arr.indexOf(name) == -1 ) {
@@ -36,12 +38,14 @@ window.onscroll = function() {
     }
 
     // 300 is the height of the header.
-    console.log( 'window.scrollY=' + window.scrollY + ', document.body.scrollY=' + document.body.scrollY + ', window.pageYOffset=' + window.pageYOffset + ', document.body.scrollTop=' + document.body.scrollTop );
-    //if( window.scrollY >= 300) { // FF, Safari and Chrome
-    if( window.pageYOffset >= 300 ) {
+    //console.log( 'window.scrollY=' + window.scrollY + ', document.body.scrollY=' + document.body.scrollY + ', window.pageYOffset=' + window.pageYOffset + ', document.body.scrollTop=' + document.body.scrollTop );
+    if( window.pageYOffset >= 300 ) { // window.scrollY is only compatible with FF, Safari and Chrome
 	addClass(nav,'fixed-header');
-    }
-    else {
+	addClass(avatar,'small-avatar' );
+	addClass(nav_ul,'small-nav');
+    } else {
 	removeClass(nav,'fixed-header');
+	removeClass(avatar,'small-avatar' );
+	removeClass(nav_ul,'small-nav');
     }
 }

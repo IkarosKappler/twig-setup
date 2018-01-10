@@ -1,7 +1,6 @@
 <?php
 
 // Parse request
-
 function get_request() {
     $request_uri    = trim($_SERVER['REQUEST_URI']);
     $request_path   = $request_uri; 
@@ -17,8 +16,6 @@ function get_request() {
 }
 
 $request = get_request();
-
-
 //$request = array( 'path' => '/blog', 'params' => '' );
 $routes  = array( '/' => 'index.twig',
 				  '/blog' => 'blog.twig' 
@@ -31,7 +28,7 @@ require_once '../vendor/autoload.php';
 // Set path to templates
 $loader = new Twig_Loader_Filesystem('../templates');
 $twig = new Twig_Environment($loader, array(
-    // 'cache' => '/path/to/compilation_cache',
+    // 'cache' => '../storage/cache',
 ));
 $twig = new Twig_Environment($loader);
 
@@ -47,6 +44,6 @@ if( array_key_exists($request['path'],$routes) ) {
 
 
 // Debug?
-print_r( $request );
+//print_r( $request );
 
 

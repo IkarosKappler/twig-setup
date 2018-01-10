@@ -67,22 +67,9 @@ Press [e] to save an image file."></canvas>
 
 
 <div id="bloglist">
-     Record&nbsp;A<br/>
-     Record&nbsp;B<br/>
-     Record&nbsp;C<br/>
-     Record&nbsp;D<br/>
-     Record&nbsp;E<br/>
-     Record&nbsp;F<br/>
-     Record&nbsp;G<br/>
-     Record&nbsp;H<br/>
-     Record&nbsp;I<br/>
-     Record&nbsp;J<br/>
-     Record&nbsp;K<br/>
-     Record&nbsp;L<br/>
-     Record&nbsp;M<br/>
-     Record&nbsp;N<br/>
-     Record&nbsp;O<br/>
-     Record&nbsp;P<br/>
+     {% for letter in 'A'..'Z' %}
+        Record&nbsp;{{ letter }}<br/>
+     {% endfor %}
 </div>
 
 {% endblock %}

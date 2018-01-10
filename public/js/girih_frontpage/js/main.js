@@ -55,6 +55,8 @@ function onLoad() {
 			     girihCanvasHandler.canvasWidth = w;
 			     girihCanvasHandler.canvasHeight = h;
 			     girihCanvasHandler.drawOffset.setXY(w/2,h/2);
+			     //console.log('body.height=' + document.body.style.height );
+			     //document.getElementById('footer').style.top = ''+h+'';
 			 }
 			);
 	    redrawGirih();

@@ -41,7 +41,7 @@ IKRS.GirihCanvasHandler = function( imageObject ) {
     
     this.canvas.onmousedown        = this.mouseDownHandler;
     this.canvas.onmouseup          = this.mouseUpHandler;
-    this.canvas.onmousemove        = this.mouseMoveHandler; 
+    this.canvas.onmousemove        = this.mouseMoveHandler;
     
 
     // Install a mouse wheel listener
