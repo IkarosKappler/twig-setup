@@ -1,15 +1,45 @@
-
+html {
+    min-height : 100%;
+}
 
 body {
     position : relative;
     padding-bottom : 6em;
     min-height : 100%;
     height : 100%;
+    font-family: Monospace;
 }
 
 #content {
     padding-bottom: 6rem;
 }
+
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    /* Styles */
+}
+
+/* Phone with larger displays ----------- */
+@media only screen and (min-device-width : 480 ) and (max-device-width : 768px) {
+    /* Styles */
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+    /* Styles */
+}
+
+/* Desktops and laptops ----------- */
+@media only screen and (min-width : 1224px) {
+    /* Styles */
+}
+
+/* Large screens ----------- */
+@media only screen and (min-width : 1824px) {
+    /* Styles */
+}
+
 
 #footer {
     position: absolute;

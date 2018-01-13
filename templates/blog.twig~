@@ -2,13 +2,13 @@
 
 {% block head %}
       {{ parent() }}
-      <link rel="stylesheet" href="css/error.css" />
+      <link rel="stylesheet" href="css/blog.css" />
 {% endblock %}
 
 {% block header %}
-   Error {{ code }}
+   Blog
 {% endblock header %}
 
 {% block content %}
-  {{ message|default('There was an error.') }}
+   Here comes the blog.
 {% endblock %}

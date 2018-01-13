@@ -17,8 +17,12 @@ function get_request() {
 
 $request = get_request();
 //$request = array( 'path' => '/blog', 'params' => '' );
-$routes  = array( '/' => 'index.twig',
-				  '/blog' => 'blog.twig' 
+$routes  = array( '/'     => array( 'template' => 'index.twig',
+                                    'params' => array() ), 
+				  '/blog' => array( 'template' => 'blog.twig',
+                                    'params' => array() ), 
+                  '/public/blog.20150422_my_basic_html_template' => array( 'template' => 'blog.20150422_my_basic_html_template.twig',
+                                                                           'params' => array( 'bannertext' => '<img src="/img/good_new_everyone_0_0.png" alt="Good news, everyone" />', 'headline' => 'My very basic HTML template' ) )
 				);				
 			
 
@@ -34,8 +38,9 @@ $twig = new Twig_Environment($loader);
 
 // Route exists?
 if( array_key_exists($request['path'],$routes) ) {
-	echo $twig->render( $routes[$request['path']], // 'index.twig',
-		                array('title' => null, 'headline' => 'Welcome')
+    $route = $routes[$request['path']];
+	echo $twig->render( $route['template'], // 'index.twig',
+                        $route['params']
 	);
 } else {
 	echo $twig->render( 'error.twig', array( 'code' => 404, 'message' => 'Not found.' ) );

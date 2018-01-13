@@ -1,29 +1,30 @@
 
 header {
-    height:360px;
-    z-index:10;
+    height              : 360px;
+    z-index             : 10;
 }
 .header-banner {
-    background-color: #2FA29D; /* #27a69b; */
+    background-color    : #2FA29D; 
     /* background-image: url('../img/pageheader.png'); */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100%;
-    height: 300px;
+    background-position : center;
+    background-repeat   : no-repeat;
+    background-size     : cover;
+    width               : 100%;
+    height              : 300px;
+    font-family         : Helvetica;
 }
 
 header .logo {
-    background-color: transparent;
-    background-image: url('../img/icon_blank_cropped.anthrazit.png');
-    background-size : cover;
-    background-position: center top;
-    background-repeat: no-repeat;
-    position: absolute;
-    left : 64px;
-    top: 52px; 
-    height: 192px;
-    width: 192px;
+    background-color    : transparent;
+    background-image    : url('../img/icon_blank_cropped.anthrazit.png');
+    background-size     : cover;
+    background-position : center top;
+    background-repeat   : no-repeat;
+    position            : absolute;
+    left                : 64px;
+    top                 : 52px; 
+    height              : 192px;
+    width               : 192px;
 }
 
 header .avatar {
@@ -34,8 +35,6 @@ header .avatar {
     background-position: center top;
     background-repeat: no-repeat;
     position: relative;
-    /* left : 64px;
-    top: -32px;  */
     height: 128px;
     width: 128px;
     -moz-border-radius: 64px;
@@ -65,11 +64,9 @@ header h1 {
 }
 
 nav {
-    /* display : inline-block; */
     width:100%;
     height:60px;
     background: #292f36;
-    /* position:fixed; !!! postion */
     z-index:10;
 }
 
@@ -103,7 +100,7 @@ nav ul li a {
 
 
 /* demo */
-.content{ width: 960px; max-width: 100%; margin:0 auto; padding-top: 60px; }
+/*.content{ width: 960px; max-width: 100%; margin:0 auto; padding-top: 60px; }
 article { width: 720px; float: left; }
 article p:first-of-type { margin-top: 0; }
 aside { width: 120px; float: right; }
@@ -113,7 +110,7 @@ body {
     font-family: helvetica;
     line-height: 1.6;
 }
-
+*/
 
 /* resets */
 body { margin:0px; padding:0px; }

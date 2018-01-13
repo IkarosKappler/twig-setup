@@ -2,12 +2,13 @@
 
 {% block head %}
       {{ parent() }}
-      <link rel="stylesheet" href="css/blog.css" />
+      <link rel="stylesheet" href="/css/blog.css" />
 {% endblock %}
 
 {% block header %}
-   Blog
-{% endblock header %}
+   <a href="../../"><img src="/img/backward_0_large_C.png" alt="... back" width="56" height="48" border="0" /></a>
+   {{ parent() }}
+{% endblock %}
 
 {% block content %}
    Here comes the blog.

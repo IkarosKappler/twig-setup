@@ -2,42 +2,42 @@
 
 {% block head %}
   {{ parent() }}
-      <script src="js/girih_frontpage/js/ikrs/IKRS.js"></script>
-      <script src="js/girih_frontpage/js/ikrs/IKRS.Object.js"></script>
+      
+      <script src="/js/girih_frontpage/js/ikrs/IKRS.js"></script>
+      <script src="/js/girih_frontpage/js/ikrs/IKRS.Object.js"></script>
 
-      <script src="js/girih_frontpage/js/ikrs/IKRS.Pair.js"></script>
+      <script src="/js/girih_frontpage/js/ikrs/IKRS.Pair.js"></script>
 
 
-      <script src="js/girih_frontpage/js/ikrs/IKRS.TileAlign.js"></script>
-      <script src="js/girih_frontpage/js/ikrs/IKRS.Point2.js"></script>
-      <script src="js/girih_frontpage/js/ikrs/IKRS.Line2.js"></script>
-      <script src="js/girih_frontpage/js/ikrs/IKRS.Polygon.js"></script>
-      <script src="js/girih_frontpage/js/ikrs/IKRS.Circle.js"></script>
-      <script src="js/girih_frontpage/js/ikrs/IKRS.BoundingBox2.js"></script>
-      <script src="js/girih_frontpage/js/ikrs/IKRS.Tile.js"></script>
-      <script src="js/girih_frontpage/js/ikrs/IKRS.Tile.Decagon.js"></script>
-      <script src="js/girih_frontpage/js/ikrs/IKRS.Tile.Pentagon.js"></script>
-      <script src="js/girih_frontpage/js/ikrs/IKRS.Tile.IrregularHexagon.js"></script>
-      <script src="js/girih_frontpage/js/ikrs/IKRS.Tile.Rhombus.js"></script>
-      <script src="js/girih_frontpage/js/ikrs/IKRS.Tile.BowTie.js"></script>
-      <script src="js/girih_frontpage/js/ikrs/IKRS.Tile.PenroseRhombus.js"></script>
-      <script src="js/girih_frontpage/js/ikrs/IKRS.Girih.js"></script>
-      <script src="js/girih_frontpage/js/ikrs/IKRS.GirihCanvasHandler.js"></script>
+      <script src="/js/girih_frontpage/js/ikrs/IKRS.TileAlign.js"></script>
+      <script src="/js/girih_frontpage/js/ikrs/IKRS.Point2.js"></script>
+      <script src="/js/girih_frontpage/js/ikrs/IKRS.Line2.js"></script>
+      <script src="/js/girih_frontpage/js/ikrs/IKRS.Polygon.js"></script>
+      <script src="/js/girih_frontpage/js/ikrs/IKRS.Circle.js"></script>
+      <script src="/js/girih_frontpage/js/ikrs/IKRS.BoundingBox2.js"></script>
+      <script src="/js/girih_frontpage/js/ikrs/IKRS.Tile.js"></script>
+      <script src="/js/girih_frontpage/js/ikrs/IKRS.Tile.Decagon.js"></script>
+      <script src="/js/girih_frontpage/js/ikrs/IKRS.Tile.Pentagon.js"></script>
+      <script src="/js/girih_frontpage/js/ikrs/IKRS.Tile.IrregularHexagon.js"></script>
+      <script src="/js/girih_frontpage/js/ikrs/IKRS.Tile.Rhombus.js"></script>
+      <script src="/js/girih_frontpage/js/ikrs/IKRS.Tile.BowTie.js"></script>
+      <script src="/js/girih_frontpage/js/ikrs/IKRS.Tile.PenroseRhombus.js"></script>
+      <script src="/js/girih_frontpage/js/ikrs/IKRS.Girih.js"></script>
+      <script src="/js/girih_frontpage/js/ikrs/IKRS.GirihCanvasHandler.js"></script>
+     
+      <script src="/js/girih_frontpage/js/thirdparty/FileSaver.js"></script>
+      
+      <script src="/js/girih_frontpage/js/StringFileExporter.js"></script>
 
-      <script src="js/girih_frontpage/js/thirdparty/FileSaver.js"></script>
-      <script src="js/girih_frontpage/js/StringFileExporter.js"></script>
+      <script src="/js/canvasResize.js"></script>
+      <script src="/js/girih_frontpage/js/main.js"></script>
 
-      <script src="js/canvasResize.js"></script>
-      <script src="js/girih_frontpage/js/main.js"></script>
-
-      <link rel="stylesheet" href="css/index.css" />
+      <link rel="stylesheet" href="/css/index.css" />
 {% endblock %}
 
 {% block header %}
-   <!-- <img src="img/favicon_large_C.png" alt="A large site icon" width="256" height="256" border="0" /> -->
-
    <div id="i2banim-container">
-      <img id="icon_blank_final" src="img/icon_blank_cropped.png" width="136" height="200" style="visibility: hidden; position: absolute;" />
+      <img id="icon_blank_final" src="img/icon_blank_cropped.png" alt="Website Icon"  width="136" height="200" style="visibility: hidden; position: absolute;" />
       <div id="i2banim-pixel-container"></div>
    </div>
 
@@ -45,9 +45,8 @@
 {% endblock header %}
 
 {% block content %}
-
-
-<canvas 
+<div id="bloglist">
+        <canvas 
   id="girih_canvas" 
   style="background-color: #ffffff;"
   width="800" 
@@ -65,11 +64,31 @@ Press [t] to toggle the textures on/off.
 
 Press [e] to save an image file."></canvas>
 
-
-<div id="bloglist">
      {% for letter in 'A'..'Z' %}
-        Record&nbsp;{{ letter }}<br/>
+        <!-- Record&nbsp;{{ letter }}<br/> -->
      {% endfor %}
+
+     <h3>Techblog</h3>
+     <a href="public/voxel-torus/">demo.20171205 voxel-torus Making a voxel torus with threejs</a><br/>
+     <a href="public/blog.20161028_Create_Zip_files_omitting_DS_Store_files/">blog.20161028_Create_Zip_files_omitting_DS_Store_files</a><br/>
+     <a href="public/blog.20161028_Setup_Vagrant_Homestead/">blog.20161028_Setup_Vagrant_Homestead</a><br/>
+     <a href="public/blog.20161025_Vegane_Sucuk/">blog.20161025_Vegane_Sucuk</a><br/>
+     <a href="public/blog.20160412_Remove_checkout_title_from_woocommerce/">blog.20160412_Remove_the_checkout_title_from_woocommerce</a><br/>
+     <a href="public/blog.20160129_Three.js_Basic_Scene_Setup/">blog.20160129_Three.js_Basic_Scene_Setup</a><br/>
+     <a href="public/blog.20160129_Gender_Select_Options/">blog.20160129_Gender_Select_Options</a><br/>
+     <a href="public/blog.20160129_Custom_styling_for_ordered_lists_with_CSS3/">blog.20160129_Custom_styling_for_ordered_lists_with_CSS3</a><br/>
+     <a href="public/blog.20151117_Javascript_Minimizer_Bash_Script/">blog.20151117_Javascript_Minimizer_Bash_Script</a><br/>
+     <a href="public/blog.20151026_Setting_up_GPG/">blog.20151026_Setting_up_GPG</a><br/>
+     <a href="public/blog.20150422_my_basic_html_template/">blog.20150422_My_Basic_HTML_Template</a><br/>
+     <a href="public/blog.20150326_Booting_my_PC_remotely_using_a_RaspberryPi/#edit_0">[Edit 2015-04-13] blog.20150326_Booting_my_PC_remotely_using_a_RaspberryPi</a><br/>
+     <a href="public/blog.20150326_Booting_my_PC_remotely_using_a_RaspberryPi/">blog.20150326_Booting_my_PC_remotely_using_a_RaspberryPi</a><br/>
+     <a href="public/blog.20141102.gnupg/">blog.20141102_Howto_setup_your_GPG</a><br/>
+     <a href="public/blog.20140929_Howto_Fix_shellshock_on_debian_squeeze/">blog.20140929_Howto_Fix_shellshock_on_debian_squeeze</a><br/>
+     <a href="public/blog.20130203_raspi_wlan/">blog.20130203_raspi_wlan</a><br/>
+     
 </div>
+{% endblock %}
+
+{% block footer %}
 
 {% endblock %}

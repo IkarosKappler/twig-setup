@@ -1,0 +1,18 @@
+
+#header {
+    margin           : 5% 10%;
+}
+
+.content {
+    margin           : 10%;
+}
+
+div.tech_paragraph {
+    margin-left      : 50px;
+    margin-right     : 50px;
+    margin-bottom    : 150px;
+}
+
+pre {
+    background-color : #e8e8e8;
+}
