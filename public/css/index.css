@@ -6,11 +6,11 @@ canvas#girih_canvas {
     z-index   : -1;
 }
 
-#content {
+main {
     padding        : 0;
 }
 
-#footer {
+footer {
     /* The footer does not apply with the dynamic front page canvas visible */
     display : none;
 }

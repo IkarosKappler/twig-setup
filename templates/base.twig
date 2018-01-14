@@ -9,6 +9,7 @@
       <link rel="stylesheet" href="/css/base.css" />
       <link rel="stylesheet" href="/css/pageheader.css" />
       <script src="/js/pageheader.js"></script>
+      <script src="/js/mediaquerydetection.js"></script>
       {% endblock %}
     </head>
     <body>
@@ -36,11 +37,11 @@
         {% endblock %}
       </div>
 
-      <div id="content">
+      <main>
 	{% block content %}{% endblock %}
-      </div>
+      </main>
       
-      <footer id="footer">
+      <footer>
         {% block footer %}
         <a href="http://www.int2byte.de/">int2byte.de</a>
         {% endblock %}

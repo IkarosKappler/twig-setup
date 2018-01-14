@@ -4,6 +4,10 @@
 
    # This line excludes the 'test' directory from the routing routine.
    RewriteRule ^(test) - [L]
+   RewriteRule ^(public) - [L]
+   RewriteRule ^(date.php) - [L]
+   RewriteRule ^(your_ip_is.php) - [L]
+   RewriteRule ^(randomkey.php) - [L]
 
    # Handle Front Controller ... pass requests to the main script index.php
    RewriteBase /

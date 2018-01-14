@@ -44,7 +44,7 @@ function onLoad() {
 	
 	girihCanvasHandler.getProperties().allowPenroseTile          = true;
 			
-	girihCanvasHandler.drawOffset.setXY( 200, 200 ); //332, 50 );
+	girihCanvasHandler.drawOffset.setXY( 200, 200 ); 
 
 	var resizer = function() {
 	    resizeCanvas(girihCanvasHandler.canvas,
@@ -54,9 +54,7 @@ function onLoad() {
 			     console.log('canvas resized. w='+w+',h='+h);
 			     girihCanvasHandler.canvasWidth = w;
 			     girihCanvasHandler.canvasHeight = h;
-			     girihCanvasHandler.drawOffset.setXY(w/2,h/2);
-			     //console.log('body.height=' + document.body.style.height );
-			     //document.getElementById('footer').style.top = ''+h+'';
+			     girihCanvasHandler.drawOffset.setXY(w/2,h/1.7);
 			 }
 			);
 	    redrawGirih();
@@ -64,7 +62,7 @@ function onLoad() {
 	window.addEventListener( 'resize', resizer );
 	resizer();
     };
-    if( false ) // Load background image at all???
+    if( false ) // Load background image at all??? It's not in use in this version
 	defaultTextureImage.src = "js/girih_frontpage/img/500px-Girih_tiles.Penrose_compatible_extended.png"; // "500px-Girih_tiles.svg.png";
     else
 	defaultTextureImage.onload( null );

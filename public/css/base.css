@@ -10,38 +10,75 @@ body {
     font-family: Monospace;
 }
 
-#content {
+main {
     padding-bottom: 6rem;
+}
+
+/* Add a pseudo element for breakpoint detection */
+body:after {
+    content: "bp-default";
+    display: none;
 }
 
 
 /* Smartphones (portrait and landscape) ----------- */
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-    /* Styles */
+/* @media only screen and (min-device-width : 320px) and (max-device-width : 480px) { */
+@media only screen and (max-device-width : 480px) {
+    main {
+	margin-left : 0;
+	margin-right : 0;
+    }
+    body:after {
+	content: "bp-min";
+    }
 }
 
 /* Phone with larger displays ----------- */
-@media only screen and (min-device-width : 480 ) and (max-device-width : 768px) {
-    /* Styles */
+@media only screen and (min-width : 480 ) and (max-width : 768px) {
+    main {
+	margin-left : 25px;
+	margin-right : 25px;
+    }
+    body:after {
+	content: "bp-480";
+    }
 }
 
 /* iPads (portrait and landscape) ----------- */
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
-    /* Styles */
+@media only screen and (min-width : 768px) and (max-width : 1024px) {
+    main {
+	margin-left : 12%;
+	margin-right : 12%;
+    }
+    body:after {
+	content: "bp-768";
+    }
 }
 
 /* Desktops and laptops ----------- */
-@media only screen and (min-width : 1224px) {
-    /* Styles */
+@media only screen and (min-width : 1024px) and (max-width: 1824px) {
+    main {
+	margin-left : 10%;
+	margin-right : 22%;
+    }
+    body:after {
+	content: "bp-1024";
+    }
 }
 
 /* Large screens ----------- */
 @media only screen and (min-width : 1824px) {
-    /* Styles */
+    main {
+	margin-left : 10%;
+	margin-right : 30%;
+    }
+    body:after {
+	content: "bp-max";
+    }
 }
 
 
-#footer {
+footer {
     position: absolute;
     right: 0;
     bottom: 0;
