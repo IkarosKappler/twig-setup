@@ -44,7 +44,7 @@ function onLoad() {
 	
 	girihCanvasHandler.getProperties().allowPenroseTile          = true;
 			
-	girihCanvasHandler.drawOffset.setXY( 200, 200 ); 
+	girihCanvasHandler.drawOffset.setXY( 200, 200 ); //332, 50 );
 
 	var resizer = function() {
 	    resizeCanvas(girihCanvasHandler.canvas,
@@ -54,7 +54,9 @@ function onLoad() {
 			     console.log('canvas resized. w='+w+',h='+h);
 			     girihCanvasHandler.canvasWidth = w;
 			     girihCanvasHandler.canvasHeight = h;
-			     girihCanvasHandler.drawOffset.setXY(w/2,h/1.7);
+			     girihCanvasHandler.drawOffset.setXY(w/2,h/2);
+			     //console.log('body.height=' + document.body.style.height );
+			     //document.getElementById('footer').style.top = ''+h+'';
 			 }
 			);
 	    redrawGirih();
@@ -62,7 +64,7 @@ function onLoad() {
 	window.addEventListener( 'resize', resizer );
 	resizer();
     };
-    if( true ) // Load background image at all??? It's not in use in this version
+    if( false ) // Load background image at all???
 	defaultTextureImage.src = "js/girih_frontpage/img/500px-Girih_tiles.Penrose_compatible_extended.png"; // "500px-Girih_tiles.svg.png";
     else
 	defaultTextureImage.onload( null );
@@ -247,7 +249,7 @@ function redrawGirih() {
     girihCanvasHandler.getDrawProperties().outerRandomColorFill      = false; // document.forms["girih_form"].elements["outer_random_color_fill"].checked;
     girihCanvasHandler.getDrawProperties().innerRandomColorFill      = false; // document.forms["girih_form"].elements["inner_random_color_fill"].checked;
 
-    girihCanvasHandler.getProperties().allowPenroseTile          = true; // document.forms["girih_form"].elements["allow_penrose_tile"].checked;    
+    girihCanvasHandler.getProperties().allowPenroseTile          = false; // document.forms["girih_form"].elements["allow_penrose_tile"].checked;    
     //girihCanvasHandler.getProperties().drawPenroseCenterPolygon  = document.forms["girih_form"].elements["draw_penrose_center_polygon"].checked;
 
   

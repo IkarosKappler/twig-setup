@@ -1,0 +1,26 @@
+
+canvas#girih_canvas {
+    position  : fixed;
+    left      : 0px;
+    top       : 0px;
+    z-index   : -1;
+}
+
+
+#content {
+    padding-bottom: 0;
+}
+
+#footer {
+    /* top : calc( 100% - 100px ); */
+    display : none;
+    
+}
+
+div#bloglist {
+    width       : 0px;
+    height      : 0px;
+    margin-left : 40%;
+    z-index     : 100;
+    background-color : grey;
+}

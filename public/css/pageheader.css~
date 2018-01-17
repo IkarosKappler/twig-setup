@@ -1,11 +1,3 @@
-@font-face{ 
-    font-family: 'sfpixelate';
-    src: url('sf_pixelate-webfont.eot');
-    src: url('sf_pixelate-webfont.eot?#iefix') format('embedded-opentype'),
-    url('sf_pixelate-webfont.woff') format('woff'),
-    url('sf_pixelate-webfont.ttf') format('truetype'),
-    url('sf_pixelate-webfont.svg#webfont') format('svg');
-}
 
 header {
     height              : 360px;
@@ -19,8 +11,7 @@ header {
     background-size     : cover;
     width               : 100%;
     height              : 300px;
-    /* font-family         : Helvetica; */
-    font-family         : sfpixelate, Monospace, Helvetica;
+    font-family         : Helvetica;
 }
 
 header .logo {

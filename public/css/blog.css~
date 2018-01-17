@@ -1,0 +1,6 @@
+
+
+div.tech_paragraph {
+    margin-left      : 25px;
+    margin-bottom    : 150px;
+}
