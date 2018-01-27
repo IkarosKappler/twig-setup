@@ -1,0 +1,535 @@
+{% extends "blog.twig" %}
+
+{% block head %}
+{{ parent() }}
+{% endblock %}
+
+
+{% block content %}
+<a name="_top"></a>
+
+<pre>
+Ikaros Kappler		      Informational                     [Page 1]
+       							   February 2013
+
+
+Setting up wireless networking on my Raspberry Pi (and partially failing)
+=========================================================================
+
+
+My Aim
+------
+I want my Raspi (model B) to be able to connect to wireless networks. 
+As the board has no built-in wlan capabilities I just purchased an USB 
+wlan device.
+After some research I found some models that would be supported by the 
+Raspberry respective by the raspbian linux. One was
+ - Belkin Wireless G USB adapter, Model F5D7050.
+
+Unfortunately this model (and others) was out of stock at my local 
+electronics trader but the closest model I found was this
+ - Model F7D1101qde
+
+The guy at the desk was not sure if it would run on a debian/linux 
+system but it was only 12 Euros (about 16 US$) ... 'so what', I thought.
+
+
+<img src="/public/blog.20130203_raspi_wlan/raspi_wlan_20130203_01_rotated_(640x480).jpg" alt="picture of the wireless device" /><br/>
+
+
+What you need
+-------------
+ - Your Raspi, eventually connected via ethernet cable (for installing
+   new drivers; eth0 should be up)
+ - The USB wlan device
+ - For the case Raspi's network won't come up after reconfiguration
+   you might need:
+    - an HDMI cable
+    - an USB keyboard
+    - an USB mouse
+    - an USB Hub (you cannot connect the Wireless USB, keyboard AND
+      mouse to a two-port connector ;)
+
+
+After unpacking the device I immediately connected it to my Raspi; 
+unluckily the device is pretty thick so it physically blocks both USB 
+ports when connected!
+ Note: fortunately I found an USB extension cable in my wire box so I 
+       would not have to give up using my USB storage connected to the 
+       Raspi (which is mounted on /var/www ^^).
+
+
+
+<img src="/public/blog.20130203_raspi_wlan/raspi_wlan_20130203_03_(480x640).jpg" alt="picture of my raspi connected to the wlan device" /><br/>
+
+
+My raspbian detected the device via hotplug and modified my 
+/etc/network/interfaces automatically:
+
+auto lo
+
+iface lo inet loopback
+iface eth0 inet dhcp
+
+allow-hotplug wlan0
+iface wlan0 inet manual
+wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
+iface default inet dhcp
+
+
+# END /etc/network/interfaces
+
+
+
+Going to follow the instructions on
+http://omer.me/2012/04/setting-up-wireless-networks-under-debian-on-ra
+spberry-pi/
+
+First I listed my usb devices to check if the wlan stick was really and 
+correctly detected:
+> lsusb
+[...]
+Bus 001 Device 004: ID 050d:945a Belkin Components F7D1101 v1 Basic Wir\
+eless Adapter [Realtek RTL8188SU]
+
+
+Note: I skipped the first instruction steps because the firmware-realtek 
+      module was already installed on my system.
+      Thank you raspbian developers!
+
+
+
+
+And, hey!, the device was already able to scan the area for local 
+networks
+> iwlist wlan0 scan
+wlan0     Scan completed :
+          Cell 01 - Address: 1C:C6:3C:03:85:4A
+                    ESSID:"WLAN-038581 Javierr"
+                    Protocol:IEEE 802.11bgn
+                    Mode:Master
+                    Frequency:2.412 GHz (Channel 1)
+                    Encryption key:on
+                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 6 Mb/s
+                              9 Mb/s; 12 Mb/s; 18 Mb/s; 24 Mb/s; 36 Mb/s
+                              48 Mb/s; 54 Mb/s
+                    Extra:wpa_ie=dd1a0050f20101000050f20202000050f20400\
+50f20201000050f202
+                    IE: WPA Version 1
+                        Group Cipher : TKIP
+                        Pairwise Ciphers (2) : CCMP TKIP
+                        Authentication Suites (1) : PSK
+                    Extra:rsn_ie=30180100000fac020200000fac04000fac0201\
+00000fac020000
+                    IE: IEEE 802.11i/WPA2 Version 1
+                        Group Cipher : TKIP
+                        Pairwise Ciphers (2) : CCMP TKIP
+                        Authentication Suites (1) : PSK
+                    IE: Unknown: DD910050F204104A0001101044000102104100\
+0100103B00010310470010000000000000000300001CC63C03854A1021000B436F72706\
+F726174696F6E10230009564756393533414B5710240008312E32302E3030301042000A\
+4A3230333038353733311054000800060050F204000110110014576972656C657373205\
+26F757465722857464129100800020084103C000103
+                    Signal level=60/100  
+          Cell 02 - Address: 00:1D:19:E3:35:A8
+                    ESSID:"SupaTuba"
+                    Protocol:IEEE 802.11bg
+                    Mode:Master
+                    Frequency:2.412 GHz (Channel 1)
+                    Encryption key:on
+                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 6 Mb/s; 9 Mb/s
+                              11 Mb/s; 12 Mb/s; 18 Mb/s; 24 Mb/s; 36 Mb\
+/s
+                              48 Mb/s; 54 Mb/s
+
+[...] and so on.
+
+
+
+Step 2: setting up the wpa config
+---------------------------------
+
+As described in the Raspberry User Guide I changed my 
+/etc/network/interfaces 
+and now it looks like this:
+
+auto lo
+
+iface lo inet loopback
+iface eth0 inet dhcp
+
+allow-hotplug wlan0
+# [2013-02-03; Ikaros Kappler]
+# This line was:
+# iface wlan0 inet manual
+iface wlan0 inet dhcp
+
+# I also added this line as described the the Rasbperry manual
+wpa-conf /etc/wpa.conf
+
+wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
+iface default inet dhcp
+
+
+# END /etc/network/interfaces
+
+
+
+Note: this is not the final version. Please continue reading to the end
+      of this document. I wrote it to remember what might go wrong 
+      during the installation of the wifi device.
+
+
+
+
+
+
+The file /etc/wpa.conf does not yet exist. So let's create it.
+> sudo emacs /etc/wpa.conf
+
+# @author Ikaros Kappler
+# @date 2013-02-03
+network={
+	ssid="my wpa network SSID"
+	proto=RSN
+	key_mgmt=WPA-PSK
+	pairwise=CCMP TKIP
+	group=CCMP TKIP
+	psk="my wpa network password"
+	key_mgmt=NONE
+}
+
+# END /etc/wpa.conf
+
+
+
+So far, so good. Let's restart all network interfaces:
+> sudo /etc/init.d/networking restart
+[warn] Running /etc/init.d/networking restart is deprecated because it \
+may not re-enable some interfaces ... (warning).
+[....] Reconfiguring network interfaces...Internet Systems Consortium D\
+HCP Client 4.2.2
+Copyright 2004-2011 Internet Systems Consortium.
+All rights reserved.
+For info, please visit https://www.isc.org/software/dhcp/
+
+Listening on LPF/eth0/b8:27:eb:af:a7:90
+Sending on   LPF/eth0/b8:27:eb:af:a7:90
+Sending on   Socket/fallback
+DHCPRELEASE on eth0 to 192.168.1.1 port 67
+
+
+And now NOTHING MORE HAPPENED.
+As I was using a SSH connection to my Raspi I thought the connection was 
+lost on network restart.
+But reconnecting failed ;(
+
+Even ping did not respone so the ethernet interface was not reachable 
+any more:
+> ping 192.168.1.109
+PING 192.168.1.109 (192.168.1.109) 56(84) bytes of data.
+From 192.168.1.113 icmp_seq=1 Destination Host Unreachable
+...
+
+
+
+
+
+
+So I ran a network scan to check if maybe the DHCP discover failed and 
+my Raspi got a new local IP address assigned:
+
+> nmap -sP 192.168.1.*
+
+Starting Nmap 5.21 ( http://nmap.org ) at 2013-02-03 18:21 CET
+Nmap scan report for 192.168.1.1
+Host is up (0.00082s latency).
+Nmap scan report for 192.168.1.100
+Host is up (0.081s latency).
+Nmap scan report for 192.168.1.105
+Host is up (0.079s latency).
+Nmap scan report for 192.168.1.113
+Host is up (0.00010s latency).
+Nmap done: 256 IP addresses (4 hosts up) scanned in 2.93 seconds
+
+... but all hosts in this list are known and definitely NOT my Raspi:
+not eth0 (wired) nor wlan0.
+
+I DIS- AND RE-CONNECTED THE WHOLE RASPI AND RESTARTED IT COMPLETELY.
+Et voilÃ¡ the network was back on line.
+
+
+I re-checked my /etc/wpa.conf and there were really typos in my network
+password; changed the file, saved and now I was a bit more clever and
+just brought up wlan0 only instead of restarting the whole network :)
+
+> sudo ifup wlan0
+wpa_supplicant: wpa-roam can only be used with the "manual" inet METHOD
+run-parts: /etc/network/if-pre-up.d/wpasupplicant exited with return co\
+de 1
+Internet Systems Consortium DHCP Client 4.2.2
+Copyright 2004-2011 Internet Systems Consortium.
+All rights reserved.
+For info, please visit https://www.isc.org/software/dhcp/
+
+Listening on LPF/wlan0/ec:1a:59:30:28:6a
+Sending on   LPF/wlan0/ec:1a:59:30:28:6a
+Sending on   Socket/fallback
+DHCPDISCOVER on wlan0 to 255.255.255.255 port 67 interval 3
+DHCPDISCOVER on wlan0 to 255.255.255.255 port 67 interval 3
+DHCPDISCOVER on wlan0 to 255.255.255.255 port 67 interval 7
+DHCPDISCOVER on wlan0 to 255.255.255.255 port 67 interval 7
+DHCPDISCOVER on wlan0 to 255.255.255.255 port 67 interval 17
+DHCPDISCOVER on wlan0 to 255.255.255.255 port 67 interval 16
+DHCPDISCOVER on wlan0 to 255.255.255.255 port 67 interval 8
+No DHCPOFFERS received.
+Unable to obtain a lease on first try.  Exiting.
+Failed to bring up wlan0.
+
+
+
+
+
+The first line tells what is definitely wrong:
+ wpa_supplicant: wpa-roam can only be used with the "manual" inet METHOD
+so I commented out the line. My /etc/network/interfaces now looks like 
+this:
+
+auto lo
+
+iface lo inet loopback
+iface eth0 inet dhcp
+
+allow-hotplug wlan0
+# [2013-02-03; Ikaros Kappler]
+# This line was:
+# iface wlan0 inet manual
+iface wlan0 inet dhcp
+
+# I also added this line as described the the Rasbperry manual
+wpa-conf /etc/wpa.conf
+
+# wpa_supplicant: wpa-roam can only be used with the "manual" inet METH\
+OD
+# wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
+iface default inet dhcp
+
+
+# END /etc/network/interfaces
+
+
+
+
+
+Now let's try to get the interface up:
+> sudo ifup wlan0
+Internet Systems Consortium DHCP Client 4.2.2
+Copyright 2004-2011 Internet Systems Consortium.
+All rights reserved.
+For info, please visit https://www.isc.org/software/dhcp/
+
+Listening on LPF/wlan0/ec:1a:59:30:28:6a
+Sending on   LPF/wlan0/ec:1a:59:30:28:6a
+Sending on   Socket/fallback
+DHCPDISCOVER on wlan0 to 255.255.255.255 port 67 interval 3
+DHCPDISCOVER on wlan0 to 255.255.255.255 port 67 interval 5
+DHCPDISCOVER on wlan0 to 255.255.255.255 port 67 interval 7
+DHCPDISCOVER on wlan0 to 255.255.255.255 port 67 interval 9
+DHCPDISCOVER on wlan0 to 255.255.255.255 port 67 interval 21
+DHCPDISCOVER on wlan0 to 255.255.255.255 port 67 interval 16
+No DHCPOFFERS received.
+Unable to obtain a lease on first try.  Exiting.
+Failed to bring up wlan0.
+
+
+
+Darn :(
+
+
+
+
+I got flipped by always loosing the network/SSH connection on network
+restart after reconfiguration. I connected my USB keyboard and mouse
+such as the Raspi's video output to my monitor (better to enqueue your 
+favorite songs into your mp3 playlist as you won't see your home desktop 
+for some time now ...).
+
+&lt; imagine the Balrog here &gt;
+
+Finally after spending hours on trying different wpa configurations,
+different wpa password types, re-cheking my router and trying different
+auth methods, channels, trying the network-manager, wpa_gui on LXDE (the 
+connection could be established for about 15 seconds with that, then 
+broke down with status code 15) I ended up with a plain and oldschool 
+like static interface configuration like this:
+
+auto lo
+auto eth0
+auto wlan0
+
+iface lo inet loopback
+iface eth0 inet dhcp
+
+iface wlan0 inet static
+  address 192.168.1.10
+  netmask 255.255.255.0
+  gateway 192.168.1.1
+  wpa-ssid "my network SSID"
+  wpa-psk "my network password"
+
+  wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
+
+iface default inet dhcp
+
+# END /etc/network/interfaces
+
+
+Additionally I slightly modified the /etc/wpa.conf file by changing the 
+'psk' value to a hexadecimal/binary key (but I don't think this makes a 
+difference). You can get this representation by:
+> wpa_passphrase &lt;your_network_SSID&gt; &lt;your_network_password&gt;
+
+This tool prints out a minimal configuration:
+network={
+        ssid="your netwrk SSID"
+        #psk="your network password"
+        psk=&lt;a hexadecimal password hash representation&gt;
+}
+
+
+Copy the second 'psk'-line (the hexadecimal one) and insert it into your 
+/etc/wpa.conf settings.
+
+
+Typing
+> sudo ifup wlan0
+just terminated without any messages. No message hopefully also means no 
+error message (I already assumed and hoped for semi success). Let's take 
+a peek at the current network interface configuration:
+
+> ifconfig
+eth0      Link encap:Ethernet  HWaddr b8:27:eb:af:a7:90  
+          UP BROADCAST MULTICAST  MTU:1492  Metric:1
+          RX packets:4894 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:4069 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:4117378 (3.9 MiB)  TX bytes:596341 (582.3 KiB)
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          UP LOOPBACK RUNNING  MTU:16436  Metric:1
+          RX packets:321 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:321 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:33457 (32.6 KiB)  TX bytes:33457 (32.6 KiB)
+
+wlan0     Link encap:Ethernet  HWaddr ec:1a:59:30:28:6a  
+          inet addr:192.168.1.110  Bcast:192.168.1.255  Mask:255.255.25\
+5.0
+          UP BROADCAST RUNNING MULTICAST  MTU:1492  Metric:1
+          RX packets:9603 errors:0 dropped:187 overruns:0 frame:0
+          TX packets:1911 errors:0 dropped:5 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:3040078 (2.8 MiB)  TX bytes:296103 (289.1 KiB)
+
+
+The 'inet addr' attribute for interface wlan0 exists and has my 
+configured value! At least my static IP address was accepted, such as 
+defined in the /etc/network/interfaces file.
+
+Note: I encountered routers that do not accept static IP addresses unless 
+      the hardware address is white listed (see you router configuration, 
+      usually at http:/192.168.1.1).
+
+
+So the wireless internet connection seemed to be available on my Raspi.
+I disconnected the ethernet cable (all network LEDs faded; it seems the 
+LEDs only indicate wired network connectivity) and finally my 
+CONFIGURATION WORKED! ^^
+
+> ping www.fefe.de
+PING www.fefe.de (80.190.240.67) 56(84) bytes of data.
+64 bytes from ioctl.codeblau.de (80.190.240.67): icmp_req=1 ttl=58 time\
+=55.2 ms
+...
+
+
+
+Yay, time for a beer.
+
+
+
+
+Note 1: Actually I DIDN'T get my DHCP client running on my raspi, but as
+      	long as it stays in my room (inside my network) using its static 
+        IP address this should not matter.
+      
+Note 2: In the past years I encountered wireless/DHCP/WPA configuration 
+     	on debian (and debian like derivates like ubuntu or raspbian) 
+	as extremly problematic --- or at least very hard to set up
+        manually.
+
+Note 3: There is a shell script which automatically detects your wifi
+     	device, downloads additional drivers and configures your network
+        at
+	http://www.raspberrypi.org/phpBB3/viewtopic.php?f=26&t=6256
+	  --> http://dl.dropbox.com/u/80256631/install-rtl8188cus.sh
+        Unfortunately this does not run on debian/wheezy (which I use,
+	so I cannot tell if it works).
+
+Note 4: I can really recommend the "Raspberry Pi(R) User Guide" (it's
+     	a printed book. On real paper. With real ink); it has short
+	introductions to each topic that affects the Raspi: from 
+	installing the hardware, setting up the OS, to Linux basics,
+	network installation, to basics in hardware programming, simple 
+	electronics, and the python language (which is used for 
+	hardware programming using the GPIO pins).
+
+
+
+Last steps
+----------
+I disabled eth0 (it's not connected any more) and reconfigured my router
+to assign the local IP address (I want to use) always to my Raspi, even
+though DHCP does not work.
+
+My Raspi is now accessible via the wireless USB device I installed. 
+There are SSH and HTTP daemons running. To access the internet it's not 
+using the wired ethernet port any more. The TCP/IP packages are passing 
+the air around my head.
+This means: eth0 is free for other network purposes :)
+
+
+
+Next Plan
+---------
+Configure my Raspi to send Magic-Packages into the local network. I want 
+to start my desktop PC using Wake-on-LAN (WOL).
+
+
+
+
+TODO
+----
+Make Raspi's wlan DHCP client to run with any network (no static 
+address).
+
+
+
+
+
+
+Feel free to copy, modify and/or link this document in any way you want.
+And the most important thing: 
+Have fun
+
+
+
+
+
+
+</pre>
+
+
+
+{% endblock %}

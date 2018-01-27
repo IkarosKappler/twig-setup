@@ -10,8 +10,17 @@ body {
     font-family: Monospace;
 }
 
+a:link, a:active, a:hover {
+		      color          : #0088d8; /* #2FA29D; */ 
+}
+
+a:visited {
+    
+}
+
+
 main {
-    padding-bottom: 6rem;
+    padding-bottom : 6rem;
 }
 
 /* Add a pseudo element for breakpoint detection */

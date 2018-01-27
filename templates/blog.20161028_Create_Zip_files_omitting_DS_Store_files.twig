@@ -1,0 +1,129 @@
+{% extends "blog.twig" %}
+
+{% block head %}
+{{ parent() }}
+{% endblock %}
+
+
+{% block content %}
+<a name="_top"></a>
+
+
+
+  <pre style="background-color: #ffffff;">
+                                                                            Author......Ikaros Kappler
+                                                                            Date............2016-10-28
+                                                                            Version................1.0
+  </pre>
+
+
+<h2></h2>
+<br/>
+
+<h3>Creating Zip files omitting .DS_Store files</span></h3>
+<!-- BEGIN paragraph -->
+<div class="tech_paragraph">
+<i>Darn m*therflippin' hidden <span class="affected">.DS_Store</span> records. Y u spoil me zip files?!</i><br/>
+<br/>
+Each time I am using MacOS X there is this one issue: Zipped files always contain those unwanted, annoying .DS_Store
+files. You don't even recognize them if you are using MacOS X on the target system too, but dare you using Windows 
+or any Linux/UNIX system ... suddenly they are everywhere.<br/>
+<br/>
+<br/>
+Do your customers/friends/family a favor: pack clean Zip files that do not contain hidden system relicts.<br/>
+<br/>
+<br/>
+You can use this script in MaxOS' Automator.
+</div>
+<!-- END paragraph -->
+
+
+
+
+<h3>Here comes the Script</span></h3>
+<!-- BEGIN paragraph -->
+<div class="tech_paragraph">
+It is a simple Bash script (sorry for bad style):
+<br/>
+
+<div class="bashbox">
+
+<pre style='color:#d1d1d1;background:#000000;'><span style='color:#9999a9; '>#!/bin/bash</span>
+<span style='color:#9999a9; '>#</span>
+<span style='color:#9999a9; '># To create the desired zip file inside the current Finder window's</span>
+<span style='color:#9999a9; '># working directoy, this script just places it inside the first</span>
+<span style='color:#9999a9; '># passed file's parent directory.</span>
+<span style='color:#9999a9; '># </span>
+<span style='color:#9999a9; '># 'pwd' is not doing the job here.</span>
+
+
+<span style='color:#9999a9; '># Check if input args are present</span>
+<span style='color:#e66170; font-weight:bold; '>if</span> <span style='color:#d2cd86; '>[</span> $<span style='color:#9999a9; '># -lt 1 ]; then</span>
+    echo <span style='color:#00c4c4; '>"Pass some files"</span> <span style='color:#008c00; '>1</span>>&amp;<span style='color:#008c00; '>2</span>
+    <span style='color:#e66170; font-weight:bold; '>exit</span> <span style='color:#008c00; '>1</span>;
+fi
+
+get_abs_filename<span style='color:#d2cd86; '>(</span><span style='color:#d2cd86; '>)</span> <span style='color:#b060b0; '>{</span>
+  <span style='color:#9999a9; '># $1 : relative filename</span>
+  echo <span style='color:#00c4c4; '>"$(cd "</span>$<span style='color:#d2cd86; '>(</span><span style='color:#e66170; font-weight:bold; '>dirname</span> <span style='color:#00c4c4; '>"$1"</span><span style='color:#d2cd86; '>)</span><span style='color:#00c4c4; '>" &amp;&amp; pwd)/$(basename "</span>$<span style='color:#008c00; '>1</span><span style='color:#00c4c4; '>")"</span>
+<span style='color:#b060b0; '>}</span>
+get_base_directory<span style='color:#d2cd86; '>(</span><span style='color:#d2cd86; '>)</span> <span style='color:#b060b0; '>{</span>
+  <span style='color:#9999a9; '># $1 : relative filename</span>
+  echo <span style='color:#00c4c4; '>"$(cd "</span>$<span style='color:#d2cd86; '>(</span><span style='color:#e66170; font-weight:bold; '>dirname</span> <span style='color:#00c4c4; '>"$1"</span><span style='color:#d2cd86; '>)</span><span style='color:#00c4c4; '>" &amp;&amp; pwd)"</span>
+<span style='color:#b060b0; '>}</span>
+
+
+baseDir<span style='color:#d2cd86; '>=</span>$<span style='color:#d2cd86; '>(</span>get_base_directory $<span style='color:#008c00; '>1</span><span style='color:#d2cd86; '>)</span>
+echo <span style='color:#00c4c4; '>"baseDir=$baseDir"</span>
+cd <span style='color:#00c4c4; '>"$baseDir"</span>
+<span style='color:#e66170; font-weight:bold; '>pwd</span>
+
+<span style='color:#9999a9; '># Convert absolute paths to plain file names</span>
+filenamelist<span style='color:#d2cd86; '>=</span><span style='color:#d2cd86; '>(</span><span style='color:#d2cd86; '>)</span>
+<span style='color:#e66170; font-weight:bold; '>for</span> f <span style='color:#e66170; font-weight:bold; '>in</span> <span style='color:#00c4c4; '>"$@"</span>
+<span style='color:#e66170; font-weight:bold; '>do</span>
+	echo <span style='color:#00c4c4; '>"Current file=$f, basename=$(basename "</span>$f<span style='color:#00c4c4; '>")"</span>
+  	filenamelist<span style='color:#d2cd86; '>+</span><span style='color:#d2cd86; '>=</span><span style='color:#d2cd86; '>(</span> <span style='color:#00c4c4; '>"$(basename "</span>$f<span style='color:#00c4c4; '>")"</span> <span style='color:#d2cd86; '>)</span>
+done
+<span style='color:#9999a9; '># echo "filenamelist: $filenamelist"</span>
+
+<span style='color:#9999a9; '># Convert the filenamelist into a string (whitespace separated)</span>
+filelist<span style='color:#d2cd86; '>=</span>$<span style='color:#d2cd86; '>(</span>echo $<span style='color:#b060b0; '>{</span>filenamelist<span style='color:#d2cd86; '>[</span><span style='color:#d2cd86; '>*</span><span style='color:#d2cd86; '>]</span><span style='color:#b060b0; '>}</span><span style='color:#d2cd86; '>)</span>
+echo <span style='color:#00c4c4; '>"filelist=$filelist"</span>
+
+zipName<span style='color:#d2cd86; '>=</span><span style='color:#00c4c4; '>"$(basename "</span>$baseDir<span style='color:#00c4c4; '>").zip"</span>
+
+<span style='color:#9999a9; '># Eventually create the zip file</span>
+<span style='color:#e66170; font-weight:bold; '>zip</span> <span style='color:#d2cd86; '>-</span>r <span style='color:#00c4c4; '>"$zipName"</span> $filelist <span style='color:#d2cd86; '>-</span>x <span style='color:#00c4c4; '>"*.DS_Store"</span>
+
+</pre>
+
+
+</pre>
+</div>
+<br/>
+<br/>
+Download bash script <a href="compress_wo_dsstore.sh">here</a>.<br/>
+<br/>
+<br/>
+
+Have fun!
+
+</div>
+<!-- END paragraph -->
+
+
+<br/>
+<br/>
+Enjoy and don't forget to help your friends!<br/>
+<br/>
+<br/>
+
+
+<!-- Use and enjoy my code and do good things. Peace to the world.<br/> -->
+
+
+
+
+
+{% endblock %}

@@ -23,11 +23,9 @@
 	  <ul id="nav_ul">
 	    <li><a href="#"><div class="avatar" id="avatar"></div></a></li>
 	    <li><a href="/public">public/</a></li>
-	    <li><a href="/date.php?ts=now">$date</a></li>
-	    <li><a href="/your_ip_is.php">$your_ip_is</a></li>
-	    <li><a href="/randomkey.php?length=32&algorithm=sha1&addDelimiters=1">$randomkey</a></li>
+	    <li><a href="https://www.github.com/ikaroskappler" target="_blank">@github</a></li>
 	    <li><a href="/impress.php">whoami</a></li>
-	    <ul>
+	  <ul>
 	</nav>
       </header>
 

@@ -1,0 +1,147 @@
+{% extends "blog.twig" %}
+
+{% block head %}
+{{ parent() }}
+{% endblock %}
+
+
+{% block content %}
+<a name="_top"></a>
+
+
+<h3>Howto setup your GnuPG (GPG) keys</h3>
+
+I wanted to set up a working GPG configuration to be able to send encyrpted and/or signed emails.<br/>
+<br/>
+
+
+<h3>What I did</h3>
+
+If you don't have any keys yet then you have to generate a new one. This needs some random data
+so take your time (took about 8 minutes on my netbook which lets me think that it really waits for some
+random data from different sources).<br/>
+Open a terminal and type:
+<pre>
+gpg --gen-key
+</pre>
+<br/>
+<br/>
+
+You will be asked for your identity (name and email address you want to use). You may add more
+identities later, but note that <b>all identities you associate with this key will always be
+associated with it. Revoking identities does not remove them, it only invalidates them.</b><br/>
+<br/>
+<br/>
+Now check your new key:
+<pre>
+gpg --list-keys
+</pre><br/>
+Your key will have a short ID, let's assume its <code>ABCD1234</<code> in this example, and your name
+is <i>Trent Reznor</i>. Let's make some backup files now by exporting your keys to some text files. I 
+don't need to say that you have to handle your private keys and your revocation certificates with care!<br/>
+If you want to use your keys for your lifetime time it's a good idea to print them on paper and store them
+in a safe location. Do NOT share your private key nor your revocation certificate.<br/>
+<ul>
+  <li>If you share your private key others might take your identity and read your encrypted emails.</li>
+  <li>If you share your revocation certificate others might invalidate your keys.</li>
+</ul>
+<br/>
+<br/>
+
+<pre>
+# To add more identities/mail addresses
+gpg --edit-key <your key ID 8 hex chars>
+> adduid
+
+# This is the file you want to share with others!
+gpg --output pubkey_ABCD1234.<i>Trent.Reznor</i>.ascii --armor --export ABCD1234
+
+
+# Now create a revocation certificate.
+# The purpose of the revocation certificate is to have a safe key that allows
+# yout to invalidate keys you once uploaded to any key server.
+gpg --output revocation_cert_ABCD1234.<i>Trent.Reznor</i>.ascii --gen-revoke ABCD1234
+
+gpg --output privkey_ABCD1234.<i>Trent.Reznor</i>.ascii --armor --export-secret-keys ABCD1234
+
+</pre><br/>
+<br/>
+<br/>
+
+Now publish your new key to a key server.<br/>
+<a href="http://www.heise.de/" target="_blank">heise.de</a> recommended pool.sks-keyservers.net, which
+seems to be a  distributed service.<br/>
+
+<pre>
+# Send key to a public server, in this case
+gpg --keyserver pool.sks-keyservers.net --send-key 0xABCD1234
+</pre><br/>
+<br/>
+
+If you made some mistakes just remove your identities and run an update.<br/>
+<br/>
+<br/>
+<br/>
+<b>This happened to me:</b> I had my 'primary identity' and added some email addresses of
+my 'secondary identity'. I uploaded my key to a key server and now my identities (I wanted to separate) will _always_
+be associated with each other :(<br/>
+Revoking my keys will not remove this part of information. It will only be invalidated
+but still visible to <b>everyone</b> (and marked as <i>revoked</i>). So carefully choose the 
+identities you want to use with your key. If unsure create more keys
+for other identities.<br/>
+<br/>
+To make changes:<br/>
+<pre>
+# To remove Identities from the key
+# Note that your keys change then!
+gpg --edit-key <ID>
+> revuid
+
+# Then update your certs by revoking them (use your revocation certificate)
+gpg --import revocation_cert_ABCD1234.ascii 
+
+# And update the modified keys on the server
+gpg --keyserver pool.sks-keyservers.net --refresh-keys ABCD1234
+# OR
+gpg --keyserver pool.sks-keyservers.net --send-keys 0xABCD1234
+</pre><br/>
+<br/>
+<br/>
+
+<h3>Use your keys to encrypt and/or sign emails</h3>
+<pre>
+# Now install enigmail
+sudo apt-get install enigmail
+
+
+# Enigmail: attach public key
+#           sign public key (don't forget to check fingerprint!)
+# (to display fingerprint:)
+gpg --fingerprint <ID>
+</pre>
+<br/>
+<br/>
+<br/>
+<h3>Edit 2016-02-18</h3>
+<b>Export public key as ASCII text file:</b>
+<pre>
+  gpg -a --output &lt;filename/rsa_pub.ascii&gt; --export ABCD1234
+</pre>
+<b>Export public key as binary text file:</b>
+<pre>
+  gpg --output &lt;filename/rsa_pub&gt; --export ABCD1234
+</pre>
+<br/>
+
+<b>Export private key as ASCII text file (<font color="red">do NOT share</font>):</b>
+<pre>
+  gpg -a --export-secret-keys ABCD1234 > &lt;filename/rsa.ascii&gt;
+</pre>
+<b>Export private key as binary text file (<font color="red">do NOT share</font>):</b>
+<pre>
+  gpg --export-secret-keys ABCD1234 > &lt;filename/rsa&gt;
+</pre>
+
+
+
+{% endblock %}

@@ -6,21 +6,31 @@ canvas#girih_canvas {
     z-index   : -1;
 }
 
-
-#content {
-    padding-bottom: 0;
-}
-
-#footer {
-    /* top : calc( 100% - 100px ); */
-    display : none;
-    
+main {
+    margin-top     : 100px;
+    padding        : 0;
 }
 
 div#bloglist {
-    width       : 0px;
-    height      : 0px;
-    margin-left : 40%;
-    z-index     : 100;
-    background-color : grey;
+    width            : 0px;
+    height           : 0px;
+    padding-left     : 10%;
+    z-index          : 100;
+    overflow         : visible;
+    background-color : rgba(128,128,128,0.5);
+    white-space      : nowrap;
+}
+
+div#bloglist a {
+    background       : rgba(256,256,256,0.75);
+}
+
+div#bloglist div.spacer {
+    width : 10px;
+    height : 250px;
+}
+
+footer {
+    /* The footer does not apply with the dynamic front page canvas visible */
+    display : none;
 }

@@ -5,6 +5,9 @@
    # This line excludes the 'test' directory from the routing routine.
    RewriteRule ^(test) - [L]
    RewriteRule ^(public) - [L]
+   RewriteRule ^(vault) - [L]
+   RewriteRule ^(services) - [L]
+   RewriteRule ^(resources) - [L]
    RewriteRule ^(date.php) - [L]
    RewriteRule ^(your_ip_is.php) - [L]
    RewriteRule ^(randomkey.php) - [L]

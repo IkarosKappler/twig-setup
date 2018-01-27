@@ -1,0 +1,297 @@
+{% extends "blog.twig" %}
+
+{% block head %}
+{{ parent() }}
+{% endblock %}
+
+
+{% block content %}
+<a name="_top"></a>
+
+
+  <pre style="background-color: #ffffff;">
+                                                                            Author......Ikaros Kappler
+                                                                            Date............2016-10-28
+                                                                            Version................1.0
+  </pre>
+
+<h2></h2>
+<br/>
+
+<h3>Virtual machine setup with <span class="affected">Vagrant Up</span> and <span class="affected">Virtual Box</span></h3>
+<!-- BEGIN paragraph -->
+<div class="tech_paragraph">
+Four months ago I started to develop software on virtual machines. 
+Hadn't done that before but it took only some hours to get me 
+convinced that using virtual machines for web-based software 
+development is a good idea.<br/>
+<br/>
+<br/>
+I am using <a href="https://www.virtualbox.org/" target="_new">Virtual Box</a>
+in combination with <a href="https://www.vagrantup.com/" target="_blank">Vagrant Up</a> 
+here.<br/>
+<br/>
+Just install them:
+<div class="console">
+$ apt-get install <span class="affected">vagrant virtualbox</span>
+</div>
+<br/>
+Note: My preferred operating system is Debian Linux and I'm going to install the current 
+stable version <span class="affects">Debian8 Jessie</span>. Oh, and
+did I mention that we are gonna using PHP7, which is not yet available
+in debian's default repositories? :)
+
+</div>
+<!-- END paragraph -->
+
+
+
+
+<h3>Here comes the setup</span></h3>
+<!-- BEGIN paragraph -->
+<div class="tech_paragraph">
+Here we go. After installing Virtualbox and Vagrant perform these steps:
+<br/>
+
+<div class="bashbox">
+<pre style='color:#000000;'><span style='color:#696969; '># I am using the Laravel PHP framework.</span>
+vagrant <span style='color:#800000; font-weight:bold; '>box</span> <span style='color:#800000; font-weight:bold; '>add</span> laravel/homestead
+
+<span style='color:#696969; '># Init vagrant and install a debian image. This can take up several minutes 
+# as the whole package needs to be downloaded.
+# Other available systems are:</span>
+<span style='color:#696969; '>#    vagrant init hashicorp/precise32</span>
+<span style='color:#696969; '>#    vagrant init hashicorp/precise64</span>
+vagrant <span style='color:#800000; font-weight:bold; '>init</span> debian/jessie64
+
+<span style='color:#696969; '># That's it for the beginning. Your base system should be downloaded and
+# stored in a virual box.</span>
+<span style='color:#696969; '># Start the virtual machine (this can take some minutes at first run)</span>
+vagrant <span style='color:#800000; font-weight:bold; '>up</span> --provider virtualbox
+
+
+<span style='color:#696969; '># Log in to the virtual machine via SSH. Vagrant's default port
+# is 2222 (not 22 as it might be in use by you parent system).</span>
+vagrant ssh
+
+<pre class="parent_system">
+<span style='color:#696969; '># If you want to login into vagrant using PUTTY or Emacs, copy the</span>
+<span style='color:#696969; '># public key file into your .ssh directory:</span>
+cd debian8/.vagrant/machines/<span style='color:#800000; font-weight:bold; '>default</span>/virtualbox
+cp vagrant_key ~/.ssh/
+
+
+<span style='color:#696969; '># Edit the ~/.ssh/config file (on your parent system):</span>
+Host 127.0.0.1
+     <span style='color:#800000; font-weight:bold; '>User</span> vagrant
+     Hostname 127.0.0.1
+     ForwardX11 <span style='color:#797997; '>yes</span>
+     ForwardAgent <span style='color:#797997; '>yes</span>
+     IdentityFile /Users/&lt;<span style='color:#800000; font-weight:bold; '>user</span>>/.ssh/vagrant_key
+     DSAAuthentication <span style='color:#797997; '>yes</span>
+     PubkeyAuthentication <span style='color:#797997; '>yes</span>
+
+<span style='color:#696969; '># Configure the VM's network</span>
+emacs Vagrantfile
+
+  config.vm.network <span style='color:#0000e6; '>"forwarded_port"</span><span style='color:#808030; '>,</span> guest: 80<span style='color:#808030; '>,</span> host: 8080
+
+  config.vm.network <span style='color:#0000e6; '>"private_network"</span><span style='color:#808030; '>,</span> ip: <span style='color:#0000e6; '>"192.168.33.10"</span>
+</pre>
+
+
+<span style='color:#696969; '># If you want to take a look at my Vagrant file:</span>
+<pre style='color:#d1d1d1;background:#000000;'><span style='color:#9999a9; '># -*- mode: ruby -*-</span>
+<span style='color:#9999a9; '># vi: set ft=ruby :</span>
+
+<span style='color:#9999a9; '># All Vagrant configuration is done below. The "2" in Vagrant.configure</span>
+<span style='color:#9999a9; '># configures the configuration version (we support older styles for</span>
+<span style='color:#9999a9; '># backwards compatibility). Please don't change it unless you know what</span>
+<span style='color:#9999a9; '># you're doing.</span>
+Vagrant<span style='color:#d2cd86; '>.</span>configure<span style='color:#d2cd86; '>(</span><span style='color:#00c4c4; '>"2"</span><span style='color:#d2cd86; '>)</span><span style='color:#e66170; font-weight:bold; '> do</span> |config|
+  <span style='color:#9999a9; '># The most common configuration options are documented and commented below.</span>
+  <span style='color:#9999a9; '># For a complete reference, please see the online documentation at</span>
+  <span style='color:#9999a9; '># </span><span style='color:#6070ec; '>https://docs.vagrantup.com</span><span style='color:#9999a9; '>.</span>
+
+  <span style='color:#9999a9; '># Every Vagrant development environment requires a box. You can search for</span>
+  <span style='color:#9999a9; '># boxes at </span><span style='color:#6070ec; '>https://atlas.hashicorp.com/search</span><span style='color:#9999a9; '>.</span>
+  config<span style='color:#d2cd86; '>.</span>vm<span style='color:#d2cd86; '>.</span>box <span style='color:#d2cd86; '>=</span> <span style='color:#00c4c4; '>"debian/jessie64"</span>
+
+  <span style='color:#9999a9; '># Disable automatic box update checking. If you disable this, then</span>
+  <span style='color:#9999a9; '># boxes will only be checked for updates when the user runs</span>
+  <span style='color:#9999a9; '># `vagrant box outdated`. This is not recommended.</span>
+  <span style='color:#9999a9; '># config.vm.box_check_update = false</span>
+
+  <span style='color:#9999a9; '># Create a forwarded port mapping which allows access to a specific port</span>
+  <span style='color:#9999a9; '># within the machine from a port on the host machine. In the example below,</span>
+  <span style='color:#9999a9; '># accessing "localhost:8080" will access port 80 on the guest machine.</span>
+  config<span style='color:#d2cd86; '>.</span>vm<span style='color:#d2cd86; '>.</span>network <span style='color:#00c4c4; '>"forwarded_port"</span><span style='color:#d2cd86; '>,</span> <span style='color:#005fd2; '>guest</span>: <span style='color:#008c00; '>80</span><span style='color:#d2cd86; '>,</span> <span style='color:#005fd2; '>host</span>: <span style='color:#008c00; '>8080</span>
+  config<span style='color:#d2cd86; '>.</span>vm<span style='color:#d2cd86; '>.</span>network <span style='color:#00c4c4; '>"forwarded_port"</span><span style='color:#d2cd86; '>,</span> <span style='color:#005fd2; '>guest</span>: <span style='color:#008c00; '>9980</span><span style='color:#d2cd86; '>,</span> <span style='color:#005fd2; '>host</span>: <span style='color:#008c00; '>9980</span>
+  config<span style='color:#d2cd86; '>.</span>vm<span style='color:#d2cd86; '>.</span>network <span style='color:#00c4c4; '>"forwarded_port"</span><span style='color:#d2cd86; '>,</span> <span style='color:#005fd2; '>guest</span>: <span style='color:#008c00; '>8000</span><span style='color:#d2cd86; '>,</span> <span style='color:#005fd2; '>host</span>: <span style='color:#008c00; '>8000</span>
+  config<span style='color:#d2cd86; '>.</span>vm<span style='color:#d2cd86; '>.</span>network <span style='color:#00c4c4; '>"forwarded_port"</span><span style='color:#d2cd86; '>,</span> <span style='color:#005fd2; '>guest</span>: <span style='color:#008c00; '>6379</span><span style='color:#d2cd86; '>,</span> <span style='color:#005fd2; '>host</span>: <span style='color:#008c00; '>6379</span>
+
+  <span style='color:#9999a9; '># Create a private network, which allows host-only access to the machine</span>
+  <span style='color:#9999a9; '># using a specific IP.</span>
+  config<span style='color:#d2cd86; '>.</span>vm<span style='color:#d2cd86; '>.</span>network <span style='color:#00c4c4; '>"private_network"</span><span style='color:#d2cd86; '>,</span> <span style='color:#005fd2; '>ip</span>: <span style='color:#00c4c4; '>"192.168.33.10"</span>
+
+  <span style='color:#9999a9; '># Create a public network, which generally matched to bridged network.</span>
+  <span style='color:#9999a9; '># Bridged networks make the machine appear as another physical device on</span>
+  <span style='color:#9999a9; '># your network.</span>
+  <span style='color:#9999a9; '># config.vm.network "public_network"</span>
+
+  <span style='color:#9999a9; '># Share an additional folder to the guest VM. The first argument is</span>
+  <span style='color:#9999a9; '># the path on the host to the actual folder. The second argument is</span>
+  <span style='color:#9999a9; '># the path on the guest to mount the folder. And the optional third</span>
+  <span style='color:#9999a9; '># argument is a set of non-required options.</span>
+  <span style='color:#9999a9; '># config.vm.synced_folder "~/", "/vagrant/data"</span>
+  config<span style='color:#d2cd86; '>.</span>vm<span style='color:#d2cd86; '>.</span>synced_folder <span style='color:#00c4c4; '>"your_project/"</span><span style='color:#d2cd86; '>,</span> <span style='color:#00c4c4; '>"/var/www/html/your_project"</span>
+
+  <span style='color:#9999a9; '># Provider-specific configuration so you can fine-tune various</span>
+  <span style='color:#9999a9; '># backing providers for Vagrant. These expose provider-specific options.</span>
+  <span style='color:#9999a9; '># Example for VirtualBox:</span>
+  <span style='color:#9999a9; '>#</span>
+  <span style='color:#9999a9; '># config.vm.provider "virtualbox" do |vb|</span>
+  <span style='color:#9999a9; '>#   # Display the VirtualBox GUI when booting the machine</span>
+  <span style='color:#9999a9; '>#   vb.gui = true</span>
+  <span style='color:#9999a9; '>#</span>
+  <span style='color:#9999a9; '>#   # Customize the amount of memory on the VM:</span>
+  <span style='color:#9999a9; '>#   vb.memory = "1024"</span>
+  <span style='color:#9999a9; '># end</span>
+  <span style='color:#9999a9; '>#</span>
+  <span style='color:#9999a9; '># View the documentation for the provider you are using for more</span>
+  <span style='color:#9999a9; '># information on available options.</span>
+
+  <span style='color:#9999a9; '># Define a Vagrant Push strategy for pushing to Atlas. Other push strategies</span>
+  <span style='color:#9999a9; '># such as FTP and Heroku are also available. See the documentation at</span>
+  <span style='color:#9999a9; '># </span><span style='color:#6070ec; '>https://docs.vagrantup.com/v2/push/atlas.html</span><span style='color:#9999a9; '> for more information.</span>
+  <span style='color:#9999a9; '># config.push.define "atlas" do |push|</span>
+  <span style='color:#9999a9; '>#   push.app = "YOUR_ATLAS_USERNAME/YOUR_APPLICATION_NAME"</span>
+  <span style='color:#9999a9; '># end</span>
+
+  <span style='color:#9999a9; '># Enable provisioning with a shell script. Additional provisioners such as</span>
+  <span style='color:#9999a9; '># Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the</span>
+  <span style='color:#9999a9; '># documentation for more information about their specific syntax and use.</span>
+  <span style='color:#9999a9; '># config.vm.provision "shell", inline: &lt;&lt;-SHELL</span>
+  <span style='color:#9999a9; '>#   apt-get update</span>
+  <span style='color:#9999a9; '>#   apt-get install -y apache2</span>
+  <span style='color:#9999a9; '># SHELL</span>
+<span style='color:#e66170; font-weight:bold; '>end</span>
+</pre>
+
+
+
+<span style='color:#696969; '># Exit your virtual machine for a moment</span>
+exit
+
+
+<pre class="parent_system">
+<span style='color:#696969; '># (Back on your parent system)</span>
+<span style='color:#696969; '># If the synced folders do not work ('Guest Additions required') install vagrant-vbguest</span>
+<span style='color:#696969; '># (halt the running machine before)</span>
+vagrant plugin <span style='color:#800000; font-weight:bold; '>install</span> vagrant-vbguest
+
+
+
+<span style='color:#696969; '># Then reload the VM</span>
+vagrant reload
+
+
+<span style='color:#696969; '># To stop the virtual machine</span>
+vagrant halt
+
+
+
+<span style='color:#696969; '># OK. Restart and re-login (later I had an alias for this command)</span>
+vagrant <span style='color:#800000; font-weight:bold; '>up</span> --provider virtualbox
+vagrant ssh
+</pre>
+<span style='color:#696969; '># (Install emacs)</span>
+<span style='color:#696969; '># (Install git)</span>
+<span style='color:#696969; '># (Install apache2)</span>
+<span style='color:#696969; '># (Install mysql-server and mysql-client)</span>
+
+<span style='color:#696969; '># Install modes for emacs</span>
+apt<span style='color:#0000e6; '>-get install php-</span>elisp mmm-<span style='color:#800000; font-weight:bold; '>mode</span>
+
+<span style='color:#696969; '># Install PHP7 on Jessie</span>
+<span style='color:#696969; '># Found at</span>
+<span style='color:#696969; '>#    </span><span style='color:#5555dd; '>https://ansas-meyer.de/programmierung/php/php-7-unter-debian-jessie-installieren/</span>
+
+<span style='color:#800000; font-weight:bold; '>echo</span> <span style='color:#0000e6; '>'deb http://packages.dotdeb.org jessie all'</span> > /etc/apt/sources.<span style='color:#800000; font-weight:bold; '>list</span>.d/dotdeb.<span style='color:#800000; font-weight:bold; '>list</span>
+<span style='color:#696969; '># (IF THAT'S NOT WORKING CHANGE root's PASSWORT)</span>
+sudo passwd root
+Passwort:
+su root
+
+<span style='color:#696969; '># Make sure apt accepts https transport</span>
+apt<span style='color:#0000e6; '>-get install apt-</span>transport-https
+
+<span style='color:#696969; '># Add key for apt</span>
+curl <span style='color:#5555dd; '>http://www.dotdeb.org/dotdeb.gpg</span> | apt<span style='color:#0000e6; '>-key add -</span>
+
+<span style='color:#696969; '>## get package list from sources incl. new set source dotdeb</span>
+apt-get update
+
+<span style='color:#696969; '># Install PHP</span>
+<span style='color:#696969; '>## upgrade to php 7</span>
+apt-get <span style='color:#800000; font-weight:bold; '>install</span> php7.0
+
+
+
+<span style='color:#696969; '># Install composer (required to install Laravel)</span>
+curl -sS <span style='color:#5555dd; '>https://getcomposer.org/installer</span> | php
+sudo mv composer.phar /usr/<span style='color:#800000; font-weight:bold; '>local</span>/bin/composer
+
+
+<span style='color:#696969; '># Install PHP7-mbstring (required by the Laravel installer)</span>
+sudo apt-get <span style='color:#800000; font-weight:bold; '>install</span> php7.0-mbstring
+
+<span style='color:#696969; '># Install the PHP XML extension (contains PHP extension 'dom' which is required 
+# by the Laravel installer)</span>
+sudo apt<span style='color:#0000e6; '>-get install php-</span>xml
+
+
+<span style='color:#696969; '># Install laravel (installiert Laravel im Verzeichnis 'your_project')</span>
+cd /var/www/
+sudo composer <span style='color:#800000; font-weight:bold; '>create</span>-project laravel/laravel your_project -<span style='color:#0000e6; '>-prefer-</span>dist
+
+
+<span style='color:#696969; '># Set write permissions to Laravel's 'storage' and 'cache' directories (important)</span>
+chmod -R a+w /var/www/html/your_project/storage
+chmod -R a+w /var/www/html/your_project/bootstrap/cache/
+
+
+<span style='color:#696969; '># Set apache's document root to /var/www/html/your-project/public in</span>
+emacs /etc/apache2/sites-enabled/000-<span style='color:#800000; font-weight:bold; '>default</span>.conf
+
+<span style='color:#696969; '># We are almost done. Restart apache and enjoy your freshly setup 
+# debian8-php7-capable virtual machine.</span>
+server apache2 restart
+
+<span style='color:#696969; '># Check if everything works by loading apache's default page in your favourite 
+# web browser (firefox, chrome, ie, lynx, ...).</span>
+lynx http://127.0.0.1:8080
+</pre>
+</div>
+<br/>
+
+
+Have fun with your virtual machine(s)!
+<br/>
+(~￣▽￣)~
+</div>
+<!-- END paragraph -->
+
+
+<br/>
+<br/>
+Enjoy and don't forget to help your friends!<br/>
+<br/>
+<br/>
+
+
+<!-- Use and enjoy my code and do good things. Peace to the world.<br/> -->
+
+
+
+{% endblock %}

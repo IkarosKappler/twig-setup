@@ -1,0 +1,208 @@
+{% extends "blog.twig" %}
+
+{% block head %}
+{{ parent() }}
+{% endblock %}
+
+
+{% block content %}
+<a name="_top"></a>
+
+
+  <pre style="background-color: #ffffff;">
+                                                                            Author......Ikaros Kappler
+                                                                            Date............2015-11-17
+                                                                            Version................1.0
+  </pre>
+
+
+<h2>Javascript Minimizer Bash Script</h2>
+<br/>
+
+
+<h3>Why this?</h3>
+<!-- BEGIN paragraph -->
+<div class="tech_paragraph">
+In the recent time it came to me to write tons of Javascript code. I<br/>
+still love this language which started as a simple helper language for<br/>
+web programmers to check their forms during runtime (somewhen in the<br/>
+90s).<br/>
+<br/>
+Goood programmers organize their code into different files.<br/>
+The advantage: you always know where to find your class/function/object.<br/>
+The disadvantage: loading times for the website increase.<br/>
+<br/>
+<br/>
+In my lastest website project I ended up with nearly 70 javascript<br/>
+files. The transmission overhead for each file and the latency was<br/>
+immense, particulary when trying to use a dynamic Javascript loader such<br/>
+as <a href="http://requirejs.org" target="_blank">Require.js</a>.<br/>
+<br/>
+My solution: a bash script that joins all Javascript files together<br/>
+into one large Javascript file &hellip; and finally compresses them! ^_^<br/>
+<br/>
+<br/>
+The script consists of two files: the bash script itself (<span class="affected">compile.sh</span>)<br/>
+and a text file (<span class="affected">filelist.txt</span>) containing all javascript files that<br/>
+shall be included.<br/>
+<br/>
+<br/>
+The text file looks like this (comments start with ';')<br/>
+[download <a href="filelist.txt" target="_blank">here</a>]<br/>
+<pre>
+; [0;35mThis file contains all scripts that are required for the app to run.[0m
+; [0;35mPlease note that the order of the file names specifies the dependencies![0m
+; [0;35m[0m
+; [0;35mGenerated on Sat Aug 22 11:47:03 CEST 2015[0m
+
+main.js
+config.js
+lib/core.js
+lib/EventHandler.js
+
+</pre>
+</div>
+
+
+<h3>Usage</h3>
+<!-- BEGIN paragraph -->
+<div class="tech_paragraph">
+  This will create two files:<br/>
+  <ul>
+    <li>An umcompressed file called <span class="affected">compiled.js</span>.</li>
+    <li>A compressed file called <span class="affected">compiled.min.js</span>. Please note that <br/>
+      the yui-compressor must be installed for this!</li>
+  </ul>
+  <img src="/public/blog.20151117_Javascript_Minimizer_Bash_Script/example_use.png" width="537" height="77" /><br/>
+  <br/>
+  To install the yui-compressor:<br/>
+  <pre class="output">$> apt-get install yui-compressor</pre>
+ 
+</div>
+
+
+
+<h3>And here's the script</h3>
+<!-- BEGIN paragraph -->
+<div class="tech_paragraph">
+
+[<a href="compile.sh" target="_blank">compile.sh</a>]<br/>
+<br/>
+
+<div style="border: 1px dashed black; width: 120%; padding: 12px;">
+<pre style='color:#000000;background:#ffffff;'><span style='color:#696969; '>#!</span><span style='color:#007997; '>/bin/bash</span>
+<span style='color:#696969; '>#</span>
+<span style='color:#696969; '># This script 'compiles' the javascript files and packs them into one single file.</span>
+<span style='color:#696969; '>#</span>
+<span style='color:#696969; '>#</span>
+<span style='color:#696969; '># Version >= 1.0.1 requires yui-compressor to be installed.</span>
+<span style='color:#696969; '># Install with</span>
+<span style='color:#696969; '>#  apt-get install yui-compressor</span>
+<span style='color:#696969; '>#</span>
+<span style='color:#696969; '>#</span>
+<span style='color:#696969; '># @author   Ikaros Kappler</span>
+<span style='color:#696969; '># @date     2015-05-27</span>
+<span style='color:#696969; '># @modified 2015-07-08</span>
+<span style='color:#696969; '># @version  1.0.1</span>
+
+
+<span style='color:#797997; '>_RED</span><span style='color:#808030; '>=</span><span style='color:#0000e6; '>'\033[0;31m'</span>
+<span style='color:#797997; '>_GREEN</span><span style='color:#808030; '>=</span><span style='color:#0000e6; '>'\033[0;32m'</span>
+<span style='color:#797997; '>_PURPLE</span><span style='color:#808030; '>=</span><span style='color:#0000e6; '>'\033[0;35m'</span>
+<span style='color:#797997; '>_NC</span><span style='color:#808030; '>=</span><span style='color:#0000e6; '>'\033[0m'</span>
+
+<span style='color:#bb7977; font-weight:bold; '>echo</span> <span style='color:#44aadd; '>-e</span> <span style='color:#0000e6; '>"</span><span style='color:#797997; '>${_PURPLE}</span><span style='color:#0000e6; '>This is the compiler script that packs the javascript source files into one package.</span><span style='color:#797997; '>${_NC}</span><span style='color:#0000e6; '>"</span>
+<span style='color:#800000; font-weight:bold; '>if</span> <span style='color:#808030; '>[</span> <span style='color:#797997; '>$#</span> <span style='color:#44aadd; '>-lt</span> <span style='color:#008c00; '>2</span> <span style='color:#808030; '>]</span><span style='color:#800080; '>;</span> <span style='color:#800000; font-weight:bold; '>then</span>
+    <span style='color:#bb7977; font-weight:bold; '>echo</span> <span style='color:#44aadd; '>-e</span> <span style='color:#0000e6; '>"[</span><span style='color:#797997; '>${_RED}</span><span style='color:#0000e6; '>Error</span><span style='color:#797997; '>${_NC}</span><span style='color:#0000e6; '>] Please pass: &lt;filelist_file> &lt;output_file>"</span><span style='color:#800080; '>;</span>
+    <span style='color:#bb7977; font-weight:bold; '>echo</span> <span style='color:#44aadd; '>-e</span> <span style='color:#0000e6; '>"        To generate a new filelist file, type mkfilelist > filelist.txt"</span><span style='color:#800080; '>;</span>
+    <span style='color:#bb7977; font-weight:bold; '>echo</span> <span style='color:#44aadd; '>-e</span> <span style='color:#0000e6; '>"        Example: </span><span style='color:#797997; '>${_GREEN}</span><span style='color:#0000e6; '>compile.sh filelist.txt compiled.js</span><span style='color:#797997; '>${_NC}</span><span style='color:#0000e6; '>"</span>
+    <span style='color:#bb7977; font-weight:bold; '>echo</span> <span style='color:#44aadd; '>-e</span> <span style='color:#0000e6; '>"        "</span>
+    <span style='color:#bb7977; font-weight:bold; '>exit</span> <span style='color:#008c00; '>1</span><span style='color:#800080; '>;</span>
+<span style='color:#800000; font-weight:bold; '>fi</span>
+
+<span style='color:#797997; '>filelist</span><span style='color:#808030; '>=</span><span style='color:#797997; '>$1</span><span style='color:#800080; '>;</span>            <span style='color:#696969; '># "files.txt";</span>
+<span style='color:#797997; '>outfile</span><span style='color:#808030; '>=</span><span style='color:#797997; '>$2</span><span style='color:#800080; '>;</span>             <span style='color:#696969; '># "compiled.js";</span>
+<span style='color:#797997; '>files</span><span style='color:#808030; '>=</span><span style='color:#800080; '>(</span><span style='color:#800080; '>)</span><span style='color:#800080; '>;</span>
+
+<span style='color:#797997; '>delimpos</span><span style='color:#808030; '>=</span><span style='color:#000000; background:#ffffe8; '>`expr index </span><span style='color:#0000e6; background:#ffffe8; '>"</span><span style='color:#797997; background:#ffffe8; '>$outfile</span><span style='color:#0000e6; background:#ffffe8; '>"</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#800000; background:#ffffe8; font-weight:bold; '>.</span><span style='color:#000000; background:#ffffe8; '>`</span>
+<span style='color:#696969; '># echo "delimpos="$delimpos</span>
+<span style='color:#797997; '>outfile_name</span><span style='color:#808030; '>=</span><span style='color:#000000; background:#ffffe8; '>`</span><span style='color:#bb7977; background:#ffffe8; font-weight:bold; '>echo</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#0000e6; background:#ffffe8; '>"</span><span style='color:#797997; background:#ffffe8; '>$outfile</span><span style='color:#0000e6; background:#ffffe8; '>"</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#e34adc; background:#ffffe8; '>|</span><span style='color:#000000; background:#ffffe8; '> cut -d</span><span style='color:#0000e6; background:#ffffe8; '>'.'</span><span style='color:#000000; background:#ffffe8; '> -f1`</span>
+<span style='color:#797997; '>outfile_extension</span><span style='color:#808030; '>=</span><span style='color:#000000; background:#ffffe8; '>`</span><span style='color:#bb7977; background:#ffffe8; font-weight:bold; '>echo</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#0000e6; background:#ffffe8; '>"</span><span style='color:#797997; background:#ffffe8; '>$outfile</span><span style='color:#0000e6; background:#ffffe8; '>"</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#e34adc; background:#ffffe8; '>|</span><span style='color:#000000; background:#ffffe8; '> cut -d</span><span style='color:#0000e6; background:#ffffe8; '>'.'</span><span style='color:#000000; background:#ffffe8; '> -f2`</span>
+<span style='color:#696969; '># File has extension?</span>
+<span style='color:#800000; font-weight:bold; '>if</span> <span style='color:#808030; '>[</span> <span style='color:#797997; '>$delimpos</span> <span style='color:#44aadd; '>==</span> <span style='color:#008c00; '>0</span> <span style='color:#808030; '>]</span><span style='color:#800080; '>;</span> <span style='color:#800000; font-weight:bold; '>then</span>
+    <span style='color:#797997; '>outfile_extension</span><span style='color:#808030; '>=</span><span style='color:#0000e6; '>""</span>
+<span style='color:#800000; font-weight:bold; '>fi</span>
+
+
+<span style='color:#696969; '># echo "outfile_name=$outfile_name"</span>
+<span style='color:#696969; '># echo "outfile_extension=$outfile_extension"</span>
+
+<span style='color:#797997; '>line_no</span><span style='color:#808030; '>=</span><span style='color:#008c00; '>1</span>
+<span style='color:#800000; font-weight:bold; '>while</span> <span style='color:#bb7977; font-weight:bold; '>read</span> line
+<span style='color:#800000; font-weight:bold; '>do</span>
+    
+    <span style='color:#696969; '># Trim line:</span>
+    <span style='color:#797997; '>var</span><span style='color:#808030; '>=</span><span style='color:#0000e6; '>"${line#"</span><span style='color:#797997; '>${</span>line%%<span style='color:#808030; '>[</span><span style='color:#0000e6; '>!</span><span style='color:#808030; '>[:</span><span style='color:#797997; '>space</span><span style='color:#808030; '>:]</span><span style='color:#808030; '>]</span><span style='color:#808030; '>*</span><span style='color:#797997; '>}</span><span style='color:#0000e6; '>"}"</span>   <span style='color:#696969; '># remove leading whitespace characters</span>
+    <span style='color:#797997; '>var</span><span style='color:#808030; '>=</span><span style='color:#0000e6; '>"${line%"</span><span style='color:#797997; '>${</span>line<span style='color:#696969; '>##*[![:space:]]}"}"   # remove trailing whitespace characters</span>
+
+    <span style='color:#696969; '># Check if line is not empty</span>
+    <span style='color:#800000; font-weight:bold; '>if</span> <span style='color:#808030; '>[</span> <span style='color:#800000; font-weight:bold; '>!</span> <span style='color:#44aadd; '>-z</span> <span style='color:#0000e6; '>"</span><span style='color:#797997; '>$line</span><span style='color:#0000e6; '>"</span> <span style='color:#44aadd; '>-a</span> <span style='color:#0000e6; '>"</span><span style='color:#797997; '>$line</span><span style='color:#0000e6; '>"</span><span style='color:#800000; font-weight:bold; '>!</span>=<span style='color:#0000e6; '>" "</span> <span style='color:#808030; '>]</span><span style='color:#800080; '>;</span> <span style='color:#800000; font-weight:bold; '>then</span>
+
+	<span style='color:#696969; '># Check if line is no comment (beginning with ';')</span>
+	<span style='color:#800000; font-weight:bold; '>if</span> <span style='color:#808030; '>[</span><span style='color:#0000e6; '>[ ${line:0:1} != ';' </span><span style='color:#808030; '>]</span>]<span style='color:#800080; '>;</span> <span style='color:#800000; font-weight:bold; '>then</span>
+
+	    <span style='color:#696969; '># Check if file exists</span>
+	    <span style='color:#800000; font-weight:bold; '>if</span> <span style='color:#808030; '>[</span> <span style='color:#800000; font-weight:bold; '>!</span> <span style='color:#44aadd; '>-f</span> <span style='color:#0000e6; '>"</span><span style='color:#797997; '>$line</span><span style='color:#0000e6; '>"</span> <span style='color:#808030; '>]</span><span style='color:#800080; '>;</span> <span style='color:#800000; font-weight:bold; '>then</span>
+		<span style='color:#bb7977; font-weight:bold; '>echo</span> <span style='color:#0000e6; '>"Error: file </span><span style='color:#797997; '>$line</span><span style='color:#0000e6; '> not found."</span>
+		<span style='color:#bb7977; font-weight:bold; '>exit</span> <span style='color:#008c00; '>1</span>
+	    <span style='color:#800000; font-weight:bold; '>elif</span> <span style='color:#808030; '>[</span><span style='color:#0000e6; '>[ "$line" =~ ' ' </span><span style='color:#808030; '>]</span>]<span style='color:#800080; '>;</span> <span style='color:#800000; font-weight:bold; '>then</span>   <span style='color:#696969; '># Check if line contains whitespace</span>
+		files+=<span style='color:#800080; '>(</span><span style='color:#0000e6; '>"</span><span style='color:#0f69ff; '>\"</span><span style='color:#797997; '>$line</span><span style='color:#0f69ff; '>\"</span><span style='color:#0000e6; '>"</span><span style='color:#800080; '>)</span>
+	    <span style='color:#800000; font-weight:bold; '>else</span>
+		files+=<span style='color:#800080; '>(</span><span style='color:#797997; '>$line</span><span style='color:#800080; '>)</span><span style='color:#800080; '>;</span>
+	    <span style='color:#800000; font-weight:bold; '>fi</span>
+	<span style='color:#800000; font-weight:bold; '>fi</span>
+	
+    <span style='color:#800000; font-weight:bold; '>fi</span>
+    <span style='color:#797997; '>line_no</span><span style='color:#808030; '>=</span><span style='color:#000000; background:#ffffe8; '>`expr </span><span style='color:#797997; background:#ffffe8; '>$line_no</span><span style='color:#000000; background:#ffffe8; '> + </span><span style='color:#008c00; background:#ffffe8; '>1</span><span style='color:#000000; background:#ffffe8; '>`</span><span style='color:#800080; '>;</span>
+<span style='color:#800000; font-weight:bold; '>done</span> <span style='color:#e34adc; '>&lt;</span> <span style='color:#797997; '>$filelist</span>
+
+<span style='color:#696969; '>#tmp="$(echo ${files[*]})";</span>
+<span style='color:#797997; '>cmd</span><span style='color:#808030; '>=</span><span style='color:#0000e6; '>"cat $(echo ${files[*]})"</span><span style='color:#800080; '>;</span>
+<span style='color:#bb7977; font-weight:bold; '>echo</span> <span style='color:#0000e6; '>"Executing: </span><span style='color:#797997; '>$cmd</span><span style='color:#0000e6; '>"</span>
+
+<span style='color:#797997; '>result</span><span style='color:#808030; '>=</span>$<span style='color:#800080; '>(</span><span style='color:#797997; '>$cmd</span><span style='color:#800080; '>)</span>
+<span style='color:#797997; '>ec</span><span style='color:#808030; '>=</span><span style='color:#0000e6; '>"$?"</span>
+<span style='color:#800000; font-weight:bold; '>if</span> <span style='color:#808030; '>[</span> <span style='color:#0000e6; '>"</span><span style='color:#797997; '>$ec</span><span style='color:#0000e6; '>"</span> <span style='color:#44aadd; '>-ne</span> <span style='color:#0000e6; '>"0"</span> <span style='color:#808030; '>]</span><span style='color:#800080; '>;</span> <span style='color:#800000; font-weight:bold; '>then</span>
+    <span style='color:#bb7977; font-weight:bold; '>echo</span> <span style='color:#44aadd; '>-e</span> <span style='color:#0000e6; '>"[</span><span style='color:#797997; '>${_RED}</span><span style='color:#0000e6; '>Error</span><span style='color:#797997; '>${_NC}</span><span style='color:#0000e6; '>] Failed. Exit code </span><span style='color:#797997; '>$ec</span><span style='color:#0000e6; '>"</span>
+    <span style='color:#bb7977; font-weight:bold; '>exit</span> <span style='color:#008c00; '>1</span>
+<span style='color:#800000; font-weight:bold; '>else</span>
+    <span style='color:#bb7977; font-weight:bold; '>echo</span> <span style='color:#0000e6; '>"Printing output to file ... "</span><span style='color:#800080; '>;</span>
+    <span style='color:#696969; '># To preserve newlines the var must be quoted.</span>
+    <span style='color:#bb7977; font-weight:bold; '>echo</span> <span style='color:#0000e6; '>"</span><span style='color:#797997; '>$result</span><span style='color:#0000e6; '>"</span> <span style='color:#e34adc; '>></span> <span style='color:#797997; '>$outfile</span>
+    <span style='color:#696969; '># echo -e "$result"</span>
+    <span style='color:#696969; '>#</span>
+    
+    <span style='color:#797997; '>outfile_minimized</span><span style='color:#808030; '>=</span><span style='color:#0000e6; '>"</span><span style='color:#797997; '>$outfile_name.min.</span><span style='color:#797997; '>$outfile_extension</span><span style='color:#0000e6; '>"</span>
+    <span style='color:#bb7977; font-weight:bold; '>echo</span> <span style='color:#0000e6; '>"Printing minimized file to </span><span style='color:#797997; '>$outfile_minimized</span><span style='color:#0000e6; '> ..."</span>
+    <span style='color:#797997; '>result</span><span style='color:#808030; '>=</span>$<span style='color:#800080; '>(</span>yui-compressor <span style='color:#0000e6; '>"</span><span style='color:#797997; '>$outfile</span><span style='color:#0000e6; '>"</span> <span style='color:#44aadd; '>-o</span> <span style='color:#0000e6; '>"</span><span style='color:#797997; '>$outfile_minimized</span><span style='color:#0000e6; '>"</span><span style='color:#800080; '>)</span>
+    <span style='color:#797997; '>ec</span><span style='color:#808030; '>=</span><span style='color:#0000e6; '>"$?"</span>
+    <span style='color:#800000; font-weight:bold; '>if</span> <span style='color:#808030; '>[</span> <span style='color:#0000e6; '>"</span><span style='color:#797997; '>$ec</span><span style='color:#0000e6; '>"</span> <span style='color:#44aadd; '>-ne</span> <span style='color:#0000e6; '>"0"</span> <span style='color:#808030; '>]</span><span style='color:#800080; '>;</span> <span style='color:#800000; font-weight:bold; '>then</span>
+	<span style='color:#bb7977; font-weight:bold; '>echo</span> <span style='color:#44aadd; '>-e</span> <span style='color:#0000e6; '>"[</span><span style='color:#797997; '>${_RED}</span><span style='color:#0000e6; '>Error</span><span style='color:#797997; '>${_NC}</span><span style='color:#0000e6; '>] Failed. Exit code </span><span style='color:#797997; '>$ec</span><span style='color:#0000e6; '>"</span>
+	<span style='color:#bb7977; font-weight:bold; '>exit</span> <span style='color:#008c00; '>1</span>
+    <span style='color:#800000; font-weight:bold; '>else</span>
+	<span style='color:#bb7977; font-weight:bold; '>echo</span> <span style='color:#44aadd; '>-e</span> <span style='color:#0000e6; '>"</span><span style='color:#797997; '>${_GREEN}</span><span style='color:#0000e6; '>Done.</span><span style='color:#797997; '>${_NC}</span><span style='color:#0000e6; '>"</span>
+    <span style='color:#800000; font-weight:bold; '>fi</span>
+<span style='color:#800000; font-weight:bold; '>fi</span>
+</pre>
+</div>
+<div style="font-size: 8pt; text-align: right;">Note: The syntax highlighting was made with <a href="https://tohtml.com" target="_blank">tohtml.com</a>.</div>
+
+</div>
+<!-- END paragraph -->
+
+
+Use and enjoy my code and do good things. Peace to the world.<br/>
+
+
+
+{% endblock %}
