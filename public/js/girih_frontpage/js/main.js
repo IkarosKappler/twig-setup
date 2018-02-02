@@ -62,7 +62,7 @@ function onLoad() {
 	window.addEventListener( 'resize', resizer );
 	resizer();
     };
-    if( false ) // Load background image at all??? It's not in use in this version
+    if( true ) // Load background image at all??? It's not in use in this version
 	defaultTextureImage.src = "js/girih_frontpage/img/500px-Girih_tiles.Penrose_compatible_extended.png"; // "500px-Girih_tiles.svg.png";
     else
 	defaultTextureImage.onload( null );
@@ -247,7 +247,7 @@ function redrawGirih() {
     girihCanvasHandler.getDrawProperties().outerRandomColorFill      = false; // document.forms["girih_form"].elements["outer_random_color_fill"].checked;
     girihCanvasHandler.getDrawProperties().innerRandomColorFill      = false; // document.forms["girih_form"].elements["inner_random_color_fill"].checked;
 
-    girihCanvasHandler.getProperties().allowPenroseTile          = false; // document.forms["girih_form"].elements["allow_penrose_tile"].checked;    
+    girihCanvasHandler.getProperties().allowPenroseTile          = true; // document.forms["girih_form"].elements["allow_penrose_tile"].checked;    
     //girihCanvasHandler.getProperties().drawPenroseCenterPolygon  = document.forms["girih_form"].elements["draw_penrose_center_polygon"].checked;
 
   

@@ -1,17 +1,32 @@
+@font-face{ 
+    font-family: 'sfpixelate';
+    src: url('sf_pixelate-webfont.eot');
+    src: url('sf_pixelate-webfont.eot?#iefix') format('embedded-opentype'),
+    url('sf_pixelate-webfont.woff') format('woff'),
+    url('sf_pixelate-webfont.ttf') format('truetype'),
+    url('sf_pixelate-webfont.svg#webfont') format('svg');
+}
 
 header {
     height              : 360px;
     z-index             : 10;
 }
+header a:link, a:visited {
+    color          : #888888; 
+}
+header a:active, a:hover {
+    color          : #0088d8; 
+}
+
 .header-banner {
     background-color    : #2FA29D; 
-    /* background-image: url('../img/pageheader.png'); */
+    /* background-image    : url('/resources/triangle-background-17.png'); */
     background-position : center;
     background-repeat   : no-repeat;
     background-size     : cover;
     width               : 100%;
     height              : 300px;
-    font-family         : Helvetica;
+    font-family         : sfpixelate, Monospace, Helvetica;
 }
 
 header .logo {
@@ -98,19 +113,5 @@ nav ul li a {
     color: #a9abae;
 }
 
-
-/* demo */
-/*.content{ width: 960px; max-width: 100%; margin:0 auto; padding-top: 60px; }
-article { width: 720px; float: left; }
-article p:first-of-type { margin-top: 0; }
-aside { width: 120px; float: right; }
-aside img { max-width: 100%; }
-body { 
-    color: #292f36;
-    font-family: helvetica;
-    line-height: 1.6;
-}
-*/
-
 /* resets */
-body { margin:0px; padding:0px; }
+/* body { margin:0px; padding:0px; } */
