@@ -1,0 +1,301 @@
+{% extends "blog.twig" %}
+
+{% block head %}
+{{ parent() }}
+{% endblock %}
+
+
+{% block content %}
+<a name="_top"></a>
+
+
+<div id="header" >
+  <pre style="background-color: #ffffff;">
+                                                                            Author......Ikaros Kappler
+                                                                            Date............2015-03-26
+									    Modified........2015-04-13
+                                                                            Version................1.0
+  </pre>
+</div>
+
+<h2>Booting my PC remotely using a RaspberryPi</h2>
+<br/>
+
+
+<h3>Connecting the main board of my PC</h3>
+<!-- BEGIN paragraph -->
+<div class="tech_paragraph">
+  On my ASRock motherboard I found a header like this with the 'Power Switch' connector (Pin
+  6 and 8) which are connected to the &ndash; big surprise &ndash; power switch of 
+  my computer case.<br/>
+  I just opened the wires and soldered a bypass into them, the blue/white cable in the pictures
+  below :)
+  <img src="/public/blog.20150326_Booting_my_PC_remotely_using_a_RaspberryPi/mainboard_header.jpg" width="351" height="246" alt="Mainboard header" />
+  
+  <br/>
+  Short-circuiting the blue-white wires sends the signal to the controller and commands it
+  to boot the computer.
+</div>
+<!-- END paragraph -->
+
+
+
+<h3>Connectors of RPi</h3>
+<!-- BEGIN paragraph -->
+<div class="tech_paragraph">
+  I used GPIO Pin 11 (blue wire) to give the signal, U<sub>c</sub> 3.3V+ (red clamp) 
+  and GND (white clamp) for connections.<br/>
+  <br/>
+  <img src="/public/blog.20150326_Booting_my_PC_remotely_using_a_RaspberryPi/DSC_7949_raspi_906x600.jpg" width="800" height="530" alt="GPIO pin 11, Uc 3.3V+ and GND" />
+</div>
+
+
+<h3>Circuit Board</h3>
+<!-- BEGIN paragraph -->
+<div class="tech_paragraph">
+  For the (very simple) circuit I used two BC547-NPN transistors, a 220&ohm; resistor and a LED
+  to indicate when signal in ON.<br/>
+  <br/>
+  <img src="/public/blog.20150326_Booting_my_PC_remotely_using_a_RaspberryPi/DSC_7950_circuit_906x600.jpg" width="800" height="530" alt="Circuit on bread board" /><br/>
+  <br/>
+  <img src="/public/blog.20150326_Booting_my_PC_remotely_using_a_RaspberryPi/DSC_7952_circuit_detail_906x600.jpg" width="800" height="530" alt="Circuit detail" /><br/>
+  <br/>
+  Fritzing file: <a href="/public/blog.20150326_Booting_my_PC_remotely_using_a_RaspberryPi/Raspi_PC_Startup.fzz">Raspi_PC_Startup.fzz<br/>
+  <img src="/public/blog.20150326_Booting_my_PC_remotely_using_a_RaspberryPi/Raspi_PC_Startup_bb_50pct.png" width="769" height="657" alt="Circuit schematic" /></a><br/>
+  <br/>
+</div>
+<!-- END paragraph -->
+
+
+
+
+<h3>The python script</h3>
+<!-- BEGIN paragraph -->
+<div class="tech_paragraph">
+Create a simple python script <span class="path">startup.py</span> that sets your GPIO
+pin 11 to HI for one second and then switches it back to LO:<br/>
+<pre class="extract">
+<span class="py_comment">#!/usr/bin/python
+
+# enable debugging</span>
+<span class="py_keyword">import</span> cgitb
+cgitb.enable()
+
+<span class="py_comment"># The comma prevents 'print' to add a line break.</span>
+<span class="py_kexword">print</span> <span class="py_literal">"Content-Type: text/plain; charset=utf-8\r\n\r\n"</span>,
+
+<span class="py_comment"># date 2015-01-25
+# A test script to set voltage=HI on your RaspberryPi (pin 11) for 1 second, then LO again.</span>
+
+<span class="py_keyword">import</span> RPi.GPIO <span class="py_keyword">as</span> GPIO
+<span class="py_keyword">import time</span>
+
+GPIO.setmode(GPIO.BOARD)
+
+GPIO.setup( 11, GPIO.OUT );
+
+<span class="py_keyword">try:</span>
+    <span class="py_kexword">print</span> <span class="py_literal">"Pin 11 HI"</span>
+    GPIO.output( 11, True )
+    time.sleep( 1 )
+    <span class="py_kexword">print</span> <span class="py_literal">"Pin 11 LO"</span>
+    GPIO.output( 11, False )
+    time.sleep( 2 )
+    GPIO.cleanup()
+<span class="py_keyword">except</span> KeyboardInterrupt:
+    GPIO.output( 11, False )
+    GPIO.cleanup()
+    <span class="py_comment"># print "Program exit by keyboard interrupt."</span>
+</pre>
+<br/>
+
+Check if your python script runs:
+<div class="console">
+  sudo python startup.py
+</div>
+Output:
+<pre class="output">
+  Content-Type: text/plain; charset=utf-8
+
+  Pin 11 HI
+  Pin 11 LO
+</pre>
+Note: we will need the Conent-Type header later when calling the script via HTTP.
+
+</div>
+<!-- END paragraph -->
+
+
+<h3>Manipulate the CGI configuration</h3>
+<!-- BEGIN paragraph -->
+<div class="tech_paragraph">
+  Go to your <span class="path">/etc/apache2/sites-enabled/000-default</span> configuration file.
+  Add the line<br/>
+  <code class="affected">AddHandler cgi-script .cgi .py</code><br/>
+  to this section, it will enable the CGI handler for python scripts:<br/>
+  <pre class="extract">
+    [...]
+        ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
+        &lt;Directory "/usr/lib/cgi-bin">
+
+                # Added 2015-03-26 by Ika
+                <span class="affected">AddHandler cgi-script .cgi .py</span>
+
+                AllowOverride None
+                Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+                Order allow,deny
+                Allow from all
+        &lt;/Directory>
+  </pre>
+<br/>
+<br/>
+Now add a sub directory for your CGI script because we don't want to protected
+the whole CGI path:<br/>
+<div class="console">
+  sudo mkdir /usr/lib/cgi-bin/startup
+</div><br/>
+Place your <span class="path">startup.py</span> file here and set the 
+executable flag so Apache ca use it:
+<div class="console">
+sudo chmod a+x /usr/lib/cgi-bin/startup/startup.py
+</div>
+<br/>
+<br/>
+The python script is now placed in Apache's cgi-bin directory and can 
+be called from your web browser (though it still throws errors). To 
+prevent unauthorized access you should set up a password for your system's
+protection.<br/>
+<br/>
+
+</div>
+<!-- END paragraph -->
+
+
+
+
+<h3>Protecting the cgi-bin subdirectory with a password</h3>
+<!-- BEGIN paragraph -->
+<div class="tech_paragraph">
+Open your <span class="path">/etc/apache2/sites-enabled/000-default</span> file again
+and add this section. It will set up a basic password protection to prohibit unauthorized
+access to the script. <b>After all the script controls your hardware!</b><br/>
+<pre class="extract">
+        <span class="affected"># Added 2015-03-26 Ika (procted cgi-bin/startup/ with a password)
+        &lt;Directory "/usr/lib/cgi-bin/startup">
+                AllowOverride None
+                Options None
+                Order allow,deny
+                Allow from all
+
+                AuthType Basic
+                AuthName "Scripts"
+                AuthUserFile /usr/lib/cgi-bin/startup/.htpasswd
+
+                Require valid-user
+                Satisfy All
+        &lt;/Directory></span>
+</pre>
+<br/>
+The <span class="path">/usr/lib/cgi-bin/startup/.htpasswd</span> file is a plain
+apache/htaccess password file.
+<br/>
+</div>
+<!-- END paragraph -->
+
+
+
+
+<h3>Setting up the cgi-interface</h3>
+<!-- BEGIN paragraph -->
+<div class="tech_paragraph">
+<b>Do this on your own responsibility and only if you know what you do. We will give the www-user
+the permission to execute a shell script with sudo privilegues!</b><br/>
+<br/>
+As we want to access /dev/mem our www user (Apache) requires sudo permissions. So we need a 
+wrapper to call python with sudo. Create <span class="path">/usr/lib/cgi-bin/startup/startup.sh</span>:<br/>
+<pre class="extract">
+<span class="sh_comment">#!/bin/sh</span>
+
+sudo python startup.py
+</pre>
+
+Now we need to give the user 'www-data' the privilegue to execute this script with sudo
+permissions without asking for a password. Change to root (the pi user is allowed to do so):
+<div class="console">
+  sudo -i
+</div>
+<br/>
+
+Now edit your <span class="path">/etc/sudoers</span> file (this file has to be edited with visudo):
+<div class="console">
+  visudo
+</div>
+<br/>
+
+and add these two lines to the end of the file:<br/>
+<code class="affected">
+www-data ALL=(ALL) NOPASSWD: /usr/lib/cgi-bin/startup/startup.sh<br/>
+www-data ALL=(ALL) NOPASSWD: /usr/bin/python
+</code><br/>
+<pre class="extract">
+[...]
+# User privilege specification
+root    ALL=(ALL:ALL) ALL
+
+# Allow members of group sudo to execute any command
+%sudo   ALL=(ALL:ALL) ALL
+
+# See sudoers(5) for more information on "#include" directives:
+
+#includedir /etc/sudoers.d
+pi ALL=(ALL) NOPASSWD: ALL
+
+<span class="affected">www-data ALL=(ALL) NOPASSWD: /usr/lib/cgi-bin/startup/startup.sh
+www-data ALL=(ALL) NOPASSWD: /usr/bin/python</span>
+
+
+</pre>
+Now Apache runs the <span class="path">startup.sh</span> script with the permission to fork 
+sudo processes (python), just by passing its request URL! That's why we have set up the password.
+</div>
+<!-- END paragraph -->
+
+
+
+
+
+<h3>Test your configuration</h3>
+<!-- BEGIN paragraph -->
+<div class="tech_paragraph">
+  Open your browser and test if your CGI script is available:<br/>
+  <b>http://127.0.0.1/cgi-bin/startup/startup.sh</b><br/>
+  Enter the username and password. The document should show<br/>
+  <pre class="output">
+    Pin 11 HI
+    Pin 11 LO
+</pre>
+  and your PC/other connected device should now (re-)boot.
+  <br/>
+  <br/>
+</div>
+<!-- END paragraph -->
+
+
+
+<h3>Edit</h3>
+<!-- BEGIN paragraph -->
+<div class="tech_paragraph">
+  <div class="link_up">
+    <a href="#_top"><img src="../../img/up_0_medium.png" width="24" height="28" alt="Go to top of page." style="border: 0;"/></a>
+  </div>
+  <a name="edit_0"></a>
+  I recently soldered the circuit onto a small board.<br/>
+  <br/>
+  <img src="/public/blog.20150326_Booting_my_PC_remotely_using_a_RaspberryPi/DSC_8448_circuit_board_1160x768.jpg" width="800" height="530" alt="Circuit soldered on board." /><br/>
+  
+</div>
+<!-- END paragraph -->
+
+
+
+{% endblock %}

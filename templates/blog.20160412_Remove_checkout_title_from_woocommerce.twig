@@ -1,0 +1,96 @@
+{% extends "blog.twig" %}
+
+{% block head %}
+{{ parent() }}
+{% endblock %}
+
+
+{% block content %}
+<a name="_top"></a>
+
+
+<div id="header" >
+  <pre style="background-color: #ffffff;">
+                                                                            Author......Ikaros Kappler
+                                                                            Date............2016-04-12
+                                                                            Version................1.0
+  </pre>
+</div>
+
+<h2>Remove the checkout title from wordpress's woocommerce</h2>
+<br/>
+
+<h3>Why this?</h3>
+<!-- BEGIN paragraph -->
+<div class="tech_paragraph">
+When testing a woocommerce shop pluguin for wordpress it came to my mind to keep it gender neutral.<br/>
+<br/>
+<b>Screenshot:</b><br/>
+<img src="/public/blog.20160412_Remove_checkout_title_from_woocommerce/creenshot_20160412_Billing_title_removed_before_A.png" width="606" height="308" alt="Screenshot with checkout title" style="border: 1px solid #00a848;" /><br/>
+<br/>
+I wanted to get rid of the 'Title' field (in the screenshot: 'Anrede'; please excuse the language mixture).<br/>
+Here is how I did it.
+</div>
+<!-- END paragraph -->
+
+
+
+<h3>Use filters and hooks</h3>
+<!-- BEGIN paragraph -->
+<div class="tech_paragraph">
+  You should have child theme installed, for example in the <span class="path">/wp-content/themes/storefrontchild/</span> directory. Add the
+  follwing lines of code to your <span class="filename">functions.php</span> file:
+  <br/>
+  <b>HTML:</b>
+  <div style="border: 1px dashed black; padding: 12px;">
+    <pre style='color:#000000;background:#ffffff;'><span style='color:#696969; '>// To use the gender neutral form remove the Sir-or-Madam title (in the billing form).</span>
+<span style='color:#800000; font-weight:bold; '>function</span> custom_override_billing_fields<span style='color:#808030; '>(</span> $fields <span style='color:#808030; '>)</span> <span style='color:#800080; '>{</span>
+     unset<span style='color:#808030; '>(</span>$fields<span style='color:#808030; '>[</span><span style='color:#800000; '>'</span><span style='color:#0000e6; '>billing_title</span><span style='color:#800000; '>'</span><span style='color:#808030; '>]</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+     <span style='color:#800000; font-weight:bold; '>return</span> $fields<span style='color:#800080; '>;</span>
+<span style='color:#800080; '>}</span>
+add_filter<span style='color:#808030; '>(</span> <span style='color:#800000; '>'</span><span style='color:#0000e6; '>woocommerce_billing_fields</span><span style='color:#800000; '>'</span> <span style='color:#808030; '>,</span> <span style='color:#800000; '>'</span><span style='color:#0000e6; '>custom_override_billing_fields</span><span style='color:#800000; '>'</span> <span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+
+
+<span style='color:#696969; '>// To use the gender neutral form remove the Sir-or-Madam title (in the checkout form).</span>
+<span style='color:#800000; font-weight:bold; '>function</span> custom_override_shipping_fields<span style='color:#808030; '>(</span> $fields <span style='color:#808030; '>)</span> <span style='color:#800080; '>{</span>
+     unset<span style='color:#808030; '>(</span>$fields<span style='color:#808030; '>[</span><span style='color:#800000; '>'</span><span style='color:#0000e6; '>shipping_title</span><span style='color:#800000; '>'</span><span style='color:#808030; '>]</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+     <span style='color:#800000; font-weight:bold; '>return</span> $fields<span style='color:#800080; '>;</span>
+<span style='color:#800080; '>}</span>
+add_filter<span style='color:#808030; '>(</span> <span style='color:#800000; '>'</span><span style='color:#0000e6; '>woocommerce_shipping_fields</span><span style='color:#800000; '>'</span> <span style='color:#808030; '>,</span> <span style='color:#800000; '>'</span><span style='color:#0000e6; '>custom_override_shipping_fields</span><span style='color:#800000; '>'</span> <span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+</pre>
+
+
+  </div>
+  <br/>
+  <br/>
+</div>
+<!-- END paragraph -->
+
+
+
+<h3>The Result</h3>
+<!-- BEGIN paragraph -->
+<div class="tech_paragraph">
+And here we go.<br/>
+<br/>
+<b>Screenshot:</b><br/>
+<img src="/public/blog.20160412_Remove_checkout_title_from_woocommerce/Screenshot_20160412_Billing_title_removed_after_A.png" width="631" height="242" alt="Screenshot without checkout title" style="border: 1px solid #00a848;" /><br/>
+<br/>
+Tadaa! (~￣▽￣)~
+</div>
+<!-- END paragraph -->
+
+
+<div style="font-size: 8pt; text-align: right;">Note: The syntax highlighting was made with <a href="https://tohtml.com" target="_blank">tohtml.com</a>.</div>
+<br/>
+<br/>
+<br/>
+Enjoy the code, have a good time and help others!<br/>
+<br/>
+<br/>
+
+
+<!-- Use and enjoy my code and do good things. Peace to the world.<br/> -->
+
+
+{% endblock %}

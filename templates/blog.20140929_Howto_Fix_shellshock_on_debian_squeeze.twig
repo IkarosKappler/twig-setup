@@ -1,0 +1,73 @@
+{% extends "blog.twig" %}
+
+{% block head %}
+{{ parent() }}
+{% endblock %}
+
+
+{% block content %}
+<a name="_top"></a>
+
+
+<h3>To fix the shellshock bug you should install at least bash_4.3-9.2, but this does not work on squeeze due to the libc6 dependency</h3>
+<h3>Solution</h3>
+It is said this fix also works for wheezy and edge, but I only tested with squeeze.<br/>
+<br/>
+
+First check if your system is vulnerable:
+<pre>
+$ <b>env x='() { :;}; echo vulnerable' bash -c "echo this is a test"</b>
+vulnerable
+this is a test
+
+</pre><br/>
+<br/>
+
+<span style="font-family: PFTempestaSevenRegular;">
+Edit your /etc/apt/sources.list and add LTS packages:
+</span>
+<pre style="font-family: 'Courier New', Courier, Monospace;">
+deb http://ftp.us.debian.org/debian squeeze-lts main non-free contrib
+</pre><br/>
+<br/>
+
+Now upgrade your bash<br/>
+<pre>
+$ <b>apt-get install --only-upgrade bash</b>
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  libnet-daemon-perl libmysqlclient15off libterm-readkey-perl libplrpc-perl
+Use 'apt-get autoremove' to remove them.
+Suggested packages:
+  bash-doc
+Recommended packages:
+  bash-completion
+The following packages will be upgraded:
+  bash
+1 upgraded, 0 newly installed, 0 to remove and 69 not upgraded.
+Need to get 1,328 kB of archives.
+After this operation, 57.3 kB of additional disk space will be used.
+Get:1 http://ftp.us.debian.org/debian/ squeeze-lts/main bash amd64 4.1-3+deb6u2 [1,328 kB]
+Fetched 1,328 kB in 1s (953 kB/s)
+(Reading database ... 38170 files and directories currently installed.)
+Preparing to replace bash 4.1-3 (using .../bash_4.1-3+deb6u2_amd64.deb) ...
+Unpacking replacement bash ...
+Processing triggers for man-db ...
+Setting up bash (4.1-3+deb6u2) ...
+update-alternatives: using /usr/share/man/man7/bash-builtins.7.gz to provide /usr/share/man/man7/builtins.7.gz (builtins.7.gz) in auto mode.
+</pre><br/>
+<br/>
+
+Test your new bash version
+<pre>
+$ <b>env x='() { :;}; echo vulnerable' bash -c "echo this is a test"</b>
+this is a test
+
+</pre><br/>
+<br/>
+
+
+
+{% endblock %}

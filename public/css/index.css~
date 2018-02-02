@@ -1,0 +1,36 @@
+
+canvas#girih_canvas {
+    position  : fixed;
+    left      : 0px;
+    top       : 0px;
+    z-index   : -1;
+}
+
+main {
+    margin-top     : 100px;
+    padding        : 0;
+}
+
+div#bloglist {
+    width            : 0px;
+    height           : 0px;
+    padding-left     : 10%;
+    z-index          : 100;
+    overflow         : visible;
+    background-color : rgba(128,128,128,0.5);
+    white-space      : nowrap;
+}
+
+div#bloglist a {
+    background       : rgba(256,256,256,0.75);
+}
+
+div#bloglist div.spacer {
+    width : 10px;
+    height : 250px;
+}
+
+footer {
+    /* The footer does not apply with the dynamic front page canvas visible */
+    display : none;
+}

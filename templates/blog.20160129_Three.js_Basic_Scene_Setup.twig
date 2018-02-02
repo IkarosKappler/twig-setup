@@ -1,0 +1,234 @@
+{% extends "blog.twig" %}
+
+{% block head %}
+{{ parent() }}
+{% endblock %}
+
+
+{% block content %}
+<a name="_top"></a>
+
+
+<div id="header" >
+  <pre style="background-color: #ffffff;">
+                                                                            Author......Ikaros Kappler
+                                                                            Date............2016-01-29
+                                                                            Version................1.0
+  </pre>
+</div>
+
+<h2>A Basic THREE.js Scene Setup</h2>
+<br/>
+
+<h3>Why this?</h3>
+<!-- BEGIN paragraph -->
+<div class="tech_paragraph">
+  Some months ago a friend who had to write a 3D web application for a
+  customer asked me for a basic THREE.js scene setup.<br/>
+  <br/>
+  For your information: <a href="http://threejs.org/" target="_blank">THREE.js</a> is a fully featured 3D visualization and
+  modelling library completely written in Javascript. It uses the new 
+  WebGL capabilities of modern web browsers.
+  <br/>
+  <br/>
+  A scene usually consists of at least
+  <ul>
+    <li>The scene itself.</li>
+    <li>A renderer.</li>
+    <li>A light emitter (sun, bulp, diffuse, ...).</li>
+    <li>A camera.</li>
+    <li>Some objects (otherwise you cannot see anything except a blank screen).</li>
+    <li>A basic mouse controller for rotating (LMB), padding (RMB) and zooming (mousewheel).</li>
+  </ul>
+  <br/>
+  <br/>
+
+  Here's a screenshot what it looks like:
+  <a href="/public/blog.20160129_Three.js_Basic_Scene_Setup/Screenshot from 2016-01-29 172314.png" target="_blank">
+    <img src="/public/blog.20160129_Three.js_Basic_Scene_Setup/Screenshot from 2016-01-29 172314.png" width="650" height="327" alt="Three.js basic scene demo" />
+  </a><br/>
+  <br/>
+  Here's the working <a href="/public/blog.20160129_Three.js_Basic_Scene_Setup/demo.html" target="_blank">Demo</a>.<br/>
+  <br/>
+  (Please note that you need to have WebGL enabled
+  in you browser; by default some browsers still have this setting deactivated)
+
+  </div>
+<!-- END paragraph -->
+
+
+
+
+
+<h3>The Code</h3>
+<!-- BEGIN paragraph -->
+<div class="tech_paragraph">
+  My code uses three Javascript files, two of them coming from the THREE.js package (download can be
+  found on their website), and one self written file specifying the scene settings:<br/>
+  <ul>
+    <li>three.r72.min.js (the minified library code, revision 72)</li>
+    <li>OrbitControls.js (a helper class for the mouse controls; from the examples)</li>
+    <li>main.js (my code)</li>
+  </ul>
+  <b>Here's my HTML code:</b><br/>
+  <div style="border: 1px dashed black; padding: 12px;">
+    <pre style='color:#000000;background:#ffffff;'>
+      <span style='color:#a65700; '>&lt;</span><span style='color:#800000; font-weight:bold; '>html</span><span style='color:#a65700; '>></span> 
+      <span style='color:#a65700; '>&lt;</span><span style='color:#800000; font-weight:bold; '>head</span><span style='color:#a65700; '>></span> 
+      <span style='color:#a65700; '>&lt;</span><span style='color:#800000; font-weight:bold; '>title</span><span style='color:#a65700; '>></span>My basic THREE<span style='color:#008c00; '>.</span>js scene setup<span style='color:#a65700; '>&lt;/</span><span style='color:#800000; font-weight:bold; '>title</span><span style='color:#a65700; '>></span> 
+      <span style='color:#a65700; '>&lt;</span><span style='color:#800000; font-weight:bold; '>style</span><span style='color:#a65700; '>></span>
+      <span style='color:#800000; font-weight:bold; '>canvas</span> <span style='color:#800080; '>{</span> <span style='color:#bb7977; font-weight:bold; '>width</span><span style='color:#808030; '>:</span> <span style='color:#008c00; '>100</span><span style='color:#006600; '>%</span><span style='color:#800080; '>;</span> <span style='color:#bb7977; font-weight:bold; '>height</span><span style='color:#808030; '>:</span> <span style='color:#008c00; '>100</span><span style='color:#006600; '>%</span> <span style='color:#800080; '>}</span>
+      <span style='color:#a65700; '>&lt;/</span><span style='color:#800000; font-weight:bold; '>style</span><span style='color:#a65700; '>></span> 
+      <span style='color:#a65700; '>&lt;/</span><span style='color:#800000; font-weight:bold; '>head</span><span style='color:#a65700; '>></span>
+
+      <span style='color:#a65700; '>&lt;</span><span style='color:#800000; font-weight:bold; '>body</span><span style='color:#a65700; '>></span> 
+      <span style='color:#a65700; '>&lt;</span><span style='color:#800000; font-weight:bold; '>script</span><span style='color:#274796; '> </span><span style='color:#074726; '>language</span><span style='color:#808030; '>=</span><span style='color:#0000e6; '>"Javascript"</span><span style='color:#274796; '> </span><span style='color:#074726; '>type</span><span style='color:#808030; '>=</span><span style='color:#0000e6; '>"text/javascript"</span><span style='color:#274796; '> </span><span style='color:#074726; '>src</span><span style='color:#808030; '>=</span><span style='color:#0000e6; '>"lib/three.r72.min.js"</span><span style='color:#a65700; '>></span><span style='color:#a65700; '>&lt;/</span><span style='color:#800000; font-weight:bold; '>script</span><span style='color:#a65700; '>></span>
+      <span style='color:#a65700; '>&lt;</span><span style='color:#800000; font-weight:bold; '>script</span><span style='color:#274796; '> </span><span style='color:#074726; '>language</span><span style='color:#808030; '>=</span><span style='color:#0000e6; '>"Javascript"</span><span style='color:#274796; '> </span><span style='color:#074726; '>type</span><span style='color:#808030; '>=</span><span style='color:#0000e6; '>"text/javascript"</span><span style='color:#274796; '> </span><span style='color:#074726; '>src</span><span style='color:#808030; '>=</span><span style='color:#0000e6; '>"lib/threejs.examples/js/controls/OrbitControls.js"</span><span style='color:#a65700; '>></span><span style='color:#a65700; '>&lt;/</span><span style='color:#800000; font-weight:bold; '>script</span><span style='color:#a65700; '>></span>
+      <span style='color:#a65700; '>&lt;</span><span style='color:#800000; font-weight:bold; '>script</span><span style='color:#274796; '> </span><span style='color:#074726; '>src</span><span style='color:#808030; '>=</span><span style='color:#0000e6; '>"main.js"</span><span style='color:#a65700; '>></span><span style='color:#a65700; '>&lt;/</span><span style='color:#800000; font-weight:bold; '>script</span><span style='color:#a65700; '>></span> 
+      <span style='color:#a65700; '>&lt;/</span><span style='color:#800000; font-weight:bold; '>body</span><span style='color:#a65700; '>></span> 
+      <span style='color:#a65700; '>&lt;/</span><span style='color:#800000; font-weight:bold; '>html</span><span style='color:#a65700; '>></span>
+    </pre>
+  </div>
+  <br/>
+  <br/>
+
+  <b>And this is my Javascript code (from the main.js file):</b><br/>
+  <div style="border: 1px dashed black; padding: 12px;">
+    <pre style='color:#000000;background:#ffffff;'>
+      <span style='color:#3f5fbf; '>/**</span>
+      <span style='color:#3f5fbf; '>&#xa0;* Example for a basic THREE.js scene setup.</span>
+      <span style='color:#3f5fbf; '>&#xa0;* </span>
+      <span style='color:#3f5fbf; '>&#xa0;* @author  Ikaros Kappler</span>
+      <span style='color:#3f5fbf; '>&#xa0;* @date    2015-11-09</span>
+      <span style='color:#3f5fbf; '>&#xa0;* @version 1.0.0</span>
+      <span style='color:#3f5fbf; '>&#xa0;**/</span>
+
+      <span style='color:#696969; '>// Create new scene</span>
+      <span style='color:#800000; font-weight:bold; '>this</span><span style='color:#808030; '>.</span>scene <span style='color:#808030; '>=</span> <span style='color:#800000; font-weight:bold; '>new</span> THREE<span style='color:#808030; '>.</span>Scene<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span> 
+
+      <span style='color:#696969; '>// Create a camera to look through</span>
+      <span style='color:#800000; font-weight:bold; '>this</span><span style='color:#808030; '>.</span>camera <span style='color:#808030; '>=</span> <span style='color:#800000; font-weight:bold; '>new</span> THREE<span style='color:#808030; '>.</span>PerspectiveCamera<span style='color:#808030; '>(</span><span style='color:#008c00; '>75</span><span style='color:#808030; '>,</span> window<span style='color:#808030; '>.</span>innerWidth<span style='color:#808030; '>/</span>window<span style='color:#808030; '>.</span>innerHeight<span style='color:#808030; '>,</span> <span style='color:#008000; '>0.1</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>1000</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span> 
+
+      <span style='color:#696969; '>// Initialize a new THREE renderer (you are also allowed </span>
+      <span style='color:#696969; '>// to pass an existing canvas for rendering).</span>
+      <span style='color:#800000; font-weight:bold; '>this</span><span style='color:#808030; '>.</span>renderer <span style='color:#808030; '>=</span> <span style='color:#800000; font-weight:bold; '>new</span> THREE<span style='color:#808030; '>.</span>WebGLRenderer<span style='color:#808030; '>(</span> <span style='color:#ffffff; background:#dd0000; font-weight:bold; font-style:italic; '>{</span> antialias <span style='color:#800080; '>:</span> <span style='color:#800000; font-weight:bold; '>true</span> <span style='color:#ffffff; background:#dd0000; font-weight:bold; font-style:italic; '>}</span> <span style='color:#808030; '>)</span><span style='color:#800080; '>;</span> 
+      <span style='color:#800000; font-weight:bold; '>this</span><span style='color:#808030; '>.</span>renderer<span style='color:#808030; '>.</span>setSize<span style='color:#808030; '>(</span> window<span style='color:#808030; '>.</span>innerWidth<span style='color:#808030; '>,</span> 
+      window<span style='color:#808030; '>.</span>innerHeight
+      <span style='color:#808030; '>)</span><span style='color:#800080; '>;</span> 
+
+      <span style='color:#696969; '>// ... and append it to the DOM</span>
+      document<span style='color:#808030; '>.</span>body<span style='color:#808030; '>.</span>appendChild<span style='color:#808030; '>(</span>renderer<span style='color:#808030; '>.</span>domElement<span style='color:#808030; '>)</span><span style='color:#800080; '>;</span> 
+
+
+      <span style='color:#696969; '>// Create a geometry conaining the logical 3D information (here: a cube)</span>
+      var geometry <span style='color:#808030; '>=</span> <span style='color:#800000; font-weight:bold; '>new</span> THREE<span style='color:#808030; '>.</span>CubeGeometry<span style='color:#808030; '>(</span><span style='color:#008c00; '>12</span><span style='color:#808030; '>,</span><span style='color:#008c00; '>12</span><span style='color:#808030; '>,</span><span style='color:#008c00; '>12</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span> 
+
+      <span style='color:#696969; '>// Pick a material, something like MeshBasicMaterial, PhongMaterial, </span>
+      var material <span style='color:#808030; '>=</span> <span style='color:#800000; font-weight:bold; '>new</span> THREE<span style='color:#808030; '>.</span>MeshPhongMaterial<span style='color:#808030; '>(</span><span style='color:#ffffff; background:#dd0000; font-weight:bold; font-style:italic; '>{</span>color<span style='color:#800080; '>:</span> <span style='color:#008000; '>0x00ff00</span><span style='color:#ffffff; background:#dd0000; font-weight:bold; font-style:italic; '>}</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span> 
+      
+      <span style='color:#696969; '>// Create the cube from the geometry and the material ...</span>
+      var cube <span style='color:#808030; '>=</span> <span style='color:#800000; font-weight:bold; '>new</span> THREE<span style='color:#808030; '>.</span>Mesh<span style='color:#808030; '>(</span>geometry<span style='color:#808030; '>,</span> material<span style='color:#808030; '>)</span><span style='color:#800080; '>;</span> 
+      cube<span style='color:#808030; '>.</span>position<span style='color:#808030; '>.</span><span style='color:#603000; '>set</span><span style='color:#808030; '>(</span> <span style='color:#008c00; '>12</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>12</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>12</span> <span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+
+      <span style='color:#696969; '>// ... and add it to your scene.</span>
+      <span style='color:#800000; font-weight:bold; '>this</span><span style='color:#808030; '>.</span>scene<span style='color:#808030; '>.</span>add<span style='color:#808030; '>(</span>cube<span style='color:#808030; '>)</span><span style='color:#800080; '>;</span> 
+
+
+      <span style='color:#696969; '>// Add some light</span>
+      <span style='color:#800000; font-weight:bold; '>this</span><span style='color:#808030; '>.</span>pointLight <span style='color:#808030; '>=</span> <span style='color:#800000; font-weight:bold; '>new</span> THREE<span style='color:#808030; '>.</span>PointLight<span style='color:#808030; '>(</span><span style='color:#008000; '>0xFFFFFF</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+      <span style='color:#696969; '>//this.pointLight = new THREE.AmbientLight(0xFFFFFF);</span>
+
+      <span style='color:#696969; '>// set its position</span>
+      <span style='color:#800000; font-weight:bold; '>this</span><span style='color:#808030; '>.</span>pointLight<span style='color:#808030; '>.</span>position<span style='color:#808030; '>.</span>x <span style='color:#808030; '>=</span> <span style='color:#008c00; '>10</span><span style='color:#800080; '>;</span>
+      <span style='color:#800000; font-weight:bold; '>this</span><span style='color:#808030; '>.</span>pointLight<span style='color:#808030; '>.</span>position<span style='color:#808030; '>.</span>y <span style='color:#808030; '>=</span> <span style='color:#008c00; '>50</span><span style='color:#800080; '>;</span>
+      <span style='color:#800000; font-weight:bold; '>this</span><span style='color:#808030; '>.</span>pointLight<span style='color:#808030; '>.</span>position<span style='color:#808030; '>.</span>z <span style='color:#808030; '>=</span> <span style='color:#008c00; '>130</span><span style='color:#800080; '>;</span>
+
+      <span style='color:#696969; '>// add to the scene</span>
+      <span style='color:#800000; font-weight:bold; '>this</span><span style='color:#808030; '>.</span>scene<span style='color:#808030; '>.</span>add<span style='color:#808030; '>(</span> <span style='color:#800000; font-weight:bold; '>this</span><span style='color:#808030; '>.</span>pointLight <span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+
+
+      <span style='color:#696969; '>// Add grid helper</span>
+      var gridHelper <span style='color:#808030; '>=</span> <span style='color:#800000; font-weight:bold; '>new</span> THREE<span style='color:#808030; '>.</span>GridHelper<span style='color:#808030; '>(</span> <span style='color:#008c00; '>90</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>9</span> <span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+      gridHelper<span style='color:#808030; '>.</span>colorGrid <span style='color:#808030; '>=</span> <span style='color:#008000; '>0xE8E8E8</span><span style='color:#800080; '>;</span>
+      <span style='color:#800000; font-weight:bold; '>this</span><span style='color:#808030; '>.</span>scene<span style='color:#808030; '>.</span>add<span style='color:#808030; '>(</span> gridHelper <span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+
+
+      <span style='color:#696969; '>// Add an axis helper</span>
+      var ah                  <span style='color:#808030; '>=</span> <span style='color:#800000; font-weight:bold; '>new</span> THREE<span style='color:#808030; '>.</span>AxisHelper<span style='color:#808030; '>(</span><span style='color:#008c00; '>50</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+      ah<span style='color:#808030; '>.</span>position<span style='color:#808030; '>.</span>y <span style='color:#808030; '>-</span><span style='color:#808030; '>=</span> <span style='color:#008000; '>0.1</span><span style='color:#800080; '>;</span>  <span style='color:#696969; '>// The axis helper should not intefere with the grid helper</span>
+      <span style='color:#800000; font-weight:bold; '>this</span><span style='color:#808030; '>.</span>scene<span style='color:#808030; '>.</span>add<span style='color:#808030; '>(</span> ah <span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+
+
+      <span style='color:#696969; '>// Set the camera position</span>
+      <span style='color:#800000; font-weight:bold; '>this</span><span style='color:#808030; '>.</span>camera<span style='color:#808030; '>.</span>position<span style='color:#808030; '>.</span><span style='color:#603000; '>set</span><span style='color:#808030; '>(</span> <span style='color:#008c00; '>75</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>75</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>75</span> <span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+      <span style='color:#696969; '>// And look at the cube again</span>
+      <span style='color:#800000; font-weight:bold; '>this</span><span style='color:#808030; '>.</span>camera<span style='color:#808030; '>.</span>lookAt<span style='color:#808030; '>(</span> cube<span style='color:#808030; '>.</span>position <span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+
+
+      <span style='color:#696969; '>// Finally we want to be able to rotate the whole scene with the mouse: </span>
+      <span style='color:#696969; '>// add an orbit control helper.</span>
+      var _self <span style='color:#808030; '>=</span> <span style='color:#800000; font-weight:bold; '>this</span><span style='color:#800080; '>;</span>
+      <span style='color:#800000; font-weight:bold; '>this</span><span style='color:#808030; '>.</span>orbitControls <span style='color:#808030; '>=</span> <span style='color:#800000; font-weight:bold; '>new</span> THREE<span style='color:#808030; '>.</span>OrbitControls<span style='color:#808030; '>(</span> <span style='color:#800000; font-weight:bold; '>this</span><span style='color:#808030; '>.</span>camera<span style='color:#808030; '>,</span> <span style='color:#800000; font-weight:bold; '>this</span><span style='color:#808030; '>.</span>renderer<span style='color:#808030; '>.</span>domElement <span style='color:#808030; '>)</span><span style='color:#800080; '>;</span> 
+      <span style='color:#696969; '>// Always move the point light with the camera. Looks much better ;)</span>
+      <span style='color:#800000; font-weight:bold; '>this</span><span style='color:#808030; '>.</span>orbitControls<span style='color:#808030; '>.</span>addEventListener<span style='color:#808030; '>(</span> <span style='color:#ffffff; background:#dd0000; font-weight:bold; font-style:italic; '>'change'</span><span style='color:#808030; '>,</span> 
+      function<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span> <span style='color:#ffffff; background:#dd0000; font-weight:bold; font-style:italic; '>{</span> _self<span style='color:#808030; '>.</span>pointLight<span style='color:#808030; '>.</span>position<span style='color:#808030; '>.</span><span style='color:#603000; '>copy</span><span style='color:#808030; '>(</span>_self<span style='color:#808030; '>.</span>camera<span style='color:#808030; '>.</span>position<span style='color:#808030; '>)</span><span style='color:#800080; '>;</span> <span style='color:#ffffff; background:#dd0000; font-weight:bold; font-style:italic; '>}</span> 
+      <span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+      <span style='color:#800000; font-weight:bold; '>this</span><span style='color:#808030; '>.</span>orbitControls<span style='color:#808030; '>.</span>enableDamping <span style='color:#808030; '>=</span> <span style='color:#800000; font-weight:bold; '>true</span><span style='color:#800080; '>;</span>
+      <span style='color:#800000; font-weight:bold; '>this</span><span style='color:#808030; '>.</span>orbitControls<span style='color:#808030; '>.</span>dampingFactor <span style='color:#808030; '>=</span> <span style='color:#008000; '>1.0</span><span style='color:#800080; '>;</span>
+      <span style='color:#800000; font-weight:bold; '>this</span><span style='color:#808030; '>.</span>orbitControls<span style='color:#808030; '>.</span>enableZoom    <span style='color:#808030; '>=</span> <span style='color:#800000; font-weight:bold; '>true</span><span style='color:#800080; '>;</span>
+      <span style='color:#800000; font-weight:bold; '>this</span><span style='color:#808030; '>.</span>orbitControls<span style='color:#808030; '>.</span>target<span style='color:#808030; '>.</span><span style='color:#603000; '>copy</span><span style='color:#808030; '>(</span> cube<span style='color:#808030; '>.</span>position <span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>  
+
+
+
+      <span style='color:#696969; '>// This is the basic render function. It will be called perpetual, again and again,</span>
+      <span style='color:#696969; '>// depending on your machines possible frame rate.</span>
+      <span style='color:#800000; font-weight:bold; '>this</span><span style='color:#808030; '>.</span>_render <span style='color:#808030; '>=</span> function <span style='color:#808030; '>(</span><span style='color:#808030; '>)</span> <span style='color:#800080; '>{</span> 
+      <span style='color:#696969; '>// Pass the render function itself</span>
+      requestAnimationFrame<span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>this</span><span style='color:#808030; '>.</span>_render<span style='color:#808030; '>)</span><span style='color:#800080; '>;</span> 
+      
+      <span style='color:#696969; '>// Let's animate the cube: a rotation.</span>
+      cube<span style='color:#808030; '>.</span>rotation<span style='color:#808030; '>.</span>x <span style='color:#808030; '>+</span><span style='color:#808030; '>=</span> <span style='color:#008000; '>0.05</span><span style='color:#800080; '>;</span> 
+      cube<span style='color:#808030; '>.</span>rotation<span style='color:#808030; '>.</span>y <span style='color:#808030; '>+</span><span style='color:#808030; '>=</span> <span style='color:#008000; '>0.04</span><span style='color:#800080; '>;</span> 
+
+      <span style='color:#800000; font-weight:bold; '>this</span><span style='color:#808030; '>.</span>renderer<span style='color:#808030; '>.</span>render<span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>this</span><span style='color:#808030; '>.</span>scene<span style='color:#808030; '>,</span> <span style='color:#800000; font-weight:bold; '>this</span><span style='color:#808030; '>.</span>camera<span style='color:#808030; '>)</span><span style='color:#800080; '>;</span> 
+      <span style='color:#800080; '>}</span><span style='color:#800080; '>;</span> 
+      <span style='color:#696969; '>// Call the rendering function. This will cause and infinite recursion (we want </span>
+      <span style='color:#696969; '>// that here, because the animation shall run forever).</span>
+      <span style='color:#800000; font-weight:bold; '>this</span><span style='color:#808030; '>.</span>_render<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+    </pre>
+  </div>
+  <br/>
+  I placed a lot of comments in the code, so I hope the Javascript code is self explaining :)
+  <br/>
+  <br/>
+  <br/>
+  <h2>Edit</h2>
+  The code above creates a canvas with full window fit but does not resize
+  if the window size changes. Add this code for auto-resizing:<br/>
+  <pre>
+function onWindowResize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize( window.innerWidth, window.innerHeight );
+}
+window.addEventListener( 'resize', onWindowResize, false );
+    </pre>
+</div>
+<!-- END paragraph -->
+
+  
+
+
+<div style="font-size: 8pt; text-align: right;">Note: The syntax highlighting was made with <a href="https://tohtml.com" target="_blank">tohtml.com</a>.</div>
+<br/>
+<br/>
+<br/>
+Enjoy the code, have a good time and help others!<br/>
+<br/>
+<br/>
+
+
+<!-- Use and enjoy my code and do good things. Peace to the world.<br/> -->
+
+
+{% endblock %}

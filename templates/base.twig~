@@ -6,44 +6,40 @@
       <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon.ico" />
       <link rel="icon" href="/favicon.png" type="image/png" />
       <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-      <link rel="stylesheet" type="text/css" href="css/base.css" />
-      <link rel="stylesheet" href="css/pageheader.css" />
-      <script src="js/pageheader.js"></script>
+      <link rel="stylesheet" href="/css/base.css" />
+      <link rel="stylesheet" href="/css/pageheader.css" />
+      <script src="/js/pageheader.js"></script>
+      <script src="/js/mediaquerydetection.js"></script>
       {% endblock %}
     </head>
     <body>
       <header id="pageheader">
 	<div class="header-banner">
-	  <a href="/" class="logo"></a>
-	  
-	  <h1>Oooh, that thing has numbers on it.</h1>
-
+	  <a href="/" class="logo"></a>	  
+	  <h1>{{ bannertext|default('Oooh, that thing has numbers on it.')|raw }}</h1>
 	</div>
 	<div class="clear"></div>
 	<nav id="nav">
-	  <!-- <div class="avatar"></div> -->
 	  <ul id="nav_ul">
 	    <li><a href="#"><div class="avatar" id="avatar"></div></a></li>
 	    <li><a href="/public">public/</a></li>
-	    <li><a href="/date.php?ts=now">$date</a></li>
-	    <li><a href="/your_ip_is.php">$your_ip_is</a></li>
+	    <li><a href="https://www.github.com/ikaroskappler" target="_blank">@github</a></li>
 	    <li><a href="/impress.php">whoami</a></li>
-	    <ul>
+	  <ul>
 	</nav>
       </header>
 
       <div id="header">
         {% block header %}
         <h1>{{ headline }}</h1>
-        Hello, {{ name }}
         {% endblock %}
       </div>
 
-      <div id="content">
+      <main>
 	{% block content %}{% endblock %}
-      </div>
+      </main>
       
-      <footer id="footer">
+      <footer>
         {% block footer %}
         <a href="http://www.int2byte.de/">int2byte.de</a>
         {% endblock %}
