@@ -19,10 +19,13 @@ div#bloglist {
     overflow         : visible;
     background-color : rgba(128,128,128,0.5);
     white-space      : nowrap;
+    line-height      : 18pt;
 }
 
 div#bloglist a {
     background       : rgba(256,256,256,0.75);
+    margin-left      : 12px;
+    padding          : 6px;
 }
 
 div#bloglist div.spacer {

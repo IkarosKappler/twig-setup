@@ -19,9 +19,11 @@ header a:active, a:hover {
 }
 
 .header-banner {
-    background-color    : #2FA29D; 
-    /* background-image    : url('/resources/triangle-background-17.png'); */
-    background-position : center;
+    /* background-color    : #2FA29D; */
+    /* background-image    : url('/resources/triangle-background-17-alphamask.png'); */
+    background: url('/resources/triangle-background-17-alphamask.png'), linear-gradient(to right, rgba(47,162,157,1) 50%,
+              rgba(64,255,64,1));
+    background-position : top left; /* center; */
     background-repeat   : no-repeat;
     background-size     : cover;
     width               : 100%;
@@ -98,6 +100,10 @@ nav ul {
 
 nav ul.small-nav {
     margin-top : 0px !important;
+}
+
+nav ul.small-nav li:nth-child(n+2) {
+    margin-top : -24px;
 }
 
 
