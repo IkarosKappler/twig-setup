@@ -1,0 +1,93 @@
+{% extends "blog.twig" %}
+
+{% block head %}
+{{ parent() }}
+{% endblock %}
+
+
+{% block content %}
+<a name="_top"></a>
+
+  <pre style="background-color: #ffffff;">
+                                                                            Author......Ikaros Kappler
+                                                                            Date............2015-10-26
+                                                                            Version................1.0
+  </pre>
+
+<h2>Setting up GPG [basic]</h2>
+<br/>
+
+
+<h3>This is what I basically do</h3>
+<!-- BEGIN paragraph -->
+<div class="tech_paragraph">
+  <pre>
+gpg --search-keys myfriend@mailhost.de
+
+gpg --edit-key &lt;foreign ID>
+> trust
+   ...
+> sign
+   ...
+> save
+
+gpg --refresh-keys
+gpg --list-sigs &lt;ID>
+
+-----------------
+
+gpg --gen-key
+
+gpg --list-keys
+
+
+# To add more identities/mail addresses
+gpg --edit-key &lt;your key ID 8 hex chars>
+> adduid
+
+gpg --output pubkey_D5446587.ascii --armor --export D5446587
+
+# gpg --export -a "Henning Diesenberg" --output
+
+
+# Create revocation certificate
+gpg --output revocation_cert_D5446587.ascii --gen-revoke D5446587
+
+gpg --output privkey_D5446587.ascii --armor --export-secret-keys D5446587
+
+# Send key to a public server, in this case
+gpg --keyserver pool.sks-keyservers.net --send-key 0xD5446587
+
+
+# To remove Identities from the key
+# Note that your keys change then!
+gpg --edit-key &lt;ID>
+> revuid
+
+# Then update your certs by revoking them (use your revocation certificate)
+gpg --import revocation_cert_D5446587.ascii 
+
+# And update the modified keys on the server
+gpg --keyserver pool.sks-keyservers.net --refresh-keys D544657
+# OR
+gpg --keyserver pool.sks-keyservers.net --send-keys 0xD5446587
+
+
+
+# Now install enigmail
+sudo apt-get install enigmail
+
+
+# Enigmail: attach public key
+#           sign public key (don't forget to check fingerprint!)
+# (to display fingerprint:)
+gpg --fingerprint &ltID>
+ 
+
+</pre>
+</div>
+<!-- END paragraph -->
+
+
+
+{% endblock %}

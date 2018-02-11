@@ -3,9 +3,11 @@
 // Define the routes.
 $routes  = array(
     '/'     => array( 'template' => 'index.twig',
-                      'params' => array() ), // 'bannertext' => '<img src="/img/title-mkpixel-ooh-that-thing-has-numbers-on-it.svg" alt="Oooh, that thing has numbers on it." width="630" height="36" />') ), 
+                      'params' => array()
+    ), 
     '/blog' => array( 'template' => 'blog.twig',
-                      'params' => array() ),
+                      'params' => array()
+    ),
     '/blog/blog.20161028_Create_Zip_files_omitting_DS_Store_files' => array( 'template' => 'blog.20161028_Create_Zip_files_omitting_DS_Store_files.twig',
                                                              'params' => array( 'bannertext' => 'Good news, everyone',
                                                                                 'headline' => 'Create ZIP files omitting DS_Store files' )
@@ -42,6 +44,14 @@ $routes  = array(
     '/blog/blog.20151117_Javascript_Minimizer_Bash_Script' => array( 'template' => 'blog.20151117_Javascript_Minimizer_Bash_Script.twig',
                                                              'params' => array( 'bannertext' => 'Good news, everyone',
                                                                                 'headline' => 'Javascript Minimizer Bash Script' )
+    ),
+    '/blog/blog.20151026_Setting_up_GPG' => array( 'template' => 'blog.20151026_Setting_up_GPG.twig',
+                                                   'params' => array( 'bannertext' => 'Good news, everyone',
+                                                                      'headline' => 'Setting up GPG' )
+    ),
+    '/blog/blog.20150422_my_basic_html_template' => array( 'template' => 'blog.20150422_my_basic_html_template.twig',
+                                                   'params' => array( 'bannertext' => 'Good news, everyone',
+                                                                      'headline' => 'My Basic HTML Template' )
     ),
     '/blog/blog.20150326_Booting_my_PC_remotely_using_a_RaspberryPi' => array( 'template' => 'blog.20150326_Booting_my_PC_remotely_using_a_RaspberryPI.twig',
                                                              'params' => array( 'bannertext' => 'Good news, everyone',
