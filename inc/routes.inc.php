@@ -1,5 +1,4 @@
 <?php
-
 // Define the routes.
 $routes  = array(
     '/'     => array( 'template' => 'index.twig',
