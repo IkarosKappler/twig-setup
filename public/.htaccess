@@ -11,6 +11,7 @@
    RewriteRule ^(date.php) - [L]
    RewriteRule ^(your_ip_is.php) - [L]
    RewriteRule ^(randomkey.php) - [L]
+   RewriteRule ^(randomstr.php) - [L]
 
    # Handle Front Controller ... pass requests to the main script index.php
    RewriteBase /
