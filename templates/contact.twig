@@ -1,0 +1,20 @@
+{% extends "base.twig" %}
+
+{% block head %}
+      {{ parent() }}
+      <link rel="stylesheet" href="/css/contact.css" />
+{% endblock %}
+
+{% block header %}
+   <a href="../../"><img src="/img/backward_0_large_C.png" alt="... back" width="56" height="48" border="0" /></a>
+   {{ parent() }}
+{% endblock %}
+
+{% block content %}
+   Hallo, ich bin Ika (イカ).<br/>
+   <br/>
+   Ich programmiere gerne.<br/>
+   <br/>
+   Email: <a href="mailto:ika@int2byte.de">ika@int2byte.de</a>
+   
+{% endblock %}

@@ -5,8 +5,11 @@ $routes  = array(
     '/'     => array( 'template' => 'index.twig',
                       'params' => array()
     ), 
-    '/blog' => array( 'template' => 'blog.twig',
+    /* '/blog' => array( 'template' => 'blog.twig',
                       'params' => array()
+    ), */
+    '/contact' => array( 'template' => 'contact.twig',
+                         'params' => array()
     ),
     '/blog/blog.20161028_Create_Zip_files_omitting_DS_Store_files' => array( 'template' => 'blog.20161028_Create_Zip_files_omitting_DS_Store_files.twig',
                                                              'params' => array( 'bannertext' => 'Good news, everyone!',
