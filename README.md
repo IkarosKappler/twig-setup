@@ -10,5 +10,4 @@ $ composer install
 ![Screenshot int2byte.de](screenshot-int2byte.de.png)
 
 
-Font used for the headlines is (dafont.com)[https://www.dafont.com/sf-pixelate.font "SF Pixelate"].
-ttps://www.dafont.com/sf-pixelate.font
+Font used for the headlines is [dafont.com](https://www.dafont.com/sf-pixelate.font "SF Pixelate").
