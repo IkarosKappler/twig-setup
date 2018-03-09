@@ -1,28 +1,32 @@
-/*
-$(window).scroll(function(){
-    if ($(window).scrollTop() >= 300) {
-       $('nav').addClass('fixed-header');
-    }
-    else {
-       $('nav').removeClass('fixed-header');
-    }
-});
-*/
+/**
+ * The sticks page header had this jQuery code. I ported it back to raw ECMA script
+ * because in the beginning I wanted to avoid using large libraries.
+ *
+ * This was the code:
+ *
+ * $(window).scroll(function(){
+ *   if ($(window).scrollTop() >= 300) {
+ *      $('nav').addClass('fixed-header');
+ *   }
+ *   else {
+ *      $('nav').removeClass('fixed-header');
+ *   }
+ * });
+ *
+ * @author  Ikaros Kappler
+ * @date    2018-01
+ * @version 1.0.1
+ **/
 
 window.onscroll = function() {
-    //console.log('scrolled ...');
     var header = document.getElementById('pageheader');
     var nav    = document.getElementById('nav');
-    //var avatar = document.getElementById('avatar');
-    //var nav    = document.getElementById('nav_ul');
     
     function addClass(element,name) {
-	//console.log('adding class ...');
 	var arr;
 	arr = element.className.split(" ");
 	if( arr.indexOf(name) == -1 ) {
             element.className += " " + name;
-	    console.log('class added: ' + element.className );
 	}
     }
 
@@ -32,13 +36,11 @@ window.onscroll = function() {
 	var pos;
 	if( (pos = arr.indexOf(name)) != -1 ) {
 	    arr.splice(pos,1);
-            element.className = arr.join(' '); // " " + name;
-	    console.log('removed: ' + arr.join(' ') );
+            element.className = arr.join(' ');
 	}
     }
 
     // 300 is the height of the header.
-    //console.log( 'window.scrollY=' + window.scrollY + ', document.body.scrollY=' + document.body.scrollY + ', window.pageYOffset=' + window.pageYOffset + ', document.body.scrollTop=' + document.body.scrollTop );
     if( window.pageYOffset >= 300 ) { // window.scrollY is only compatible with FF, Safari and Chrome
 	addClass(nav,'fixed-header');
 	addClass(avatar,'small-avatar' );
@@ -49,3 +51,22 @@ window.onscroll = function() {
 	removeClass(nav_ul,'small-nav');
     }
 }
+
+
+/* Maybe animate the SVG header? This required inline SVG ... */
+/*
+window.addEventListener('load', function load() {
+    window.removeEventListener('load', load, false);
+    console.log('load'); 
+    var banner = document.getElementsByClassName('header-banner')[0];
+    banner.onmousemove = function(e) { 
+	var x = e.pageX - this.offsetLeft; 
+	var y = e.pageY - this.offsetTop;
+
+	console.log('mouse at '+x+','+y );
+
+	
+	
+    };
+} );
+*/
