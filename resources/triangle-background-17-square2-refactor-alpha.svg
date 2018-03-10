@@ -1,7 +1,11 @@
 ﻿<?xml version="1.0" standalone="yes"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" 
    "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<<<<<<< HEAD
 <svg width="853" height="410" viewBox="0 0 853 410" version="1.1" 
+=======
+<svg width="853" height="410" version="1.1" 
+>>>>>>> acfe35e8f17c7b67000f72117c0d88529faa2dd5
    xmlns="http://www.w3.org/2000/svg">
    <polygon points="10,30 102,44 84,2" style="fill:rgba(1,1,1,0.00392156862745098)" />
    <polygon points="155,8 102,44 162,88" style="fill:rgba(1,1,1,0.12941176470588237)" />
@@ -225,4 +229,8 @@
    <polygon points="10,30 27,-43 -20,-5" style="fill:rgba(1,1,1,0.004139433551198257)" />
    <polygon points="-10,87 10,30 -20,-5" style="fill:rgba(1,1,1,0)" />
    <polygon points="-15,152 -10,87 -20,-5" style="fill:rgba(1,1,1,0)" />
+<<<<<<< HEAD
 </svg>
+=======
+</svg>
+>>>>>>> acfe35e8f17c7b67000f72117c0d88529faa2dd5

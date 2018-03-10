@@ -20,9 +20,13 @@ header a:active, a:hover {
 
 .header-banner {
     /* background: url('/img/triangle-background-17-alphamask.png'), linear-gradient(to right, rgba(47,162,157,1) 50%, rgba(64,255,64,1)); */
+<<<<<<< HEAD
     /* background: url('/resources/triangle-background-17-square2-refactor-alpha-optimized.svg'), linear-gradient(to right, rgba(47,162,157,1) 50%, rgba(64,255,64,1)); */
     /* background: url('/resources/triangle-background-17-square2-refactor-alpha-large.svg'), linear-gradient(to right, rgba(47,162,157,1) 50%, rgba(64,255,64,1)); */
      background: url('/resources/triangle-background-17-square2-refactor-alpha.svg'), linear-gradient(to right, rgba(47,162,157,1) 50%, rgba(64,255,64,1));
+=======
+    background: url('/resources/triangle-background-17-square2-refactor-alpha-optimized.svg'), linear-gradient(to right, rgba(47,162,157,1) 50%, rgba(64,255,64,1));
+>>>>>>> acfe35e8f17c7b67000f72117c0d88529faa2dd5
     background-position : top left;
     background-repeat   : no-repeat;
     background-size     : cover;
