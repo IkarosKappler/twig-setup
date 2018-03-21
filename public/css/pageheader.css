@@ -19,9 +19,6 @@ header a:active, a:hover {
 }
 
 .header-banner {
-    /* background: url('/img/triangle-background-17-alphamask.png'), linear-gradient(to right, rgba(47,162,157,1) 50%, rgba(64,255,64,1)); */
-    /* background: url('/resources/triangle-background-17-square2-refactor-alpha-optimized.svg'), linear-gradient(to right, rgba(47,162,157,1) 50%, rgba(64,255,64,1)); */
-    /* background: url('/resources/triangle-background-17-square2-refactor-alpha-large.svg'), linear-gradient(to right, rgba(47,162,157,1) 50%, rgba(64,255,64,1)); */
     background: url('/resources/triangle-background-17-square2-refactor-alpha.svg'), linear-gradient(to right, rgba(47,162,157,1) 50%, rgba(64,255,64,1)); 
     background-position : top left;
     background-repeat   : no-repeat;
@@ -96,6 +93,7 @@ nav ul {
     width: 960px; 
     max-width: 100%;
     margin-top : -48px;
+    height : 0px;
 }
 
 nav ul.small-nav {
@@ -117,4 +115,23 @@ nav ul li {
 nav ul li a {
     text-decoration: none; 
     color: #a9abae;
+}
+
+/* First nav link red */
+nav:hover ul li:nth-of-type(3n+2) a { 
+    color: #e00000;
+}
+
+/* Second nav link green */ 
+nav:hover ul li:nth-of-type(3n+3) a {
+    color: #00a800;
+}
+
+/* Third nav link blue */
+nav:hover ul li:nth-of-type(3n+4) a {
+    color: #00a8ff;
+}
+
+nav:hover ul li a:hover {
+    color: orange;
 }
