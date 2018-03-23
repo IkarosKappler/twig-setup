@@ -8,8 +8,12 @@
       <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
       <link rel="stylesheet" href="/css/base.css" />
       <link rel="stylesheet" href="/css/pageheader.css" />
+      {% if env('MODE') == 'DEVELOPMENT' %}
       <script src="/js/pageheader.js"></script>
       <script src="/js/mediaquerydetection.js"></script>
+      {% else %}
+      <script src="/js/core.min.js"></script>
+      {% endif %}
       {% endblock %}
     </head>
     <body>     
@@ -47,6 +51,7 @@
 
 
       {% if env('MODE') != 'DEVELOPMENT' %}
+      
       <!-- Matomo -->
       <script type="text/javascript">
 	var _paq = _paq || [];
@@ -62,6 +67,7 @@
 	})();
       </script>
       <!-- End Matomo Code -->
+      
       {% endif %}
     </body>
 </html>

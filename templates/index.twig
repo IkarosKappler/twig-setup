@@ -4,6 +4,7 @@
   {{ parent() }}
 
      {% if env('MODE') == 'DEVELOPMENT' %}
+     
       <script src="/js/girih_frontpage/js/ikrs/IKRS.js"></script>
       <script src="/js/girih_frontpage/js/ikrs/IKRS.Object.js"></script>
 
@@ -30,10 +31,11 @@
       
       <script src="/js/girih_frontpage/js/StringFileExporter.js"></script>
 
-      <script src="/js/girih_frontpage/js/main.js"></script>
-     {% else %}   
+      <script src="/js/girih_frontpage/js/main.js"></script>      
+     {% else %}
+     
       <script src="/js/girih.min.js"></script>
-      <script src="/js/canvasResize.js"></script>
+      
      {% endif %}
 
       <link rel="stylesheet" href="/css/index.css" />
