@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+SITEMAP https://www.int2byte.de/sitemap.txt
