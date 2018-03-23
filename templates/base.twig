@@ -41,10 +41,12 @@
       
       <footer>
         {% block footer %}
-        <a href="http://www.int2byte.de/">int2byte.de</a>
+        <a href="https://www.int2byte.de/">int2byte.de</a>
         {% endblock %}
       </footer>
-      
+
+
+      {% if env('MODE') != 'DEVELOPMENT' %}
       <!-- Matomo -->
       <script type="text/javascript">
 	var _paq = _paq || [];
@@ -60,5 +62,6 @@
 	})();
       </script>
       <!-- End Matomo Code -->
+      {% endif %}
     </body>
 </html>
