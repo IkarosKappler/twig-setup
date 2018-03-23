@@ -6,12 +6,13 @@
       <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon.ico" />
       <link rel="icon" href="/favicon.png" type="image/png" />
       <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+      {% if env('MODE') == 'DEVELOPMENT' %}
       <link rel="stylesheet" href="/css/base.css" />
       <link rel="stylesheet" href="/css/pageheader.css" />
-      {% if env('MODE') == 'DEVELOPMENT' %}
       <script src="/js/pageheader.js"></script>
       <script src="/js/mediaquerydetection.js"></script>
       {% else %}
+      <link rel="stylesheet" href="/css/styles.min.css" />
       <script src="/js/core.min.js"></script>
       {% endif %}
       {% endblock %}

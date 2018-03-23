@@ -1,13 +1,25 @@
+"strict mode";
+/**
+ * This gulp script concatenates and minifies all my scripts.
+ *
+ * @author  Ikaros Kappler
+ * @version 1.0.0
+ * @date    2018-03-23
+ **/
 
 var copy = require('copy');
 var del = require('del');
 var del = require('del');
 var gulp = require('gulp');
+var cleanCSS = require('gulp-clean-css');
 var filesExist = require('files-exist');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var runSequence = require('run-sequence');
+var sourcemaps = require('gulp-sourcemaps');
+
+//var printError = require('print-error');
 
 //script paths
 var coreFiles = [
@@ -37,9 +49,17 @@ var coreFiles = [
 	'src/girih_frontpage/js/ImageFileReader.js',
 	'src/girih_frontpage/js/main.js'
     ],
+    cssFiles = [
+	'src/css/base.css',
+	'src/css/pageheader.css',
+	'src/css/index.css',
+	'src/css/blog.css',
+	'src/css/contact.css'
+    ],
     jsDest = './dist/',
     coreFilename = 'core.js',
-    girihFilename = 'girih.js';
+    girihFilename = 'girih.js',
+    cssFilename = 'styles.css';
 
 gulp.task('clean', function() {
     return Promise.all([
@@ -69,13 +89,32 @@ gulp.task('uglify', function() {
 	.pipe(gulp.dest(jsDest));
 });
 
+gulp.task('concat-css', function() {
+    return gulp.src(filesExist(cssFiles))
+        .pipe(concat(cssFilename))
+        .pipe(gulp.dest(jsDest));
+});
+
+gulp.task('minify-css', function() {
+    // I wonder: how do I obtain the sourcemap data and
+    // write that into a separate file?
+    // (not to the end of the minified style.css)
+    return gulp.src(jsDest+cssFilename)
+      .pipe(sourcemaps.init())
+      .pipe(cleanCSS( { sourceMap: true, compatibility: 'ie8' } ))
+      .pipe(rename({suffix: '.min'}))
+      .pipe(sourcemaps.write())
+      .pipe(gulp.dest(jsDest));
+});
+
 gulp.task('publish', function() {
     return Promise.all([
-        copy(jsDest+'/*.js', 'public/js/', function(err,files) { if (err) throw err; else console.log('[copy] Files copied.'); } )
+        copy(jsDest+'/*.js', 'public/js/', function(err,files) { if (err) throw err; else console.log('[copy]  JS files copied.'); } ),
+	copy(jsDest+'/*.css', 'public/css/', function(err,files) { if (err) throw err; else console.log('[copy] CSS Files copied.'); } )
     ]);
 });
 
 gulp.task('default', function() {
-    return runSequence( 'clean', 'concat-core', 'concat-girih', 'uglify', 'publish' ); 
+    return runSequence( 'clean', 'concat-core', 'concat-girih', 'uglify', 'concat-css', 'minify-css', 'publish' ); 
 });
 
