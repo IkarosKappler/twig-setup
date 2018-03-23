@@ -1,0 +1,36 @@
+{
+  "name": "twig-setup",
+  "version": "1.0.0",
+  "description": "My very first running twig setup.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "gulp gulpfile.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IkarosKappler/twig-setup.git"
+  },
+  "keywords": [
+    "twig",
+    "framework"
+  ],
+  "author": "Ikaros Kappler",
+  "license": "CC-BY-NC-4.0",
+  "bugs": {
+    "url": "https://github.com/IkarosKappler/twig-setup/issues"
+  },
+  "homepage": "https://github.com/IkarosKappler/twig-setup#readme",
+  "dependencies": {
+    "files-exist": "^1.0.2",
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-cli": "^2.0.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^3.0.0",
+    "run-sequence": "^2.2.1"
+  },
+  "devDependencies": {
+  }
+}

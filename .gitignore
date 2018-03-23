@@ -5,3 +5,4 @@ public/php.ini
 _htaccess_extended 
 public/phpinfo.php
 public/phpinfo-hidden.php
+node_modules/
