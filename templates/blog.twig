@@ -2,7 +2,9 @@
 
 {% block head %}
       {{ parent() }}
-      <!-- <link rel="stylesheet" href="/css/blog.css" /> -->
+      {% if env('MODE') == 'DEVELOPMENT' %}
+      <link rel="stylesheet" href="/css/blog.css" />
+      {% endif %}
 {% endblock %}
 
 {% block header %}
