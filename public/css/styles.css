@@ -1,6 +1,6 @@
 html {
     min-height : 100%;
-    height : 100%;
+    /* height : 100%; */
 }
 
 body {
@@ -22,7 +22,9 @@ a:visited {
 
 
 main {
-    padding-bottom : 6rem;
+    /* padding-bottom : 6rem; */
+    padding-bottom : 150px;
+    margin-bottom : 6rem;
 }
 
 /* Add a pseudo element for breakpoint detection */
@@ -259,7 +261,7 @@ nav ul li div.nav-icon {
 }
 nav:hover ul li div.nav-icon {
     margin-top : 0px;
-
+    
     webkit-transition: margin-top 0.25s;
        moz-transition: margin-top 0.25s;
         ms-transition: margin-top 0.25s;
