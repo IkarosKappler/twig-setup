@@ -158,7 +158,7 @@ nav ul li div.nav-icon {
 }
 nav:hover ul li div.nav-icon {
     margin-top : 0px;
-
+    
     webkit-transition: margin-top 0.25s;
        moz-transition: margin-top 0.25s;
         ms-transition: margin-top 0.25s;
