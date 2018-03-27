@@ -50,11 +50,12 @@ var coreFiles = [
 	'src/girih_frontpage/js/main.js'
     ],
     cssFiles = [
-	'src/css/base.css',
-	'src/css/pageheader.css',
-	'src/css/index.css',
-	'src/css/blog.css',
-	'src/css/contact.css'
+	'public/css/base.css',
+	'public/css/pageheader.css',
+	'public/css/navigation-underlines.css',
+	'public/css/index.css',
+	'public/css/blog.css',
+	'public/css/contact.css'
     ],
     jsDest = './dist/',
     coreFilename = 'core.js',

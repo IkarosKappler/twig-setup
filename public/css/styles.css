@@ -245,26 +245,11 @@ nav:hover ul li a:hover {
 
 
 /* Icon animation */
-/*
-@keyframes navicon-in {
-    from { margin-top : -300px; }
-    to { margin-top : 0px; }
-}
-
-@keyframes navicon-out {
-    from { margin-top : 0px; }
-    to { margin-top : -300px; }
-}
-*/
-
 nav ul li div.nav-icon {
     display : inline-block;
     position : absolute;
     margin-top : -350px;
-    /* animation-name: navicon-out;
-    animation-duration: 0.5s; */
 
-    webkit-transition: margin-top 0.5s;
     webkit-transition: margin-top 0.5s;
        moz-transition: margin-top 0.5s;
         ms-transition: margin-top 0.5s;
@@ -273,8 +258,6 @@ nav ul li div.nav-icon {
 }
 nav:hover ul li div.nav-icon {
     margin-top : 0px;
-    /* animation-name: navicon-in;
-    animation-duration: 0.5s; */
 
     webkit-transition: margin-top 0.25s;
        moz-transition: margin-top 0.25s;
@@ -282,6 +265,33 @@ nav:hover ul li div.nav-icon {
          o-transition: margin-top 0.25s;
            transition: margin-top 0.25s;
 }
+/* Animate the underlins of nav */
+nav ul li:nth-child(n+2),
+nav ul li:nth-child(n+2):after {
+  transition : all .5s;
+}
+
+nav ul li:nth-child(n+2) {
+    position : relative;
+}
+
+nav ul li:nth-child(n+2):after {
+  position   : absolute;
+  top        : 10px;
+  left       : 15px;
+  right      : 0;
+  margin     : auto;
+  width      : 0px;
+  content    : '.';
+  color      : transparent;
+  background : grey;
+  height     : 1px; 
+}
+
+nav ul li:nth-child(n+2):hover:after {
+    width    : 80%;
+}
+
 
 canvas#girih_canvas {
     position  : fixed;

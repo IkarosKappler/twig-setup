@@ -145,26 +145,11 @@ nav:hover ul li a:hover {
 
 
 /* Icon animation */
-/*
-@keyframes navicon-in {
-    from { margin-top : -300px; }
-    to { margin-top : 0px; }
-}
-
-@keyframes navicon-out {
-    from { margin-top : 0px; }
-    to { margin-top : -300px; }
-}
-*/
-
 nav ul li div.nav-icon {
     display : inline-block;
     position : absolute;
     margin-top : -350px;
-    /* animation-name: navicon-out;
-    animation-duration: 0.5s; */
 
-    webkit-transition: margin-top 0.5s;
     webkit-transition: margin-top 0.5s;
        moz-transition: margin-top 0.5s;
         ms-transition: margin-top 0.5s;
@@ -173,8 +158,6 @@ nav ul li div.nav-icon {
 }
 nav:hover ul li div.nav-icon {
     margin-top : 0px;
-    /* animation-name: navicon-in;
-    animation-duration: 0.5s; */
 
     webkit-transition: margin-top 0.25s;
        moz-transition: margin-top 0.25s;
