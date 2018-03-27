@@ -104,7 +104,8 @@ gulp.task('minify-css', function() {
       .pipe(sourcemaps.init())
       .pipe(cleanCSS( { sourceMap: true, compatibility: 'ie8' } ))
       .pipe(rename({suffix: '.min'}))
-      .pipe(sourcemaps.write())
+      // Source Maps just blow up the code size
+      // .pipe(sourcemaps.write())
       .pipe(gulp.dest(jsDest));
 });
 
