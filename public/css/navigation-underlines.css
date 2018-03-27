@@ -1,7 +1,7 @@
 /* Animate the underlins of nav */
 nav ul li:nth-child(n+2),
 nav ul li:nth-child(n+2):after {
-  transition : all .5s;
+  transition : width .5s;
 }
 
 nav ul li:nth-child(n+2) {

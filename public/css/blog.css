@@ -1,19 +1,25 @@
 
+
 #header {
     margin           : 5% 10%;
 }
 
+
 .content {
-    margin           : 10%;
+    
+}
+
+div.rfc-header {
+    width            : 100%;
+    text-align       : right;
 }
 
 div.tech_paragraph {
-    margin-left      : 50px;
-    margin-right     : 50px;
     margin-bottom    : 150px;
     overflow-wrap: break-word;
 }
 
+/* DEPRECATED Do not use any more. Replace by 'typewriter' and 'excerpt' */
 pre {
     background-color : #e8e8e8;
     /* Make even pre-formatted texts to break properly at the
@@ -23,4 +29,22 @@ pre {
     white-space: -pre-wrap;      /* Opera 4-6 */
     white-space: -o-pre-wrap;    /* Opera 7 */
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+div.typewriter {
+    /* Make even pre-formatted texts to break properly at the
+       end of their container */
+    white-space: pre-wrap;       /* css-3 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+div.excerpt {
+    background-color : #e8e8e8;
+    border-left : 5px solid #292f36;
+    margin-left : 20px;
+    margin-right : 30px;
+    padding-left : 10px;
 }
