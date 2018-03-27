@@ -338,10 +338,12 @@ div#bloglist div.spacer {
     height : 250px;
 }
 
+/*
 footer {
     /* The footer does not apply with the dynamic front page canvas visible */
-    display : none;
+ /*   display : none;
 }
+ */
 
 
 
