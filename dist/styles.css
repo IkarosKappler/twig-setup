@@ -133,7 +133,8 @@ header a:active, a:hover {
 
 header .logo {
     background-color    : transparent;
-    background-image    : url('../img/icon_blank_cropped.anthrazit.png');
+    /* background-image    : url('../img/icon_blank_cropped.anthrazit.png'); */
+    background-image    : url('../img/icon-blank-large.svg');
     background-size     : cover;
     background-position : center top;
     background-repeat   : no-repeat;
@@ -141,7 +142,8 @@ header .logo {
     left                : 64px;
     top                 : 52px; 
     height              : 192px;
-    width               : 192px;
+    /* width               : 192px; */
+    width               : 123px;
 }
 
 header .avatar {
@@ -261,13 +263,14 @@ nav ul li div.nav-icon {
 }
 nav:hover ul li div.nav-icon {
     margin-top : 0px;
-    
+
     webkit-transition: margin-top 0.25s;
        moz-transition: margin-top 0.25s;
         ms-transition: margin-top 0.25s;
          o-transition: margin-top 0.25s;
            transition: margin-top 0.25s;
 }
+
 /* Animate the underlins of nav */
 nav ul li:nth-child(n+2),
 nav ul li:nth-child(n+2):after {
