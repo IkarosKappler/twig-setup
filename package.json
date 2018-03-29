@@ -22,15 +22,17 @@
   },
   "homepage": "https://github.com/IkarosKappler/twig-setup#readme",
   "dependencies": {
-    "files-exist": "^1.0.2",
+    "copy": "^0.3.1",
     "del": "^3.0.0",
+    "files-exist": "^1.0.2",
     "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.9.3",
     "gulp-cli": "^2.0.1",
     "gulp-concat": "^2.6.1",
     "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^3.0.0",
     "run-sequence": "^2.2.1"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }

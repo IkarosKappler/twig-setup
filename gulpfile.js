@@ -9,7 +9,6 @@
 
 var copy = require('copy');
 var del = require('del');
-var del = require('del');
 var gulp = require('gulp');
 var cleanCSS = require('gulp-clean-css');
 var filesExist = require('files-exist');
@@ -23,9 +22,9 @@ var sourcemaps = require('gulp-sourcemaps');
 
 //script paths
 var coreFiles = [
-        'src/js/pageheader.js',
-        'src/js/mediaquerydetection.js',
-        'src/js/canvasResize.js'
+        'public/js/pageheader.js',
+        'public/js/mediaquerydetection.js',
+        'public/js/canvasResize.js'
     ],	
     girihFiles = [
 	'src/girih_frontpage/js/ikrs/IKRS.js',
