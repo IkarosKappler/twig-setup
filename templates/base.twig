@@ -4,8 +4,11 @@
       <title>{{ title|default('Contents of /') }}</title>
       {% block head %}
       <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon.ico" />
-      <link rel="icon" href="/favicon.png" type="image/png" />
       <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+      <link rel="icon" href="/favicon.png" type="image/png" />
+      <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">  
+      <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">  
+      <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">  
       {% if env('MODE') == 'DEVELOPMENT' %}
       <link rel="stylesheet" href="/css/base.css" />
       <link rel="stylesheet" href="/css/pageheader.css" />

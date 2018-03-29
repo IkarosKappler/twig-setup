@@ -10,10 +10,12 @@
 <div class="content">
 
 
-  <div style="margin-left: 10%; margin-right: 10%; text-align: right; font-family: monospace;">
-                                                                            Author......Ikaros Kappler<br/>
-                                                                            Date............2015-04-22<br/>
-                                                                            Version................1.0<br/>
+  <div class="rfc-header">
+       Author......Ikaros Kappler<br/>
+       Date............2015-04-22<br/>
+       Modified........2018-03-29<br/>
+       Version..............1.0.1<br/>
+									    
   </div>
 
 
@@ -23,25 +25,70 @@
 <!-- BEGIN paragraph -->
 <div class="tech_paragraph">
   This is the code I usually start with:<br/>
-  <pre>
+  <div class="excerpt typewriter">
 &lt;!DOCTYPE html>
 &lt;html>
   &lt;head>
     &lt;title>Document Title&lt;/title>
-    &lt;meta charset="UTF-8" />
-    &lt;meta name="description" content="Content Description" />
-    &lt;meta name="keywords" content="any, keywords, you, want" />
-    &lt;meta name="author" content="Ikaros Kappler" />
-    &lt;meta name="date" content="2015-04-22" />
+    &lt;meta charset="UTF-8">
+    &lt;meta name="description" content="Content Description">
+    &lt;meta name="keywords" content="any, keywords, you, want">
+    &lt;meta name="author" content="Ikaros Kappler">
+    &lt;meta name="date" content="2015-04-22">
 
-    &lt;link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
+    &lt;link rel="stylesheet" type="text/css" media="screen" href="css/styles.css">
     
   &lt;/head>
 
   &lt;body>
 
   &lt;/body>
-&lt;/html></pre>
+&lt;/html>
+
+</div>
+
+
+<div class="tech_paragraph">
+     <h3>Version with Favicons</h3>
+     Due to <a href="https://sympli.io/blog/2017/02/15/heres-everything-you-need-to-know-about-favicons-in-2017/" target="_blank">sympli.io</a>
+     there are at least three favicon sizes required to cover most browser formats. Also place a facicon.ico (16x16) in your public root for browsers that try to access that file even if it's not linked in your document.
+
+     <div class="excerpt typewriter">
+&lt;!DOCTYPE html>
+&lt;html>
+  &lt;head>
+    &lt;title>Document Title&lt;/title>
+    &lt;meta charset="UTF-8" />
+    &lt;link rel="icon" href="/favicon.png" type="image/png">
+    &lt;link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">  
+    &lt;link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">  
+    &lt;link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+
+    &lt;!-- Apple Touch Icons -->
+    &lt;link rel="apple-touch-icon" href="older-iPhone.png"> &lt;!-- 120px -->  
+    &lt;link rel="apple-touch-icon" sizes="180x180" href="iPhone-6-Plus.png">  
+    &lt;link rel="apple-touch-icon" sizes="152x152" href="iPad-Retina.png">  
+    &lt;link rel="apple-touch-icon" sizes="167x167" href="iPad-Pro.png"> 
+
+    &lt;meta name="description" content="Content Description">
+    &lt;meta name="keywords" content="any, keywords, you, want">
+    &lt;meta name="author" content="Ikaros Kappler">
+    &lt;meta name="date" content="2015-04-22">
+
+    &lt;link rel="stylesheet" type="text/css" media="screen" href="css/styles.css">
+    
+  &lt;/head>
+
+  &lt;body>
+
+  &lt;/body>
+&lt;/html>
+
+     </div>
+
+</div>
+
+
 </div>
 <!-- END paragraph -->
 
