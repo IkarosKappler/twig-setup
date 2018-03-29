@@ -60,6 +60,8 @@ var coreFiles = [
     girihFilename = 'girih.js',
     cssFilename = 'styles.css';
 
+
+// Define tasks
 gulp.task('clean', function() {
     return Promise.all([
         del(coreFilename),
