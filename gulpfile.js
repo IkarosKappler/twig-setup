@@ -18,7 +18,6 @@ var uglify = require('gulp-uglify');
 var runSequence = require('run-sequence');
 var sourcemaps = require('gulp-sourcemaps');
 
-//var printError = require('print-error');
 
 //script paths
 var coreFiles = [
