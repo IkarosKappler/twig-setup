@@ -11,6 +11,11 @@ $request = parse_request();
 require_once '../vendor/autoload.php';
 
 
+//$__urlparts = parse_url(site_url());
+//$__domain = $__urlparts['host'];
+$__domain = $_SERVER['HTTP_HOST'];
+
+
 // Set path to templates
 $loader = new Twig_Loader_Filesystem('../templates');
 $twig = new Twig_Environment($loader, array(
@@ -22,7 +27,7 @@ $twig->addFunction(new Twig\TwigFunction('env','_env'));
 if( array_key_exists($request['path'],$routes) ) {
     $route = $routes[$request['path']];
 	echo $twig->render( $route['template'], // 'index.twig',
-                        $route['params']
+                         array_merge( $route['params'], array('__domain' => $__domain) )
 	);
 } else if( $request['path'] == '/sitemap.txt' ) {
     header( 'Content-Type: text/plain' );

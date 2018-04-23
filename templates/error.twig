@@ -2,13 +2,15 @@
 
 {% block head %}
       {{ parent() }}
-      <!-- <link rel="stylesheet" href="css/error.css" /> -->
+      {% if env('MODE') == 'DEVELOPMENT' %}
+      <link rel="stylesheet" href="css/error.css" />
+      {% endif %}
 {% endblock %}
 
 {% block header %}
-   Error {{ code }}
+   <h1>Error {{ code }}</h1>
 {% endblock header %}
 
 {% block content %}
-  {{ message|default('There was an error.') }}
+  <div class="error">{{ message|default('There was an error.') }}</div>
 {% endblock %}
