@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 {% for r_name,r_conf in routes %}
    <url>
-      <loc>{{ app.request.getSchemeAndHttpHost() }}{{ r_name }}</loc>
+      <loc>{{ __protocol }}{{ __domain }}{{ r_name }}</loc>
       <lastmod>2018-03-10</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.5</priority>
