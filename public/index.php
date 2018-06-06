@@ -28,7 +28,7 @@ if( array_key_exists($request['path'],$routes) ) {
 	echo $twig->render( $route['template'], // 'index.twig',
                          array_merge( $route['params'], array('__domain' => $__domain, '__protocol' => $__protocol ) )
 	);
-} else if( $request['path'] == '/sitemap.txt' ) {
+} else if( $request['path'] == '/sitemap.xml' ) {
     header( 'Content-Type: text/plain' );
     echo $twig->render( 'sitemap.twig',
                         array_merge( array( 'routes' => $routes ), array('__domain' => $__domain, '__protocol' => $__protocol ) )
