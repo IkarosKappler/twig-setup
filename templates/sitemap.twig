@@ -3,9 +3,9 @@
 {% for r_name,r_conf in routes %}
    <url>
       <loc>{{ __protocol }}{{ __domain }}{{ r_name }}</loc>
-      <lastmod>2018-03-10</lastmod>
+      <lastmod>{%if r_conf.date is defined %}{{ r_conf.date }}{%else%}{{ "2018-06-06" }}{% endif %}</lastmod>
       <changefreq>monthly</changefreq>
-      <priority>0.5</priority>
+      <priority>{%if r_conf.priority is defined %}{{ r_conf.priority }}{%else%}{{ 0.5 }}{% endif %}</priority>
    </url>
 {% endfor %}
 </urlset> 

@@ -22,6 +22,7 @@ $twig = new Twig_Environment($loader, array(
 ));
 $twig->addFunction(new Twig\TwigFunction('env','_env'));
 
+
 // Route exists?
 if( array_key_exists($request['path'],$routes) ) {
     $route = $routes[$request['path']];
@@ -29,7 +30,7 @@ if( array_key_exists($request['path'],$routes) ) {
                          array_merge( $route['params'], array('__domain' => $__domain, '__protocol' => $__protocol ) )
 	);
 } else if( $request['path'] == '/sitemap.xml' ) {
-    header( 'Content-Type: text/plain' );
+    header( 'Content-Type: application/xml; charset=utf-8' );
     echo $twig->render( 'sitemap.twig',
                         array_merge( array( 'routes' => $routes ), array('__domain' => $__domain, '__protocol' => $__protocol ) )
 	);
