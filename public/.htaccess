@@ -1,5 +1,17 @@
 
-# Set Expiration-Dates for different file types
+####### Redirect non https and non www #######
+# First rewrite any request to the wrong domain to use the correct one (here www.)
+RewriteCond %{HTTP_HOST} !^www\.
+RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Now, rewrite to HTTPS:
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+
+
+
+####### Set Expiration-Dates for different file types #######
 # 480 weeks
 <FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf|woff|svg)$">
     Header set Cache-Control "max-age=290304000, public"

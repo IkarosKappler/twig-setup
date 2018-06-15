@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html>
-    <head>
+  <head>
+      <meta charset="UTF-8" />
       <title>{{ title|default('Contents of /') }}</title>
       {% block head %}
-      <meta content="text/html; charset=UTF-8" name="Content-Type" />
+      <meta name="Content-Type" content="text/html; charset=UTF-8" />
+      <meta name="author" content="Ikaros Kappler" />
+      <meta name="description" content="{{ description }}" />
+      <meta name="keywords" content="{{ keywords }}" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon.ico" />
       <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
       <link rel="icon" href="/favicon.png" type="image/png" />
@@ -15,6 +20,7 @@
       <meta name="twitter:site" content="@humanearthpig" />
       <meta name="twitter:creator" content="@humanearthpig" />
       <meta property="og:url" content="https://{{ __domain }}" />
+      <meta property="og:type" content="website" />
       <meta property="og:title" content="Ikaros Kappler's codebase" />
       <meta property="og:description" content="Ikaros Kappler's codebase." />
       <meta property="og:image" content="https://{{ __domain }}/img/preview-image.png" />
@@ -61,7 +67,7 @@
 
       <footer>
         {% block footer %}
-        <a href="https://www.int2byte.de/">int2byte.de</a>
+        <a href="https://www.int2byte.de/">int2byte.de</a> | <a href="https://www.int2byte.de/imprint/">Impressum und Datenschutz</a>
         {% endblock %}
       </footer>
 
