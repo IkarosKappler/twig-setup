@@ -17,6 +17,12 @@ Install the web builder (gulp):
 $ npm install gulp
 $ gulp install
 ```
+
+Then run
+```
+$ gulp
+```
+
 This will write new files:
  * dist/core.min.js
  * dist/girih.min.js

@@ -1,21 +1,45 @@
 <!DOCTYPE html>
 <html>
-    <head>
+  <head>
+      <meta charset="UTF-8" />
       <title>{{ title|default('Contents of /') }}</title>
       {% block head %}
-      <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon.ico" />
-      <link rel="icon" href="/favicon.png" type="image/png" />
-      <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+      <meta name="Content-Type" content="text/html; charset=UTF-8">
+      <meta name="author" content="Ikaros Kappler">
+      <meta name="description" content="{{ description }}">
+      <meta name="keywords" content="{{ keywords }}">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
+      <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+      <link rel="icon" href="/favicon.png" type="image/png">
+      <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">  
+      <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">  
+      <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+      <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">  
+      <link rel="icon" type="image/png" href="/favicon-512x512.png" sizes="512x512">
+
+      <meta name="twitter:card" content="summary">
+      <meta name="twitter:site" content="@humanearthpig">
+      <meta name="twitter:creator" content="@humanearthpig">
+      <meta property="og:url" content="https://{{ __domain }}">
+      <meta property="og:type" content="website">
+      <meta property="og:title" content="Ikaros Kappler's codebase">
+      <meta property="og:description" content="Ikaros Kappler's codebase.">
+      <meta property="og:image" content="https://{{ __domain }}/img/preview-image.png">
+
+      
       {% if env('MODE') == 'DEVELOPMENT' %}
-      <link rel="stylesheet" href="/css/base.css" />
-      <link rel="stylesheet" href="/css/pageheader.css" />
+      <link rel="stylesheet" href="/css/base.css">
+      <link rel="stylesheet" href="/css/pageheader.css">
+      <link rel="stylesheet" href="/css/navigation-underlines.css">
       <script src="/js/pageheader.js"></script>
       <script src="/js/mediaquerydetection.js"></script>
       <script src="/js/canvasResize.js"></script>
       {% else %}
-      <link rel="stylesheet" href="/css/styles.min.css" />
+      <link rel="stylesheet" href="/css/styles.min.css">
       <script src="/js/core.min.js"></script>
       {% endif %}
+      <link rel="manifest" href="/manifest.json">
       {% endblock %}
     </head>
     <body>     
@@ -28,10 +52,10 @@
 	<nav id="nav">
 	  <ul id="nav_ul">
 	    <li><a href="#"><div class="avatar" id="avatar"></div></a></li>
-	    <li><a href="/public"><div class="nav-icon">▷</div><span>public</a></a></li>
+	    <li><a href="/public"><div class="nav-icon">▷</div><span>public</span></a></li>
 	    <li><a href="https://www.github.com/ikaroskappler" target="_blank"><div class="nav-icon">▷</div><span>@github</span></a></li>
 	    <li><a href="/contact"><div class="nav-icon">▷</div><span>contact</span></a></li>
-	  <ul>
+	  </ul>
 	</nav>
       </header>
 
@@ -44,10 +68,10 @@
       <main>
 	{% block content %}{% endblock %}
       </main>
-      
+
       <footer>
         {% block footer %}
-        <a href="https://www.int2byte.de/">int2byte.de</a>
+        <a href="https://www.int2byte.de/">int2byte.de</a> | <a href="https://www.int2byte.de/imprint/">Impressum und Datenschutz</a>
         {% endblock %}
       </footer>
 
@@ -55,7 +79,7 @@
       {% if env('MODE') != 'DEVELOPMENT' %}
       
       <!-- Matomo -->
-      <script type="text/javascript">
+      <script>
 	var _paq = _paq || [];
 	/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
 	_paq.push(['trackPageView']);

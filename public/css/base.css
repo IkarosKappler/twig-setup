@@ -1,5 +1,6 @@
 html {
     min-height : 100%;
+    /* height : 100%; */
 }
 
 body {
@@ -19,9 +20,15 @@ a:visited {
     color          : #0088d8;
 }
 
+#header {
+    margin           : 5% 10%;
+}
+
 
 main {
-    padding-bottom : 6rem;
+    /* padding-bottom : 6rem; */
+    padding-bottom : 150px;
+    margin-bottom : 6rem;
 }
 
 /* Add a pseudo element for breakpoint detection */

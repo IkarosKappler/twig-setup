@@ -11,6 +11,10 @@ $request = parse_request();
 require_once '../vendor/autoload.php';
 
 
+$__domain = $_SERVER['HTTP_HOST'];
+$__protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+
+
 // Set path to templates
 $loader = new Twig_Loader_Filesystem('../templates');
 $twig = new Twig_Environment($loader, array(
@@ -18,16 +22,17 @@ $twig = new Twig_Environment($loader, array(
 ));
 $twig->addFunction(new Twig\TwigFunction('env','_env'));
 
+
 // Route exists?
 if( array_key_exists($request['path'],$routes) ) {
     $route = $routes[$request['path']];
 	echo $twig->render( $route['template'], // 'index.twig',
-                        $route['params']
+                         array_merge( $route, $route['params'], array('__domain' => $__domain, '__protocol' => $__protocol ) )
 	);
-} else if( $request['path'] == '/sitemap.txt' ) {
-    header( 'Content-Type: text/plain' );
+} else if( $request['path'] == '/sitemap.xml' ) {
+    header( 'Content-Type: application/xml; charset=utf-8' );
     echo $twig->render( 'sitemap.twig',
-                        array( 'routes' => $routes )
+                        array_merge( array( 'routes' => $routes ), array('__domain' => $__domain, '__protocol' => $__protocol ) )
 	);
 } else {
 	echo $twig->render( 'error.twig', array( 'code' => 404, 'message' => 'Not found.' ) );

@@ -5,3 +5,4 @@ _htaccess_extended
 public/phpinfo.php
 public/phpinfo-hidden.php
 node_modules/
+package-lock.json

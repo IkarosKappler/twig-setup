@@ -47,8 +47,6 @@
       <img id="icon_blank_final" src="img/icon_blank_cropped.png" alt="Website Icon"  width="136" height="200" style="visibility: hidden; position: absolute;" />
       <div id="i2banim-pixel-container"></div>
    </div>
-
-   <div id="i2ba_pixel_template" width="16" height="16" class="no-display"></div>
 {% endblock header %}
 
 {% block content %}
@@ -75,8 +73,8 @@ Press [e] to save an image file."></canvas>
      <ul>
      <li><a href="/date.php?ts=now">$date</a></li>
      <li><a href="/your_ip_is.php">$your_ip_is</a></li>
-     <li><a href="/randomkey.php?length=32&algorithm=sha1&addDelimiters=1">$randomkey</a></li>
-     <li><a href="/randomstr.php?length=8&count=5">$randomstr</a><li>
+     <li><a href="/randomkey.php?length=32&amp;algorithm=sha1&amp;addDelimiters=1">$randomkey</a></li>
+     <li><a href="/randomstr.php?length=8&amp;count=5">$randomstr</a><li>
      </ul>
 
      <h3>▷ DMO</h3>
@@ -98,15 +96,21 @@ Press [e] to save an image file."></canvas>
      <li><a href="blog/blog.20150422_my_basic_html_template/">blog.20150422_My_Basic_HTML_Template</a></li>
      <!-- <li><a href="public/blog.20150326_Booting_my_PC_remotely_using_a_RaspberryPi/#edit_0">[Edit 2015-04-13] blog.20150326_Booting_my_PC_remotely_using_a_RaspberryPi</a></li> -->
      <li><a href="blog/blog.20150326_Booting_my_PC_remotely_using_a_RaspberryPi/">blog.20150326_Booting_my_PC_remotely_using_a_RaspberryPi</a></li>
-     <li><a href="blog/blog.20141102.gnupg/">blog.20141102_Howto_setup_your_GPG</a></li>
+     <li><a href="blog/blog.20141102_Howto_setup_your_GPG/">blog.20141102_Howto_setup_your_GPG</a></li>
      <li><a href="blog/blog.20140929_Howto_Fix_shellshock_on_debian_squeeze/">blog.20140929_Howto_Fix_shellshock_on_debian_squeeze</a></li>
      <li><a href="blog/blog.20130203_raspi_wlan/">blog.20130203_raspi_wlan</a></li>
      </ul>
+
+     <br><br><br><br>
+
+     <a href="https://www.int2byte.de/imprint/">Impressum und Datenschutz</a>
+     
 
      <div class="spacer"></div>
 </div>
 {% endblock %}
 
 {% block footer %}
-
+   <!-- Hide footer on the index page -->
+   <style> footer { display : none; } </style>
 {% endblock %}

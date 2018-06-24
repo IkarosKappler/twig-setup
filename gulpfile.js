@@ -9,7 +9,6 @@
 
 var copy = require('copy');
 var del = require('del');
-var del = require('del');
 var gulp = require('gulp');
 var cleanCSS = require('gulp-clean-css');
 var filesExist = require('files-exist');
@@ -19,13 +18,12 @@ var uglify = require('gulp-uglify');
 var runSequence = require('run-sequence');
 var sourcemaps = require('gulp-sourcemaps');
 
-//var printError = require('print-error');
 
 //script paths
 var coreFiles = [
-        'src/js/pageheader.js',
-        'src/js/mediaquerydetection.js',
-        'src/js/canvasResize.js'
+        'public/js/pageheader.js',
+        'public/js/mediaquerydetection.js',
+        'public/js/canvasResize.js'
     ],	
     girihFiles = [
 	'src/girih_frontpage/js/ikrs/IKRS.js',
@@ -50,17 +48,20 @@ var coreFiles = [
 	'src/girih_frontpage/js/main.js'
     ],
     cssFiles = [
-	'src/css/base.css',
-	'src/css/pageheader.css',
-	'src/css/index.css',
-	'src/css/blog.css',
-	'src/css/contact.css'
+	'public/css/base.css',
+	'public/css/pageheader.css',
+	'public/css/navigation-underlines.css',
+	'public/css/index.css',
+	'public/css/blog.css',
+	'public/css/contact.css'
     ],
     jsDest = './dist/',
     coreFilename = 'core.js',
     girihFilename = 'girih.js',
     cssFilename = 'styles.css';
 
+
+// Define tasks
 gulp.task('clean', function() {
     return Promise.all([
         del(coreFilename),
@@ -103,7 +104,8 @@ gulp.task('minify-css', function() {
       .pipe(sourcemaps.init())
       .pipe(cleanCSS( { sourceMap: true, compatibility: 'ie8' } ))
       .pipe(rename({suffix: '.min'}))
-      .pipe(sourcemaps.write())
+      // Source Maps just blow up the code size
+      // .pipe(sourcemaps.write())
       .pipe(gulp.dest(jsDest));
 });
 

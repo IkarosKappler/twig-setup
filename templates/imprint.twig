@@ -1,0 +1,89 @@
+{% extends "base.twig" %}
+
+{% block head %}
+      {{ parent() }}
+      {% if env('MODE') == 'DEVELOPMENT' %}
+      <!-- <link rel="stylesheet" href="/css/contact.css" /> -->
+      {% endif %}
+{% endblock %}
+
+{% block header %}
+   <a href="/"><img src="/img/btn-back.svg" alt="... back" width="56" height="48" border="0" /></a>
+   {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+   <article>
+	<!-- BEGIN SITE CONTENT -->
+
+	<h1>Datenschutz</h1>
+
+	<h2>Anbieter</h2>
+	<p>int2byte.de ist eine private, nichtkommerzielle Seite. Sie präsentiert Hobbies von Ika.</p>
+
+	<h2>Keine Speicherung von Daten</h2>
+	<p>
+	  Bei dem Besuch der Webseite <a href="https://www.int2byte.de/">int2byte.de</a>
+	  <ul>
+	    <li>werden keine personenbezogenen Daten gespeichert</li>
+	    <li>werden keine Cookies verwendet</li>
+	    <li>wird kein localStorage und kein sessionStorage verwendet</li>
+	    <li>wird kein Google-Analytics verwendet</li>
+	  </ul>
+	  <br/>
+	  <br/>
+	  
+	  Zur Sicherstellung der Funktionsweise werden Serverlogs gespeichert, welche nach sieben Tagen wieder gelöscht werden;<br/>
+	  außerdem wird ihr Besuch nur dann von einer Matomo-Instanz getrackt, wenn Ihr Browser keinen Do-not-Track-Header (DNT) sendet:<br/>
+	  <ul>
+	    <li>Zeitpunkt</li>
+	    <li>IP-Adresse ohne den letzten Block (letztes Byte)</li>
+	    <li>Angefragte Datei (Request-URI)</li>
+	    <li>verwendeter Browser (User-Agent)</li>
+	  </ul>
+	</p>
+	
+
+	<h2>Datenschutzerkl&auml;rung</h2>
+	<p>Verantwortliche Stelle im Sinne der Datenschutzgesetze, insbesondere der EU-Datenschutzgrundverordnung (DSGVO), ist hier erreichbar:</p>
+	<p>info[at]int2byte[dot]de</script>
+
+	</p>
+<p><strong>Ihre Betroffenenrechte</strong></p>
+<p>Unter den angegebenen Kontaktdaten unseres Datenschutzbeauftragten können Sie jederzeit folgende Rechte ausüben:</p>
+<ul>
+<li>Auskunft über Ihre bei uns gespeicherten Daten und deren Verarbeitung,</li>
+<li>Berichtigung unrichtiger personenbezogener Daten,</li>
+<li>Löschung Ihrer bei uns gespeicherten Daten,</li>
+<li>Einschränkung der Datenverarbeitung, sofern wir Ihre Daten aufgrund gesetzlicher Pflichten noch nicht löschen dürfen,</li>
+<li>Widerspruch gegen die Verarbeitung Ihrer Daten bei uns und</li>
+<li>Datenübertragbarkeit, sofern Sie in die Datenverarbeitung eingewilligt haben oder einen Vertrag mit uns abgeschlossen haben.</li>
+</ul>
+<p>Sofern Sie uns eine Einwilligung erteilt haben, können Sie diese jederzeit mit Wirkung für die Zukunft widerrufen.</p>
+<p>Sie können sich jederzeit mit einer Beschwerde an die für Sie zuständige Aufsichtsbehörde wenden. Ihre zuständige Aufsichtsbehörde richtet sich nach dem Bundesland Ihres Wohnsitzes, Ihrer Arbeit oder der mutmaßlichen Verletzung. Eine Liste der Aufsichtsbehörden (für den nichtöffentlichen Bereich) mit Anschrift finden Sie unter: <a href="https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html" rel="noopener" target="_blank">https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html</a>.</p>
+<p><strong>Zwecke der Datenverarbeitung durch die verantwortliche Stelle und Dritte</strong></p>
+<p>Wir verarbeiten Ihre personenbezogenen Daten nur zu den in dieser Datenschutzerklärung genannten Zwecken. Eine Übermittlung Ihrer persönlichen Daten an Dritte zu anderen als den genannten Zwecken findet nicht statt.
+<p><strong>Löschung bzw. Sperrung der Daten</strong></p>
+<p>Wir halten uns an die Grundsätze der Datenvermeidung und Datensparsamkeit.</p>
+<p><strong>Änderung unserer Datenschutzbestimmungen</strong></p>
+<p>Wir behalten uns vor, diese Datenschutzerklärung anzupassen, damit sie stets den aktuellen rechtlichen Anforderungen entspricht oder um Änderungen unserer Leistungen in der Datenschutzerklärung umzusetzen, z.B. bei der Einführung neuer Services. Für Ihren erneuten Besuch gilt dann die neue Datenschutzerklärung.</p>
+<p><strong>Fragen an die Datenschutzbeauftragten</strong></p>
+<p>Wenn Sie Fragen zum Datenschutz haben, schreiben Sie uns bitte eine E-Mail oder wenden Sie sich direkt an die für den Datenschutz verantwortliche Person:</p>
+<p>E-Mail: info[at]int2byte[dot]de</p>
+<p><em>Die Datenschutzerklärung wurde mit dem </em><a href="https://www.activemind.de/datenschutz/datenschutzhinweis-generator/" rel="noopener" target="_blank"><em>Datenschutzerklärungs-Generator der activeMind AG erstellt</em></a>.</p>
+	
+
+	<p><b>Webmaster:</b> info[at]int2byte[dot]de
+	 </p>
+
+	 <br/>
+	 <br/>
+	 <br/>
+	 <br/>
+	 <br/>
+
+	<!-- END CONTENT -->
+      </article>
+   
+{% endblock %}
