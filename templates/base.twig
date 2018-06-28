@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
       <meta charset="UTF-8" />
-      <title>{{ title|default('Contents of /') }}</title>
+      <title>Ika's Codebase | {{ title|default('Contents of /') }}</title>
       {% block head %}
       <meta name="Content-Type" content="text/html; charset=UTF-8">
       <meta name="author" content="Ikaros Kappler">
@@ -18,9 +18,15 @@
       <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">  
       <link rel="icon" type="image/png" href="/favicon-512x512.png" sizes="512x512">
 
+      {% include 'structured-data.twig' with { 'type' : type, 'name' : title, 'image' : image, 'description' : description } %}
+
+      {# Place the twitter card before the open graph tags #}
+      
       <meta name="twitter:card" content="summary">
       <meta name="twitter:site" content="@humanearthpig">
       <meta name="twitter:creator" content="@humanearthpig">
+      {# Place the open graph tags after the twitter cards #}
+      
       <meta property="og:url" content="https://{{ __domain }}">
       <meta property="og:type" content="website">
       <meta property="og:title" content="Ikaros Kappler's codebase">

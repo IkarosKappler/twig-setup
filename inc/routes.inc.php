@@ -1,33 +1,40 @@
 <?php
 
 // Define the routes.
-$routes  = array(
-    //'/sitemap.txt' => array( 'template' => 'sitemap.twig',
-    //                  'params' => array()
-    //), 
+$routes  = array( 
     '/'     => array( 'template' => 'index.twig',
                       'params' => array(),
 		      'date' => '2018-06-11',
                       'priority' => 1.0,
-		      'description' => "Ikaros Kappler's codebase",
-		      'keywords' => 'ikaros kappler, coding, queer, drone, cyborg, coding, programming, rainbow, patterns, all colors are beautiful, girih, javascript, webgl, linux, debian, UNIX, Berlin, punk'
+		      'description' => "Ika's codebase",
+		      'keywords' => 'ikaros kappler, coding, queer, drone, cyborg, coding, programming, rainbow, patterns, all colors are beautiful, girih, javascript, webgl, linux, debian, UNIX, Berlin, punk',
+		      'type' => 'TechArticle',
+		      'title' => 'I host my software, code, tinkered stuff and program snippets here.',
+		      'image' => 'https://www.int2byte.de/img/preview-image.png',
+		      'proficiencyLevel' => 'Beginner'
+		      
     ), 
-    /* '/blog' => array( 'template' => 'blog.twig',
-                      'params' => array()
-    ), */
     '/contact' => array( 'template' => 'contact.twig',
                          'params' => array( ),
 			 'date' => '2018-06-11',
                       	 'priority' => 0.1,
 			 'description' => "Ikaros Kappler's codebase, contact page.",
-			 'keywords' => 'ikaros kappler, contact, kontakt, email'
+			 'keywords' => 'ikaros kappler, contact, kontakt, email',
+			 'type' => 'TechArticle',
+			 'title' => 'I host some software, codes, tinker stuff and snippets here.',
+			 'image' => 'https://www.int2byte.de/img/avatar-old.jpg',
+			 'proficiencyLevel' => 'Beginner'
     ),
     '/imprint' => array( 'template' => 'imprint.twig',
                          'params' => array(),
 			 'date' => '2018-06-15',
                       	 'priority' => 0.0,
 			 'description' => "Imprint of int2byte.de.",
-			 'keywords' => 'imprint'
+			 'keywords' => 'imprint',
+			 'type' => 'TechArticle',
+			 'title' => 'The imprint of this site.',
+			 'image' => 'https://www.int2byte.de/img/preview-image.png',
+			 'proficiencyLevel' => 'Beginner'
     ),
     '/blog/blog.20161028_Create_Zip_files_omitting_DS_Store_files' => array( 'template' => 'blog.20161028_Create_Zip_files_omitting_DS_Store_files.twig',
                                                              'params' => array( 'bannertext' => 'Good news, everyone!',
@@ -35,7 +42,11 @@ $routes  = array(
                                                                              'date' => '2016-10-28',
                                                                              'priority' => 0.5,
 									     'description' => 'A shell script demonstrating how to create Zip files with sub directories but without any hidden or temp files inside.',
-									     'keywords' => 'create, clean zip file, zip files, ommit .DS_Store, no hidden files, script, basg, shell'
+									     'keywords' => 'create, clean zip file, zip files, ommit .DS_Store, no hidden files, script, basg, shell',
+									     'type' => 'TechArticle',
+									     'title' => 'Create ZIP files omitting DS_Store files.',
+									     'image' => 'https://www.int2byte.de/img/preview-image.png', // ! Find a better one !
+									     'proficiencyLevel' => 'Beginner'
     ),
     '/blog/blog.20161028_Setup_Vagrant_Homestead' => array( 'template' => 'blog.20161028_Setup_Vagrant_Homestead.twig',
                                                              'params' => array( 'bannertext' => 'Good news, everyone!',
@@ -43,7 +54,11 @@ $routes  = array(
                                                             'date' => '2016-10-28',
                                                             'priority' => 0.75,
 							    'description' => "How to setup a virtual linux machine using Vagrant Up and Virtual Box.",
-							    'keywords' => 'vagrant, vagrant up, virtual box, setup, install, tutorial, howto, getting started'
+							    'keywords' => 'vagrant, vagrant up, virtual box, setup, install, tutorial, howto, getting started',
+							    'type' => 'TechArticle',
+							    'title' => 'How to setup a virtual linux machine using Vagrant Up and Virtual Box.',
+							    'image' => 'https://www.int2byte.de/img/preview-image.png', // ! Find a better one !
+							    'proficiencyLevel' => 'Expert'
     ),
     '/blog/blog.20161025_Vegane_Sucuk' => array( 'template' => 'blog.20161025_Vegane_Sucuk.twig',
                                                              'params' => array( 'bannertext' => 'Good news, everyone!',
@@ -51,15 +66,23 @@ $routes  = array(
                                                  'date' => '2016-10-25',
                                                  'priority' => 0.8,
 						 'description' => "How to make vegan turkish garlic sausage with saitan.",
-						 'keywords' => 'vegan, sucuk, garlic, sausage, vegetatian, red beets, sour, tasty, spicy, cumin, kreuzkümmel, knoblauch, knoblauchwurst, knoblauchswurst, wurst, fleischlos, animal rights, genuss, seitan, saitan, rezept, tarif, tarifi, tarıfı, yemek, recipe'
+						 'keywords' => 'vegan, sucuk, garlic, sausage, vegetatian, red beets, sour, tasty, spicy, cumin, kreuzkümmel, knoblauch, knoblauchwurst, knoblauchswurst, wurst, fleischlos, animal rights, genuss, seitan, saitan, rezept, tarif, tarifi, tarıfı, yemek, recipe',
+						 'type' => 'TechArticle',
+						 'title' => 'How to make vegan turkish garlic sausage with saitan.',
+						 'image' => 'https://www.int2byte.de/public/blog.20161025_Vegane_Sucuk/20161023_050551_600x800.jpg', 
+						 'proficiencyLevel' => 'Beginner'
     ),
     '/blog/blog.20160412_Remove_checkout_title_from_woocommerce' => array( 'template' => 'blog.20160412_Remove_checkout_title_from_woocommerce.twig',
                                                              'params' => array( 'bannertext' => 'Good news, everyone!',
                                                                                 'headline' => 'Remove checkout title from woocommerce' ),
                                                                            'date' => '2016-04-12',
                                                                            'priority' => 0.5,
-									   'description' => "How to remove the title field from woo-commerce's checkout form.",
-									   'keywords' => 'wordpress, woocommerce, remove title, remove title field, modify, checkout, checkout form, gender neutral, gender'
+									   'description' => "How to remove the title field from the wordpress plugin woocommerce.",
+									   'keywords' => 'wordpress, woocommerce, remove title, remove title field, modify, checkout, checkout form, gender neutral, gender',
+									   'type' => 'TechArticle',
+									   'title' => "How to remove the title field from woo-commerce's checkout form.",
+									   'image' => 'https://www.int2byte.de/img/preview-image.png', // ! Find a better one !
+									   'proficiencyLevel' => 'Beginner'
     ),
     
     '/blog/blog.20160129_Three.js_Basic_Scene_Setup' => array( 'template' => 'blog.20160129_Three.js_Basic_Scene_Setup.twig',
@@ -68,7 +91,11 @@ $routes  = array(
                                                                'date' => '2016-01-29',
                                                                'priority' => 0.75,
 							       'description' => "Setup a basic HTML5 3D scene using WebGL and the javascript library Three.js.",
-							       'keywords' => 'webgl, html5, threejs, three, three.js, three js, javascript, 3d, scene, program, programming, browser, light, lighting, cube, mesh, model, texture'
+							       'keywords' => 'webgl, html5, threejs, three, three.js, three js, javascript, 3d, scene, program, programming, browser, light, lighting, cube, mesh, model, texture',
+							       'type' => 'TechArticle',
+							       'title' => "Setup a basic HTML5 3D scene using WebGL and the javascript library Three.js.",
+							       'image' => 'https://www.int2byte.de/public/blog.20160129_Three.js_Basic_Scene_Setup/Screenshot%20from%202016-01-29%20172314.png', 
+							       'proficiencyLevel' => 'Expert'
     ),
     '/blog/blog.20160129_Gender_Select_Options' => array( 'template' => 'blog.20160129_Gender_Select_Options.twig',
                                                              'params' => array( 'bannertext' => 'Good news, everyone!',
@@ -76,15 +103,23 @@ $routes  = array(
                                                           'date' => '2016-01-29',
                                                           'priority' => 0.5,
 							  'description' => 'A friendly approach to build a gender select field that recognizes as many options as possible.',
-							  'keywords' => 'gender friendy, gender, select, menu, dropdown, facebook, gender neutral, pan, pansexual, bi, bisexual, trans, cis, queer, genderqueer, html, nonbinary, poly, two-spirit, two spirit, website, webseite, web page, form, agender, androgyne, bigender, ftm, mtf, fluid, gender fluid, inter, intersex, pangender, trans*, person, transsexual, transmasculine, transfeminine'
+							  'keywords' => 'gender friendy, gender, select, menu, dropdown, facebook, gender neutral, pan, pansexual, bi, bisexual, trans, cis, queer, genderqueer, html, nonbinary, poly, two-spirit, two spirit, website, webseite, web page, form, agender, androgyne, bigender, ftm, mtf, fluid, gender fluid, inter, intersex, pangender, trans*, person, transsexual, transmasculine, transfeminine',
+							  'type' => 'TechArticle',
+							  'title' => 'How to setup a virtual linux machine using Vagrant Up and Virtual Box.',
+							  'image' => 'https://www.int2byte.de/img/preview-image.png', // ! Find a better one !
+							  'proficiencyLevel' => 'Expert'
     ),
     '/blog/blog.20160129_Custom_styling_for_ordered_lists_with_CSS3' => array( 'template' => 'blog.20160129_Custom_styling_for_ordered_lists_with_CSS3.twig',
-                                                             'params' => array( 'bannertext' => 'Good news, everyone!',
-                                                                                'headline' => 'Custom styling for ordered lists with CSS3' ),
+                                                                               'params' => array( 'bannertext' => 'Good news, everyone!',
+                                                                                                  'headline' => 'Custom styling for ordered lists with CSS3' ),
                                                                                'date' => '2016-01-29',
                                                                                'priority' => 0.5,
 									       'description' => 'Custom list bullet point styling with CSS3.',
-									       'keywords' => 'css, list, bullet, style, type, custom, numbers, bullets, roman'
+									       'keywords' => 'css, list, bullet, style, type, custom, numbers, bullets, roman',
+									       'type' => 'TechArticle',
+							    		       'title' => 'Custom styling for ordered lists with CSS3.',
+							    		       'image' => 'https://www.int2byte.de/img/preview-image.png', // ! Find a better one !
+							    		       'proficiencyLevel' => 'Beginner'
     ),
     '/blog/blog.20151117_Javascript_Minimizer_Bash_Script' => array( 'template' => 'blog.20151117_Javascript_Minimizer_Bash_Script.twig',
                                                              'params' => array( 'bannertext' => 'Good news, everyone!',
@@ -92,7 +127,11 @@ $routes  = array(
                                                                      'date' => '2015-11-17',
                                                                      'priority' => 0.5,
 								     'description' => 'A minimizer script for Javascript files written in bash (using yui-compressor).',
-								     'keywords' => 'javascript, minimizer, bash, script, yui-compressor, minifyer, minifier, shell'
+								     'keywords' => 'javascript, minimizer, bash, script, yui-compressor, minifyer, minifier, shell',
+								     'type' => 'TechArticle',
+							    	     'title' => 'Javascript Minimizer Bash Script',
+							    	     'image' => 'https://www.int2byte.de/img/preview-image.png', // ! Find a better one !
+							    	     'proficiencyLevel' => 'Beginner'
     ),
     '/blog/blog.20151026_Setting_up_GPG' => array( 'template' => 'blog.20151026_Setting_up_GPG.twig',
                                                    'params' => array( 'bannertext' => 'Good news, everyone!',
@@ -100,23 +139,35 @@ $routes  = array(
                                                    'date' => '2015-10-26',
                                                    'priority' => 0.5,
 						   'description' => 'Beginners instructions for setting up GNU Pretty Good Privacy (GPG).',
-						   'keywords' => 'gpg, gnu privacy guard, pretty good privacy, setup, beginners, tutorial, howto, linux, crypt, encryption, email, secure, security'
+						   'keywords' => 'gpg, gnu privacy guard, pretty good privacy, setup, beginners, tutorial, howto, linux, crypt, encryption, email, secure, security',
+						   'type' => 'TechArticle',
+						   'title' => 'Setting up GPG',
+						   'image' => 'https://www.int2byte.de/img/preview-image.png', // ! Find a better one !
+						   'proficiencyLevel' => 'Beginner'
     ),
     '/blog/blog.20150422_my_basic_html_template' => array( 'template' => 'blog.20150422_my_basic_html_template.twig',
-                                                   'params' => array( 'bannertext' => 'Good news, everyone!',
-                                                                      'headline' => 'My Basic HTML Template' ),
+                                                            'params' => array( 'bannertext' => 'Good news, everyone!',
+                                                                      	       'headline' => 'My Basic HTML Template' ),
                                                            'date' => '2015-04-22',
                                                            'priority' => 0.95,
 							   'description' => 'My basic HTML5 template I always start with.',
-							   'keywords' => 'basic, html, template, html5, favicon, meta, tags'
+							   'keywords' => 'basic, html, template, html5, favicon, meta, tags',
+							   'type' => 'TechArticle',
+						   	   'title' => 'My Basic HTML Template',
+						   	   'image' => 'https://www.int2byte.de/img/preview-image.png', // ! Find a better one !
+						   	   'proficiencyLevel' => 'Beginner'
     ),
     '/blog/blog.20150326_Booting_my_PC_remotely_using_a_RaspberryPi' => array( 'template' => 'blog.20150326_Booting_my_PC_remotely_using_a_RaspberryPI.twig',
-                                                             'params' => array( 'bannertext' => 'Good news, everyone!',
-                                                                                'headline' => 'Booting my PC remotely using a Raspberry PI' ),
+                                                             	     	       'params' => array( 'bannertext' => 'Good news, everyone!',
+                                                                                	   	  'headline' => 'Booting my PC remotely using a Raspberry PI' ),
                                                                                'date' => '2015-03-26',
                                                                                'priority' => 0.5,
 									       'description' => 'Building a device for remotely booting your home PC using a RaspberryPI, some wires and two transistors.',
-									       'keywords' => 'remote boot, pc, computer, raspberry, pi, raspberrypi, wires, soldering, transistor, wol, wake on lan'
+									       'keywords' => 'remote boot, pc, computer, raspberry, pi, raspberrypi, wires, soldering, transistor, wol, wake on lan',
+									       'type' => 'TechArticle',
+						   	   		       'title' => 'Booting my PC remotely using a Raspberry PI',
+						   	   		       'image' => 'https://www.int2byte.de/img/preview-image.png', // ! Find a better one !
+						   	   		       'proficiencyLevel' => 'Beginner'
     ),
     '/blog/blog.20141102_Howto_setup_your_GPG' => array( 'template' => 'blog.20141102.Howto_setup_your_GPG.twig',
                                                              'params' => array( 'bannertext' => 'Good news, everyone!',
@@ -124,15 +175,23 @@ $routes  = array(
                                                          'date' => '2014-11-02',
                                                          'priority' => 0.5,
 							 'description' => 'How to setup and manage your GnuPG (GPG) keys.',
-							 'keywords' => 'gpg, setup, key, management, gnupg'
+							 'keywords' => 'gpg, setup, key, management, gnupg',
+							 'type' => 'TechArticle',
+						   	 'title' => 'How to setup your GnuPG (GPG) keys',
+						   	 'image' => 'https://www.int2byte.de/img/preview-image.png', // ! Find a better one !
+						   	 'proficiencyLevel' => 'Beginner'
     ),
     '/blog/blog.20140929_Howto_Fix_shellshock_on_debian_squeeze' => array( 'template' => 'blog.20140929_Howto_Fix_shellshock_on_debian_squeeze.twig',
-                                                             'params' => array( 'bannertext' => 'Good news, everyone!',
+                                                             	    	   'params' => array( 'bannertext' => 'Good news, everyone!',
                                                                                 'headline' => 'How to fix shellshock on Debian Squeeze' ),
                                                                            'date' => '2014-09-29',
                                                                            'priority' => 0.5,
 									   'description' => 'How to fix the shellshock vulnerability on Debian Squeeze.',
-									   'keywords' => 'fix, shellshock, debian, squeeze, howto, instructions'
+									   'keywords' => 'fix, shellshock, debian, squeeze, howto, instructions',
+									   'type' => 'TechArticle',
+						   	 		   'title' => 'How to fix shellshock on Debian Squeeze',
+						   	 		   'image' => 'https://www.int2byte.de/img/preview-image.png', // ! Find a better one !
+						   	 		   'proficiencyLevel' => 'Beginner'
     ),
     '/blog/blog.20130203_raspi_wlan' => array( 'template' => 'blog.20130203_raspi_wlan.twig',
                                                              'params' => array( 'bannertext' => 'Good news, everyone!',
@@ -140,6 +199,10 @@ $routes  = array(
                                                'date' => '2013-02-03',
                                                'priority' => 0.5,
 					       'description' => 'Setting up your RaspberryPI for wifi.',
-					       'keywords' => 'raspberry, pi, raspberrypi, wifi, configure, configuration, dhcp, howto, tutorial, linux, raspbian'
+					       'keywords' => 'raspberry, pi, raspberrypi, wifi, configure, configuration, dhcp, howto, tutorial, linux, raspbian',
+					       'type' => 'TechArticle',
+					       'title' => 'Setting up wireless networking on my Raspberry Pi',
+					       'image' => 'https://www.int2byte.de/img/preview-image.png', // ! Find a better one !
+					       'proficiencyLevel' => 'Beginner'
     )
 );	
