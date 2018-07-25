@@ -3,10 +3,14 @@
       {
         "@context": "http://schema.org/",
         "@type": "{{ type|default('TechArticle') }}",
-        "name" : "{{ name|default('no name') }}",
-        "author": "Ikaros Kappler",
+        "name" : "{{ name|default('No name') }}",
+        "author": {
+		  "@type" : "Person",
+		  "name" : "Ikaros Kappler"
+		  },
         "image": "{{ image|default('https://www.int2byte.de/img/preview-image.png') }}",
-        "description": "{{ description|default('No description') }}",
-        "proficiencyLevel" : "{{ proficiencyLevel|default('Begnner') }}"
+        "description": "{{ description|default('') }}",
+        "proficiencyLevel" : "{{ proficiencyLevel|default('Begnner') }}",
+	"headline" : "{{ headline|default('') }}"
       }
       </script>
