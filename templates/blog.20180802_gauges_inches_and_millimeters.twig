@@ -1,0 +1,526 @@
+{% extends "blog.twig" %}
+
+{% block head %}
+{{ parent() }}
+<style>
+/* Global definitions */
+.author {
+	display: block;
+	width : 100%;
+	text-align:
+	right;
+	background-color: #ffffff;
+}
+
+.w-100 {
+       width : 100%;
+}
+
+
+/* Local definitions */
+#gauge-table {
+    border-spacing: 1px;
+    border-collapse: separate;
+    /* background : black; */
+}
+#gauge-table thead tr th {
+       color : black;
+       background : white;
+}
+#gauge-table tbody tr td {
+       /* border-top : 1px solid rgba(0,136,120,0.5); */
+       border-bottom : 1px solid rgba(67,160,71,0.5);
+       color : rgb(1,77,65);
+}
+#gauge-table tbody tr td, #gauge-table thead tr th {
+       text-align : right;
+       padding : 6px;
+       font-weight : 900;
+}
+#gauge-table tbody tr:nth-child(even) {
+	     /* Green */
+       /* background : linear-gradient(to top, rgba(0,136,120,0.05), rgba(0,151,136,0.05) ); */
+}
+#gauge-table tbody tr:nth-child(odd) {
+	     /* Teal */
+        background : linear-gradient(to bottom, rgba(67,160,71,0.05), rgba(20,200,37,0.05) ); 
+}
+</style>
+{% endblock %}
+
+
+{% block content %}
+<a name="_top"></a>
+
+
+  <div class="author">
+                                                                            Author......Ikaros Kappler<br>
+                                                                            Date............2018-08-02<br>
+                                                                            Version................1.0<br>
+  </div>
+
+<h2>Gauges, Inches and Millimeters</h2>
+<br/>
+
+Piercing affectionados probably found
+themselves this situation once: you talk with people from a different continent and suddenly fifty
+percent of your audience does not understand the size of your jewelry.<br>
+<br>
+How large are 00ga? Is a quarter of an imperial inch too small for your nipples? <br>
+<br>
+<br>
+<img src="/img/dehnstab.jpg" alt="Dehnstab, 6mm" class="w-100">
+A stretching taper of 6mm, which is 1ga or 0.289 inch.
+
+
+<h3>Here is the answer</h3>
+
+<!-- BEGIN paragraph -->
+<div class="tech_paragraph">
+Actually most gauge/inch tables in the world wide web differ in some sizes here and there and
+do not give a clear image of the <i>real</i> gauge sizes. I found
+<a href="https://www.rapidtables.com/calc/wire/wire-gauge-chart.html" target="_blank">this website</a>
+that uses these two diameter calculations:<br>
+<br>
+<b>d<sub>n</sub></em><sub> (in)</sub> = 0.005 in &times; 92<sup>(36-<em>n</em>)/39</sup></b><br>
+<br>
+and<br>
+<br>
+<b>d<sub>n</sub></em><sub> (mm)</sub> = 0.127 mm &times; 92<sup>(36-<em>n</em>)/39</sup></b><br>
+<br>
+Most results come very close to those in other tables.<br>
+<br>
+
+<button id="convert" style="display: none;">Convert</button>
+
+
+<table id="gauge-table" class="w-100">
+	<thead>
+		<tr>
+			<th>Gauge</th>
+			<th>Millimeters</th>
+			<th>Imperial/US Inch</th>
+			<th>Inch in fractions</th>
+		</tr>
+	</thead>
+	<tbody>
+	        <tr>
+			<td>38ga</td>
+			<td>0.15875mm</td>
+			<td>0.00626in</td>
+			<td>1/160"</td>
+		</tr><tr>
+			<td>37ga</td>
+			<td>0.168671875mm</td>
+			<td>0.0045in</td>
+			<td></td>
+		</tr><tr>
+			<td>36ga</td>
+			<td>0.13mm</td>
+			<td>0.005in</td>
+			<td></td>
+		</tr><tr>
+			<td>35ga</td>
+			<td>0.142mm</td>
+			<td>0.0056in</td>
+			<td></td>
+		</tr><tr>
+			<td>34ga</td>
+			<td>0.16mm</td>
+			<td>0.0063in</td>
+			<td></td>
+		</tr><tr>
+			<td>33ga</td>
+			<td>0.18mm</td>
+			<td>0.0071in</td>
+			<td></td>
+		</tr><tr>
+			<td>32ga</td>
+			<td>0.2mm</td>
+			<td>0.008in</td>
+			<td></td>
+		</tr><tr>
+			<td>31ga</td>
+			<td>0.226mm</td>
+			<td>0.0089in</td>
+			<td></td>
+		</tr><tr>
+			<td>30ga</td>
+			<td>0.25mm</td>
+			<td>0.01in</td>
+			<td></td>
+		</tr><tr>
+			<td>29ga</td>
+			<td>0.287mm</td>
+			<td>0.0113in</td>
+			<td></td>
+		</tr><tr>
+			<td>28ga</td>
+			<td>0.32mm</td>
+			<td>0.0162in</td>
+			<td></td>
+		</tr><tr>
+			<td>27ga</td>
+			<td>0.361mm</td>
+			<td>0.0142in</td>
+			<td></td>
+		</tr><tr>
+			<td>26ga</td>
+			<td>0.404mm</td>
+			<td>0.0159in</td>
+			<td></td>
+		</tr><tr>
+			<td>25ga</td>
+			<td>0.455mm</td>
+			<td>0.0179in</td>
+			<td></td>
+		</tr><tr>
+			<td>24ga</td>
+			<td>0.51mm</td>
+			<td>0.02in</td>
+			<td></td>
+		</tr><tr>
+			<td>23ga</td>
+			<td>0.58mm</td>
+			<td>0.023in</td>
+			<td></td>
+		</tr><tr>
+			<td>22ga</td>
+			<td>0.64mm</td>
+			<td>0.025in</td>
+			<td></td>
+		</tr><tr>
+			<td>21ga</td>
+			<td>0.71mm</td>
+			<td>0.028in</td>
+			<td></td>
+		</tr><tr>
+			<td>20ga</td>
+			<td>0.81mm</td>
+			<td>0.032in</td>
+			<td></td>
+		</tr><tr>
+			<td>19ga</td>
+			<td>0.91mm</td>
+			<td>0.036in</td>
+			<td></td>
+		</tr><tr>
+			<td>18ga</td>
+			<td>1.02mm</td>
+			<td>0.04in</td>
+			<td></td>
+		</tr><tr>
+			<td>17ga</td>
+			<td>1.14mm</td>
+			<td>0.045</td>
+			<td></td>
+		</tr><tr>
+			<td>16ga</td>
+			<td>1.291mm</td>
+			<td>0.051in</td>
+			<td></td>
+		</tr><tr>
+			<td>15ga</td>
+			<td>1.45mm</td>
+			<td>0.057in</td>
+			<td></td>
+		</tr><tr>
+			<td>14ga</td>
+			<td>1.63mm</td>
+			<td>0.064in</td>
+			<td></td>
+		</tr><tr>
+			<td>13ga</td>
+			<td>1.83mm</td>
+			<td>0.072in</td>
+			<td></td>
+		</tr><tr>
+			<td>12ga</td>
+			<td>2.06mm</td>
+			<td>0.081in</td>
+			<td></td>
+		</tr><tr>
+			<td>11ga</td>
+			<td>2.31mm</td>
+			<td>0.091in</td>
+			<td></td>
+		</tr><tr>
+			<td>10ga</td>
+			<td>2.59mm</td>
+			<td>0.102in</td>
+			<td></td>
+		</tr><tr>
+			<td>9ga</td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr><tr>
+			<td>8ga</td>
+			<td>3.264mm</td>
+			<td>0.128in</td>
+			<td>1/8"</td>
+		</tr><tr>
+			<td>7ga</td>
+			<td>3.969mm</td>
+			<td>0.156in</td>
+			<td>5/32"</td>
+		</tr><tr>
+			<td>6ga</td>
+			<td>4.115mm</td>
+			<td>0.162in</td>
+			<td>13/64"</td>
+		</tr><tr>
+			<td>5ga</td>
+			<td>4.763mm</td>
+			<td>0.178in</td>
+			<td>3/16"</td>
+		</tr><tr>
+			<td>4ga</td>
+			<td>5.189mm</td>
+			<td>0.204in</td>
+			<td>13/64"</td>
+		</tr><tr>
+			<td>3ga</td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr><tr>
+			<td>2ga</td>
+			<td>6.544mm</td>
+			<td>0.258in</td>
+			<td>1/4"</td>
+		</tr><tr>
+			<td>1ga</td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr><tr>
+			<td>0ga</td>
+			<td>8.251mm</td>
+			<td>0.325in</td>
+			<td>5/16in</td>
+		</tr><tr>
+			<td>00ga</td>
+			<td>9.266mm</td>
+			<td>0.365in</td>
+			<td></td>
+		</tr><tr>
+			<td>-</td>
+			<td>9.525mm</td>
+			<td>0.375in</td>
+			<td>3/8"</td>	
+		</tr><tr>
+			<td>000ga</td>
+			<td>10.41mm</td>
+			<td>0.410in</td>
+			<td></td>
+		</tr><tr>
+			<td>-</td>
+			<td>11.11mm</td>
+			<td>0.428in</td>
+			<td>7/16"</td>
+		</tr><tr>
+			<td>0000ga</td>
+			<td>11.684mm</td>
+			<td>0.460in</td>
+			<td>13/32"</td>
+		</tr><tr>
+			<td>00000ga</td>
+			<td>31.1mm</td>
+			<td>0.517in</td>
+			<td>7/16"</td>
+		</tr><tr>
+			<td>000000ga</td>
+			<td></td>
+			<td></td>
+			<td>15/32"</td>
+		</tr><tr>
+			<td>000000ga</td>
+			<td></td>
+			<td></td>
+			<td>1/2"</td>
+		</tr><tr>	
+			<td>-</td>
+			<td>14.3mm</td>
+			<td>0.563in</td>
+			<td>9/16"</td>
+		</tr><tr>
+			<td>-</td>
+			<td>14.3mm</td>
+			<td>0.563in</td>
+			<td>9/16"</td>
+		</tr><tr>
+			<td>-</td>
+			<td>15.9mm</td>
+			<td>0.625in</td>
+			<td>5/8"</td>
+		</tr><tr>
+			<td>-</td>
+			<td>17.5mm</td>
+			<td>0.688in</td>
+			<td>11/16"</td>
+		</tr><tr>
+			<td>-</td>
+			<td>19.1mm</td>
+			<td>0.75in</td>
+			<td>3/4"</td>
+		</tr><tr>
+			<td>-</td>
+			<td>20.6mm</td>
+			<td>0.813in</td>
+			<td>13/16"</td>
+		</tr><tr>
+			<td>-</td>
+			<td>22.2mm</td>
+			<td>0.875in</td>
+			<td>7/8"</td>
+		</tr><tr>
+			<td>-</td>
+			<td>23.8mm</td>
+			<td>0.9375in</td>
+			<td>15/16"</td>
+		</tr><tr>
+			<td>-</td>
+			<td>25.4mm</td>
+			<td>1.0in</td>
+			<td>1"</td>
+		</tr><tr>
+			<td>-</td>
+			<td>26.9875mm</td>
+			<td>1.0625in</td>
+			<td>1 1/16"</td>
+	  	</tr><tr>
+			<td>-</td>
+			<td>28.575mm</td>
+			<td>1.125in</td>
+			<td>1 1/8"</td>
+	  	</tr><tr>
+			<td>-</td>
+			<td>30.1625mm</td>
+			<td>1.1875in</td>
+			<td>1 3/16"</td>
+	  	</tr><tr>
+			<td>-</td>
+			<td>31.75mm</td>
+			<td>1.25in</td>
+			<td>1 1/4"</td>
+	  	</tr><tr>
+			<td>-</td>
+			<td>33.3375mm</td>
+			<td>1.3125in</td>
+			<td>1 5/16"</td>
+	  	</tr><tr>
+			<td>-</td>
+			<td>34.925mm</td>
+			<td>1.375in</td>
+			<td>1 3/8"</td>
+	  	</tr><tr>
+			<td>-</td>
+			<td>36.5125mm</td>
+			<td>1.4375in</td>
+			<td>1 7/16"</td>
+	  	</tr><tr>
+			<td>-</td>
+			<td>38.1mm</td>
+			<td>1.5in</td>
+			<td>1 1/2"</td>
+	  	</tr><tr>
+			<td>-</td>
+			<td>39.6875mm</td>
+			<td>1.5625in</td>
+			<td>1 9/16"</td>
+	  	</tr><tr>
+			<td>-</td>
+			<td>41.275mm</td>
+			<td>1.625in</td>
+			<td>1 5/8"</td>
+	  	</tr><tr>
+			<td>-</td>
+			<td>44.45mm</td>
+			<td>1.75in</td>
+			<td>1 3/4"</td>
+	  	</tr><tr>
+			<td>-</td>
+			<td>47.625mm</td>
+			<td>1.875in</td>
+			<td>1 7/8"</td>
+	  	</tr><tr>
+			<td>-</td>
+			<td>50.8mm</td>
+			<td>2in</td>
+			<td>2"</td>
+		</tr>
+	</tbody>
+</table>
+<br>
+
+<div>
+     Sources (warning: with different gauge sizes at some points):
+     <ul>
+	<li><a href="https://www.firemountaingems.com/resources/encyclobeadia/charts/6404" target="_blank">https://www.firemountaingems.com/resources/encyclobeadia/charts/6404</a></li>
+	<li><a href="http://www.adamperlen.de/masze.html" target="_blank">http://www.adamperlen.de/masze.html</a></li>
+	<li><a href="https://wiki.bme.com/index.php?title=Gauge" target="_blank">https://wiki.bme.com/index.php?title=Gauge</a></li>
+	<li><a href="https://www.bodyartforms.com/help_MeasurementGuide.asp" target="_blank">https://www.bodyartforms.com/help_MeasurementGuide.asp</a></li>
+	<li><a href="https://www.rapidtables.com/calc/wire/wire-gauge-chart.html" target="_blank">https://www.rapidtables.com/calc/wire/wire-gauge-chart.html</a>
+     </ul>
+</div>
+
+</div>
+<!-- END paragraph -->
+
+
+
+
+<h3>This is it</h3>
+<!-- BEGIN paragraph -->
+<div class="tech_paragraph">
+There we go. Now you know the size of your piercings and your stretching tapers you need.
+<br>
+Have fun!
+<br>
+(~￣▽￣)~
+</div>
+<!-- END paragraph -->
+
+
+<br/>
+<br/>
+Enjoy and don't forget to support others.<br/>
+<br/>
+<br/>
+
+
+
+
+<script>
+function _convert(e) {
+var table = document.getElementById('gauge-table');
+     for( var r = 1; r < table.rows.length; r++ ) {
+     	  var gaugeNumber = table.rows[r].cells[0].innerHTML;
+	  console.log( gaugeNumber );
+	  // Strip the 'ga'
+	  if( gaugeNumber == '00ga' ) gaugeNumber = -1;
+	  else if( gaugeNumber == '000ga' ) gaugeNumber = -2;
+	  else if( gaugeNumber == '0000ga' ) gaugeNumber = -3;
+	  else if( gaugeNumber == '00000ga' ) gaugeNumber = -4;
+	  else gaugeNumber = parseInt(gaugeNumber);
+	  if( isNaN(gaugeNumber) )
+	      continue;
+	  // See
+	  //    https://www.rapidtables.com/calc/wire/wire-gauge-chart.html
+	  var inch = 0.005 * Math.pow( 92, (36-gaugeNumber)/39 );
+	  var mill = 0.127 * Math.pow( 92, (36-gaugeNumber)/39 );
+	  console.log( 'gauge=' + gaugeNumber + ', inch=' + inch + ', mill=' + mill );
+	  table.rows[r].cells[1].innerHTML = mill.toFixed(4)+'mm';
+	  table.rows[r].cells[2].innerHTML = inch.toFixed(5)+'in';
+     }
+} // END function
+
+document.getElementById('convert').addEventListener('click', _convert );
+window.addEventListener('load',_convert);
+
+</script>
+
+
+
+{% endblock %}

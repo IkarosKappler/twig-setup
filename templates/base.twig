@@ -31,7 +31,7 @@
       <meta property="og:type" content="website">
       <meta property="og:title" content="Ikaros Kappler's codebase">
       <meta property="og:description" content="Ikaros Kappler's codebase.">
-      <meta property="og:image" content="https://{{ __domain }}/img/preview-image.png">
+      <meta property="og:image" content="{{ image|default('https://www.int2byte.de/img/preview-image.png') }}">
 
       
       {% if env('MODE') == 'DEVELOPMENT' %}
