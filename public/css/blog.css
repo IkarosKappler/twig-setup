@@ -1,8 +1,8 @@
 
 
-main.blog div.rfc-header {
-    width            : 100%;
-    text-align       : right;
+main.blog h2 {
+    margin-top    : 64px;
+    margin-bottom : 16px;
 }
 
 main.blog div.tech_paragraph {
@@ -10,7 +10,8 @@ main.blog div.tech_paragraph {
     overflow-wrap: break-word;
 }
 
-/* DEPRECATED Do not use any more. Replace by 'typewriter' and 'excerpt' */
+/* DEPRECATED Do not use any more. Replace by 'typewriter' and 'excerpt'. */
+/* Even though old blod posts still use these formattings. */
 main.blog pre {
     background-color : #e8e8e8;
     /* Make even pre-formatted texts to break properly at the

@@ -7,19 +7,15 @@
 
 {% block content %}
 <a name="_top"></a>
-
-
-<div id="header" >
-  <pre style="background-color: #ffffff;">
-                                                                            Author......Ikaros Kappler
-                                                                            Date............2015-03-26
-									    Modified........2015-04-13
-                                                                            Version................1.0
-  </pre>
-</div>
+   <div class="author">
+                                                                            Author......Ikaros Kappler<br>
+                                                                            Date............2015-03-26<br>
+									    Modified........2015-04-13<br>
+                                                                            Version................1.0<br>
+   </div>
 
 <h2>Booting my PC remotely using a RaspberryPi</h2>
-<br/>
+
 
 
 <h3>Connecting the main board of my PC</h3>
@@ -30,7 +26,7 @@
   my computer case.<br/>
   I just opened the wires and soldered a bypass into them, the blue/white cable in the pictures
   below :)
-  <img src="/public/blog.20150326_Booting_my_PC_remotely_using_a_RaspberryPi/mainboard_header.jpg" width="351" height="246" alt="Mainboard header" />
+  <img src="/img/mainboard_header.jpg" width="351" height="246" alt="Mainboard header" />
   
   <br/>
   Short-circuiting the blue-white wires sends the signal to the controller and commands it
@@ -46,7 +42,7 @@
   I used GPIO Pin 11 (blue wire) to give the signal, U<sub>c</sub> 3.3V+ (red clamp) 
   and GND (white clamp) for connections.<br/>
   <br/>
-  <img src="/public/blog.20150326_Booting_my_PC_remotely_using_a_RaspberryPi/DSC_7949_raspi_906x600.jpg" width="800" height="530" alt="GPIO pin 11, Uc 3.3V+ and GND" />
+  <img src="/img/DSC_7949_raspi_906x600.jpg" width="800" height="530" alt="GPIO pin 11, Uc 3.3V+ and GND" />
 </div>
 
 
@@ -56,12 +52,12 @@
   For the (very simple) circuit I used two BC547-NPN transistors, a 220&ohm; resistor and a LED
   to indicate when signal in ON.<br/>
   <br/>
-  <img src="/public/blog.20150326_Booting_my_PC_remotely_using_a_RaspberryPi/DSC_7950_circuit_906x600.jpg" width="800" height="530" alt="Circuit on bread board" /><br/>
+  <img src="/img/DSC_7950_circuit_906x600.jpg" width="800" height="530" alt="Circuit on bread board" /><br/>
   <br/>
-  <img src="/public/blog.20150326_Booting_my_PC_remotely_using_a_RaspberryPi/DSC_7952_circuit_detail_906x600.jpg" width="800" height="530" alt="Circuit detail" /><br/>
+  <img src="/img/DSC_7952_circuit_detail_906x600.jpg" width="800" height="530" alt="Circuit detail" /><br/>
   <br/>
   Fritzing file: <a href="/public/blog.20150326_Booting_my_PC_remotely_using_a_RaspberryPi/Raspi_PC_Startup.fzz">Raspi_PC_Startup.fzz<br/>
-  <img src="/public/blog.20150326_Booting_my_PC_remotely_using_a_RaspberryPi/Raspi_PC_Startup_bb_50pct.png" width="769" height="657" alt="Circuit schematic" /></a><br/>
+  <img src="/img/Raspi_PC_Startup_bb_50pct.png" width="769" height="657" alt="Circuit schematic" /></a><br/>
   <br/>
 </div>
 <!-- END paragraph -->
@@ -291,7 +287,7 @@ sudo processes (python), just by passing its request URL! That's why we have set
   <a name="edit_0"></a>
   I recently soldered the circuit onto a small board.<br/>
   <br/>
-  <img src="/public/blog.20150326_Booting_my_PC_remotely_using_a_RaspberryPi/DSC_8448_circuit_board_1160x768.jpg" width="800" height="530" alt="Circuit soldered on board." /><br/>
+  <img src="/img/DSC_8448_circuit_board_1160x768.jpg" width="800" height="530" alt="Circuit soldered on board." /><br/>
   
 </div>
 <!-- END paragraph -->
