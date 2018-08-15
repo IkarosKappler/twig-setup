@@ -2,11 +2,57 @@
 
 {% block head %}
 {{ parent() }}
+<style>
+/* Global definitions */
+.author {
+	display: block;
+	width : 100%;
+	text-align:
+	right;
+	background-color: #ffffff;
+}
+
+.w-100 {
+       width : 100%;
+}
+
+
+/* Local definitions */
+.data-list-table {
+    border-spacing: 1px;
+    border-collapse: separate;
+    /* background : black; */
+}
+.data-list-table thead tr th {
+       color : black;
+       background : white;
+}
+.data-list-table tbody tr td {
+       /* border-top : 1px solid rgba(0,136,120,0.5); */
+       border-bottom : 1px solid rgba(67,160,71,0.5);
+       color : rgb(1,77,65);
+}
+.data-list-table tbody tr td, .data-list-table thead tr th {
+       text-align : right;
+       padding : 6px;
+       font-weight : 900;
+}
+.data-list-table tbody tr:nth-child(even) {
+	     /* Green */
+       /* background : linear-gradient(to top, rgba(0,136,120,0.05), rgba(0,151,136,0.05) ); */
+}
+.data-list-table tbody tr:nth-child(odd) {
+	     /* Teal */
+        background : linear-gradient(to bottom, rgba(67,160,71,0.05), rgba(20,200,37,0.05) ); 
+}
+</style>
 {% endblock %}
 
 
 {% block content %}
 <a name="_top"></a>
+
+
   <div class="author">
                                                                             Author......Ikaros Kappler<br>
                                                                             Date............2018-08-02<br>
@@ -14,7 +60,7 @@
   </div>
 
 <h2>Gauges, Inches and Millimeters</h2>
-
+<br/>
 
 Piercing affectionados probably found
 themselves this situation once: you talk with people from a different continent and suddenly fifty
