@@ -414,6 +414,7 @@ main.blog pre {
     white-space: -o-pre-wrap;    /* Opera 7 */
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
+/* END DEPRECATED */
 
 main.blog div.typewriter {
     /* Make even pre-formatted texts to break properly at the
@@ -432,7 +433,6 @@ main.blog div.excerpt {
     margin-right : 30px;
     padding-left : 10px;
 }
-/* END DEPRECATED */
 
 
 
