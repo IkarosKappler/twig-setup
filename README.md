@@ -25,7 +25,6 @@ $ gulp
 
 This will write new files:
  * dist/core.min.js
- * dist/girih.min.js
  * dist/styles.min.css
 
 And also place a copy of them into the public/ dir.
