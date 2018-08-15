@@ -52,6 +52,9 @@ window.onscroll = function() {
     }
 }
 
+// Initially trigger a scroll event.
+window.dispatchEvent(new Event('scroll'));
+
 
 /* Maybe animate the SVG header? This required inline SVG ... */
 /*

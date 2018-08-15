@@ -38,12 +38,12 @@
       <link rel="stylesheet" href="/css/base.css">
       <link rel="stylesheet" href="/css/pageheader.css">
       <link rel="stylesheet" href="/css/navigation-underlines.css">
-      <script src="/js/pageheader.js"></script>
-      <script src="/js/mediaquerydetection.js"></script>
-      <script src="/js/canvasResize.js"></script>
+      <script async src="/js/pageheader.js"></script>
+      <script async src="/js/mediaquerydetection.js"></script>
+      <script async src="/js/canvasResize.js"></script>
       {% else %}
+      <script async src="/js/core.min.js"></script>
       <link rel="stylesheet" href="/css/styles.min.css">
-      <script src="/js/core.min.js"></script>
       {% endif %}
       <link rel="manifest" href="/manifest.json">
       {% endblock %}
@@ -99,7 +99,7 @@
 	})();
       </script>
       <!-- End Matomo Code -->
-      
+
       {% endif %}
     </body>
 </html>

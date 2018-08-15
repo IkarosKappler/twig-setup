@@ -23,10 +23,8 @@ var sourcemaps = require('gulp-sourcemaps');
 var coreFiles = [
         'public/js/pageheader.js',
         'public/js/mediaquerydetection.js',
-        'public/js/canvasResize.js'
-    ],	
-    girihFiles = [
-	'src/girih_frontpage/js/ikrs/IKRS.js',
+        'public/js/canvasResize.js',
+    	'src/girih_frontpage/js/ikrs/IKRS.js',
 	'src/girih_frontpage/js/ikrs/IKRS.Object.js',
 	'src/girih_frontpage/js/ikrs/IKRS.Pair.js',
 	'src/girih_frontpage/js/ikrs/IKRS.TileAlign.js',
@@ -66,20 +64,12 @@ gulp.task('clean', function() {
     return Promise.all([
         del(coreFilename),
         del('core.min.js'),
-	del(girihFilename),
-        del('girih.min.js'),
     ]);
 });
 
 gulp.task('concat-core', function() {
     return gulp.src(filesExist(coreFiles))
         .pipe(concat(coreFilename))
-        .pipe(gulp.dest(jsDest));
-});
-
-gulp.task('concat-girih', function() {
-    return gulp.src(filesExist(girihFiles))
-        .pipe(concat(girihFilename))
         .pipe(gulp.dest(jsDest));
 });
 
@@ -117,6 +107,6 @@ gulp.task('publish', function() {
 });
 
 gulp.task('default', function() {
-    return runSequence( 'clean', 'concat-core', 'concat-girih', 'uglify', 'concat-css', 'minify-css', 'publish' ); 
+    return runSequence( 'clean', 'concat-core', 'uglify', 'concat-css', 'minify-css', 'publish' ); 
 });
 

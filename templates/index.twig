@@ -4,13 +4,9 @@
   {{ parent() }}
 
      {% if env('MODE') == 'DEVELOPMENT' %}
-     
       <script src="/js/girih_frontpage/js/ikrs/IKRS.js"></script>
       <script src="/js/girih_frontpage/js/ikrs/IKRS.Object.js"></script>
-
       <script src="/js/girih_frontpage/js/ikrs/IKRS.Pair.js"></script>
-
-
       <script src="/js/girih_frontpage/js/ikrs/IKRS.TileAlign.js"></script>
       <script src="/js/girih_frontpage/js/ikrs/IKRS.Point2.js"></script>
       <script src="/js/girih_frontpage/js/ikrs/IKRS.Line2.js"></script>
@@ -26,17 +22,10 @@
       <script src="/js/girih_frontpage/js/ikrs/IKRS.Tile.PenroseRhombus.js"></script>
       <script src="/js/girih_frontpage/js/ikrs/IKRS.Girih.js"></script>
       <script src="/js/girih_frontpage/js/ikrs/IKRS.GirihCanvasHandler.js"></script>
-     
-      <script src="/js/girih_frontpage/js/thirdparty/FileSaver.js"></script>
-      
+      <script src="/js/girih_frontpage/js/thirdparty/FileSaver.js"></script>  
       <script src="/js/girih_frontpage/js/StringFileExporter.js"></script>
-
       <script src="/js/girih_frontpage/js/main.js"></script>
       <link rel="stylesheet" href="/css/index.css" />
-     {% else %}
-     
-      <script src="/js/girih.min.js"></script>
-      
      {% endif %}
 
       
