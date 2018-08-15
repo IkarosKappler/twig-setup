@@ -11,6 +11,7 @@
    <h1>Error {{ code }}</h1>
 {% endblock header %}
 
+{% block main_classes %}error{% endblock %}
 {% block content %}
   <div class="error">{{ message|default('There was an error.') }}</div>
 {% endblock %}

@@ -1,27 +1,17 @@
 
-/*
-#header {
-    margin           : 5% 10%;
-}
-*/
 
-
-.content {
-    
-}
-
-div.rfc-header {
+main.blog div.rfc-header {
     width            : 100%;
     text-align       : right;
 }
 
-div.tech_paragraph {
+main.blog div.tech_paragraph {
     margin-bottom    : 150px;
     overflow-wrap: break-word;
 }
 
 /* DEPRECATED Do not use any more. Replace by 'typewriter' and 'excerpt' */
-pre {
+main.blog pre {
     background-color : #e8e8e8;
     /* Make even pre-formatted texts to break properly at the
        end of their container */
@@ -32,7 +22,7 @@ pre {
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
 
-div.typewriter {
+main.blog div.typewriter {
     /* Make even pre-formatted texts to break properly at the
        end of their container */
     white-space: pre-wrap;       /* css-3 */
@@ -42,10 +32,48 @@ div.typewriter {
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
 
-div.excerpt {
+main.blog div.excerpt {
     background-color : #e8e8e8;
     border-left : 5px solid #292f36;
     margin-left : 20px;
     margin-right : 30px;
     padding-left : 10px;
+}
+/* END DEPRECATED */
+
+
+
+/* Global definitions */
+main.blog .author {
+    display: block;
+    width : 100%;
+    text-align: right;
+    background-color: #ffffff;
+}
+
+main.blog .data-list-table {
+    border-spacing: 1px;
+    border-collapse: separate;
+    /* background : black; */
+}
+main.blog .data-list-table thead tr th {
+    color : black;
+    background : white;
+}
+main.blog .data-list-table tbody tr td {
+    border-bottom : 1px solid rgba(67,160,71,0.5);
+    color : rgb(1,77,65);
+}
+main.blog .data-list-table tbody tr td, main.blog .data-list-table thead tr th {
+    text-align : right;
+    padding : 6px;
+    font-weight : 900;
+}
+main.blog .data-list-table tbody tr:nth-child(even) {
+    /* Green */
+    /* background : linear-gradient(to top, rgba(0,136,120,0.05), rgba(0,151,136,0.05) ); */
+}
+main.blog .data-list-table tbody tr:nth-child(odd) {
+    /* Teal */
+    background : linear-gradient(to bottom, rgba(67,160,71,0.05), rgba(20,200,37,0.05) ); 
 }

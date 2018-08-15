@@ -3,13 +3,13 @@
 // Define the routes.
 $routes  = array( 
     '/'     => array( 'template' => 'index.twig',
-                      'params' => array(),
+                      'params' => array( 'headline' => "Ika's codebase" ),
 		      'date' => '2018-06-11',
                       'priority' => 1.0,
-		      'description' => "Ika's codebase",
+		      'description' => "Ika's codebase.",
 		      'keywords' => 'ikaros kappler, coding, queer, drone, cyborg, coding, programming, rainbow, patterns, all colors are beautiful, girih, javascript, webgl, linux, debian, UNIX, Berlin, punk',
 		      'type' => 'TechArticle',
-		      'title' => 'I host my software, code, tinkered stuff and program snippets here.',
+		      'title' => "I host my software, code, tinkered stuff and program snippets here.",
 		      'image' => 'https://www.int2byte.de/img/preview-image.png',
 		      'proficiencyLevel' => 'Beginner'
 		      
@@ -35,6 +35,18 @@ $routes  = array(
 			 'title' => 'The imprint of this site.',
 			 'image' => 'https://www.int2byte.de/img/preview-image.png',
 			 'proficiencyLevel' => 'Beginner'
+    ),
+    '/blog/blog.20180802-Gauges-Inches-and-Millimeters' => array( 'template' => 'blog.20180802_gauges_inches_and_millimeters.twig',
+                                                             'params' => array( 'bannertext' => 'Good news, everyone!',
+                                                                                'headline' => 'Gauges, Inches and Millimeters' ),
+                                                                             'date' => '2018-08-02',
+                                                                             'priority' => 0.5,
+									     'description' => 'The differences between three unit systems of diameter measurement.',
+									     'keywords' => 'gauge, ga, gage, inch, inches, zoll, millimeter, meter, centermeter, zentimeter',
+									     'type' => 'TechArticle',
+									     'title' => 'Gauges, Inches and Millimeters.',
+									     'image' => 'https://www.int2byte.de/img/dehnstab.jpg',
+									     'proficiencyLevel' => 'Beginner'
     ),
     '/blog/blog.20161028_Create_Zip_files_omitting_DS_Store_files' => array( 'template' => 'blog.20161028_Create_Zip_files_omitting_DS_Store_files.twig',
                                                              'params' => array( 'bannertext' => 'Good news, everyone!',

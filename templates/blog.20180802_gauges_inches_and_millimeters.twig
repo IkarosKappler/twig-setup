@@ -2,50 +2,6 @@
 
 {% block head %}
 {{ parent() }}
-<style>
-/* Global definitions */
-.author {
-	display: block;
-	width : 100%;
-	text-align:
-	right;
-	background-color: #ffffff;
-}
-
-.w-100 {
-       width : 100%;
-}
-
-
-/* Local definitions */
-#gauge-table {
-    border-spacing: 1px;
-    border-collapse: separate;
-    /* background : black; */
-}
-#gauge-table thead tr th {
-       color : black;
-       background : white;
-}
-#gauge-table tbody tr td {
-       /* border-top : 1px solid rgba(0,136,120,0.5); */
-       border-bottom : 1px solid rgba(67,160,71,0.5);
-       color : rgb(1,77,65);
-}
-#gauge-table tbody tr td, #gauge-table thead tr th {
-       text-align : right;
-       padding : 6px;
-       font-weight : 900;
-}
-#gauge-table tbody tr:nth-child(even) {
-	     /* Green */
-       /* background : linear-gradient(to top, rgba(0,136,120,0.05), rgba(0,151,136,0.05) ); */
-}
-#gauge-table tbody tr:nth-child(odd) {
-	     /* Teal */
-        background : linear-gradient(to bottom, rgba(67,160,71,0.05), rgba(20,200,37,0.05) ); 
-}
-</style>
 {% endblock %}
 
 
@@ -94,7 +50,7 @@ Most results come very close to those in other tables.<br>
 <button id="convert" style="display: none;">Convert</button>
 
 
-<table id="gauge-table" class="w-100">
+<table id="gauge-table" class="w-100 data-list-table">
 	<thead>
 		<tr>
 			<th>Gauge</th>

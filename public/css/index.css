@@ -24,18 +24,14 @@ div#bloglist {
 
 div#bloglist ul {
     list-style       : none;
-    /* list-style-position : inside; */
     padding-left     : 0px;
 }
 
 div#bloglist ul li {
-    /* margin-left      : 0px;
-    padding-left     : 0px; */
 }
 
 div#bloglist ul li a {
     background       : rgba(256,256,256,0.75);
-    /* margin-left      : 12px; */
     padding          : 6px;
 }
 
@@ -44,9 +40,4 @@ div#bloglist div.spacer {
     height : 250px;
 }
 
-/*
-footer {
-    /* The footer does not apply with the dynamic front page canvas visible */
- /*   display : none;
-}
- */
+
