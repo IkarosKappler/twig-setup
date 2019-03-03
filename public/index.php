@@ -27,12 +27,12 @@ $twig->addFunction(new Twig\TwigFunction('env','_env'));
 if( array_key_exists($request['path'],$routes) ) {
     $route = $routes[$request['path']];
 	echo $twig->render( $route['template'], // 'index.twig',
-                         array_merge( $route, $route['params'], array('__domain' => $__domain, '__protocol' => $__protocol ) )
+    array_merge( $route, $route['params'], array('__domain' => $__domain, '__protocol' => $__protocol, '__get' => $_GET ) )
 	);
 } else if( $request['path'] == '/sitemap.xml' ) {
     header( 'Content-Type: application/xml; charset=utf-8' );
     echo $twig->render( 'sitemap.twig',
-                        array_merge( array( 'routes' => $routes ), array('__domain' => $__domain, '__protocol' => $__protocol ) )
+                        array_merge( array( 'routes' => $routes ), array('__domain' => $__domain, '__protocol' => $__protocol, '__get' => $_GET  ) )
 	);
 } else {
 	echo $twig->render( 'error.twig', array( 'code' => 404, 'message' => 'Not found.', 'bannertext' => '404 Not Found' ) );

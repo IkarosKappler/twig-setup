@@ -21,11 +21,18 @@
 	<h1>Datenschutz</h1>
 
 	<h2>Anbieter</h2>
-	<p>int2byte.de ist eine private, nichtkommerzielle Seite. Sie präsentiert Hobbies von Ika.</p>
+	<p>
+	   {% if __get.site is defined and __get.site in ['int2byte.de','func.name','omega4.net','plotboilerplate.io'] %}
+	      {{ __get.site }}
+	   {% else %}
+	      int2byte.de
+	   {% endif %}
+	   ist eine private, nichtkommerzielle Seite.
+	</p>
 
 	<h2>Keine Speicherung von Daten</h2>
 	<p>
-	  Bei dem Besuch der Webseite <a href="https://www.int2byte.de/">int2byte.de</a>
+	  Bei dem Besuch der Webseite
 	  <ul>
 	    <li>werden keine personenbezogenen Daten gespeichert</li>
 	    <li>wird kein localStorage und kein sessionStorage verwendet</li>
@@ -35,7 +42,7 @@
 	  <br/>
 	  
 	  Zur Sicherstellung der Funktionsweise werden Serverlogs gespeichert, welche nach sieben Tagen wieder gelöscht werden;<br/>
-	  außerdem wird ihr Besuch nur dann von einer Matomo-Instanz getrackt, wenn Ihr Browser keinen Do-not-Track-Header (DNT) sendet:<br/>
+	  außerdem wird ihr Besuch nur dann von einer selbstgehosteten Matomo-Instanz getrackt, wenn Ihr Browser keinen Do-not-Track-Header (DNT) sendet:<br/>
 	  <ul>
 	    <li>Zeitpunkt</li>
 	    <li>IP-Adresse ohne den letzten Block (letztes Byte)</li>
