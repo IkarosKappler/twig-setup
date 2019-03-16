@@ -36,6 +36,18 @@ $routes  = array(
 			 'image' => 'https://www.int2byte.de/img/preview-image.png',
 			 'proficiencyLevel' => 'Beginner'
     ),
+    '/blog/blog.20190316_Install_and_setup_Jekyll_on_Debian' => array( 'template' => 'blog.20190316_Install_and_setup_Jekyll_on_Debian.twig',
+                                                             'params' => array( 'bannertext' => 'Good news, everyone!',
+                                                                                'headline' => 'Install Jekyll on Debian' ),
+                                                            'date' => '2019-03-16',
+                                                            'priority' => 0.75,
+							    'description' => "How to install ruby/Jekyll on Debian-like Linux derivates.",
+							    'keywords' => 'Jekyll, ruby, ruby gems, bootstrap, debian, linux',
+							    'type' => 'TechArticle',
+							    'title' => 'How to install ruby/Jekyll on Debian-like Linux derivates.',
+							    'image' => 'https://www.int2byte.de/img/preview-image.png', // ! Find a better one !
+							    'proficiencyLevel' => 'Expert'
+    ),
     '/blog/blog.20180802-Gauges-Inches-and-Millimeters' => array( 'template' => 'blog.20180802_gauges_inches_and_millimeters.twig',
                                                              'params' => array( 'bannertext' => 'Good news, everyone!',
                                                                                 'headline' => 'Gauges, Inches and Millimeters' ),

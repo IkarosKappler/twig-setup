@@ -1,0 +1,105 @@
+{% extends "blog.twig" %}
+
+{% block head %}
+{{ parent() }}
+{% endblock %}
+
+
+{% block content %}
+<a name="_top"></a>
+  <div class="author">
+                                                                            Author......Ikaros Kappler<br>
+                                                                            Date............2019-03-16<br>
+                                                                            Version................1.0<br>
+  </div>
+
+<h2>Virtual machine setup with <span class="affected">Vagrant Up</span> and <span class="affected">Virtual Box</span></h2>
+
+<!-- BEGIN paragraph -->
+<div class="tech_paragraph">
+Installing ruby/Jekyll on Debian derivates can cause some trouble. In my experience Ruby
+and Ruby gems are a well integrated language/framework for MacOS but they do not become
+comfortable with Debian environments very easy.<br>
+<br>
+So here are two workarounds:
+(1) Use a virtual machine like VirtualBox/Vagrant. Unfortunately Jekyll's directory watcher
+    seems to have issues with some virtual file systems (file changes are not seen).
+(2) Install ruby, ruby gems, ruby-dev and the Jekyll dependencies manually. Maybe
+    you will have to tinker around to find compatible jekyll-ruby-bootstrap versions
+    for your system (change the version numbers in the Gemfile then run <pre>$ bundle update</pre>).
+</div>
+<!-- END paragraph -->
+
+
+
+
+<h3>Here comes the setup</span></h3>
+<!-- BEGIN paragraph -->
+<div class="tech_paragraph">
+
+
+<br/>
+<pre>
+   # Generate docs with jekyll
+
+
+This required nodejs/npm installed. If you have troubles installing npm
+on Debian derivates, follow these instructions:
+https://tecadmin.net/install-latest-nodejs-npm-on-debian/
+
+You would have to run these commands
+$ sudo apt-get install curl software-properties-common
+$ curl -sL https://deb.nodesource.com/setup_11.x | sudo bash -
+
+
+# Jekyll requires Ruby to installed (gem command)
+
+Install ruby and ruby-dev for your matching version
+$ sudo apt-get install ruby ruby-all-dev
+$ sudo apt-get install ruby`ruby -e 'puts RUBY_VERSION[/\d+\.\d+/]'`-dev
+$ sudo apt-get install ruby-full build-essential zlib1g-dev
+
+# Run the bundler
+$ sudo gem install bundler
+$ bundle update
+$ sudo gem install jekyll redcarpet
+$ bundle exec jekyll serve
+
+If there are still problems try
+$ sudo gem update
+and repeat the last 4 steps.
+
+
+
+# Compile
+Now run
+$ bundle exec jekyll serve
+for continuous local HTML generation
+
+or
+
+$ bundle exec jekyll build
+for building the docs for production.
+</pre>
+
+
+
+Have fun with Jekyll!
+<br/>
+(~￣▽￣)~
+</div>
+<!-- END paragraph -->
+
+
+<br/>
+<br/>
+Enjoy and don't forget to help your friends!<br/>
+<br/>
+<br/>
+
+
+<!-- Use and enjoy my code and do good things. Peace to the world.<br/> -->
+
+
+
+{% endblock %}
